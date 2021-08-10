@@ -44,3 +44,14 @@ def get_cards_for_board(board_id):
         , {"board_id": board_id})
 
     return matching_cards
+
+
+def get_board_with_id(board_id):
+    return data_manager.execute_select(
+        """
+        SELECT *
+        FROM boards
+        WHERE boards.id = %(board_id)s
+        ;
+        """
+        ,{"board_id": board_id})

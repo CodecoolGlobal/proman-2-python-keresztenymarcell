@@ -1,15 +1,12 @@
 export const htmlTemplates = {
     board: 1,
-    column: 2,
-    card: 3
+    card: 2
 }
 
 export function htmlFactory(template) {
     switch (template) {
         case htmlTemplates.board:
             return boardBuilder
-        case htmlTemplates.column:
-            return columnBuilder
         case htmlTemplates.card:
             return cardBuilder
         default:
