@@ -4,11 +4,12 @@ export let dataHandler = {
     return response;
   },
   getBoard: async function (boardId) {
-    const response = await apiGet(`/api/boards/${boardId}`)
+    const response = await apiGet(`/api/boards/${boardId}`);
     return response;
   },
-  getStatuses: async function () {
-    // the statuses are retrieved and then the callback function is called with the statuses
+  getStatuses: async function (boardId) {
+   const response = await apiGet(`/api/board/${boardId}/column`);
+   return response;
   },
   getStatus: async function (statusId) {
     // the status is retrieved and then the callback function is called with the status

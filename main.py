@@ -33,6 +33,10 @@ def get_board_with_id(board_id: int):
 
 
 
+@app.route("/api/board/<int:board_id>/column")
+@json_response
+def get_statuses(board_id: int):
+    return queries.get_statuses(board_id)
 
 
 @app.route("/api/boards/<int:board_id>/cards/")

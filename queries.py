@@ -54,4 +54,17 @@ def get_board_with_id(board_id):
         WHERE boards.id = %(board_id)s
         ;
         """
-        ,{"board_id": board_id})
+        , {"board_id": board_id}
+    )
+
+
+def get_statuses(board_id):
+    return data_manager.execute_select(
+        """
+        SELECT DISTINCT(statuses.title) FROM statuses
+        JOIN cards c on statuses.id = c.status_id
+        JOIN boards b on b.id = c.board_id
+        WHERE board_id = %(board_id)s
+        ;
+        """, {"board_id" : board_id}
+    )
