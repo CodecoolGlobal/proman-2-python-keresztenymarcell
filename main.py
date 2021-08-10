@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from dotenv import load_dotenv
 
 
@@ -32,6 +32,13 @@ def get_boards():
 def get_board_with_id(board_id: int):
     return queries.get_board_with_id(board_id)
 
+
+@app.route("/api/rename-board-by-id", methods=['POST'])
+@json_response
+def rename_board_by_id():
+    board_id = request.json['board_id']
+    board_title = request.json['board_title']
+    return queries.rename_board_by_id(board_id, board_title)
 
 
 @app.route("/api/board/<int:board_id>/column")
