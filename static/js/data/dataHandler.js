@@ -4,7 +4,8 @@ export let dataHandler = {
     return response;
   },
   getBoard: async function (boardId) {
-    // the board is retrieved and then the callback function is called with the board
+    const response = await apiGet(`/api/boards/${boardId}`)
+    return response;
   },
   getStatuses: async function () {
     // the statuses are retrieved and then the callback function is called with the statuses

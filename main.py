@@ -34,6 +34,7 @@ def get_board_with_id(board_id: int):
 
 
 
+
 @app.route("/api/boards/<int:board_id>/cards/")
 @json_response
 def get_cards_for_board(board_id: int):
