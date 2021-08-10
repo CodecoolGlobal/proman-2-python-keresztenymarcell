@@ -50,6 +50,12 @@ def get_cards_for_board(board_id: int):
     return queries.get_cards_for_board(board_id)
 
 
+@app.route("/api/boards/new_board/<string:board_title>")
+@json_response
+def createNewBoard(board_title: str):
+    return queries.create_element(board_title)
+
+
 def main():
     app.run(debug=True)
 

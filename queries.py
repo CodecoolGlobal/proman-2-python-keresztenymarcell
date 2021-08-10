@@ -69,3 +69,11 @@ def get_statuses(board_id):
         ;
         """, {"board_id" : board_id}
     )
+
+
+def create_element(title):
+    return data_manager.execute_select(
+        """
+            INSERT INTO boards (title) values %(title)s;
+        """, {"title": title}
+    )

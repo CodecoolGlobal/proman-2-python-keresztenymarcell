@@ -18,8 +18,20 @@ export let boardsManager = {
       );
     }
   },
-
 };
+
+
+export let buttonManager = {
+  loadBoards: async function () {
+    const buttonBuilder = htmlFactory(htmlTemplates.createboard);
+    const buttoncontent = buttonBuilder();
+    domManager.addChild("#root", buttoncontent);
+    domManager.addEventListener(
+        "#load-new-board-form",
+        "click",
+      );
+  }
+}
 
 async function openBoard(boardId, button){
   await columnManager.loadColumns(boardId)
@@ -27,6 +39,7 @@ async function openBoard(boardId, button){
   button.dataset.toggleState = "show"
   button.textContent = "Hide Cards"
 }
+
 
 async function closeBoard(boardId, button){
   const columnContent = document.querySelector(`.board-container[data-board-id="${boardId}"] .board-columns`)
@@ -46,5 +59,6 @@ async function showHideButtonHandler(clickEvent) {
     await closeBoard(boardId, button)
   }
 }
+
 
 

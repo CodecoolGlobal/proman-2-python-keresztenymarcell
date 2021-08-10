@@ -1,12 +1,15 @@
 export const htmlTemplates = {
     board: 1,
     column: 2,
-    card: 3
+    card: 3,
+    createboard: 4
 
 }
 
 export function htmlFactory(template) {
     switch (template) {
+        case htmlTemplates.createboard:
+            return initNewBoardDiv
         case htmlTemplates.board:
             return boardBuilder
         case  htmlTemplates.column:
@@ -38,7 +41,6 @@ function boardBuilder(board) {
 }
 
 function columnBuilder(column) {
-    console.log(column)
     return `<div class="board-column" data-column-id="${column.id}">
                 <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
                 <button class="delete-column-button" data-delete-status-id="${column.id}" data-delete-owner-id="${column.owner}">X</button>
@@ -53,4 +55,19 @@ function cardBuilder(card) {
                 <div class="card-archive" data-card-archive-id="${card.id}">A</div>
                 <div class="card-remove" data-card-id="${card.id}">X</div>
             </div>`;
+}
+
+
+function initNewBoardDiv(createboard) {
+    return `<div id="new-board-form"></div>
+    <input type="text" 
+                    placeholder="Enter new board title" 
+                    id="new-board-title" 
+                    required 
+                    autofocus 
+                    autocomplete="off">
+            <input type="checkbox" value="true" id="private-checkbox">
+            <label for="private-checkbox">Private</label>
+           <button id="submit-new-board-title">Save</button>
+           <button type="button" id="load-new-board-form">Create new board</button>`
 }
