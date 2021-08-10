@@ -9,7 +9,7 @@ export const htmlTemplates = {
 
 export function htmlFactory(template) {
     switch (template) {
-        case htmlTemplates.createboard:
+        case htmlTemplates.newboard:
             return initNewBoardDiv
         case htmlTemplates.board:
             return boardBuilder
@@ -64,8 +64,10 @@ function initNewBoardDiv() {
     <input type="text" 
                     placeholder="Enter new board title" 
                     id="new-board-title" 
+                    name="new-board-title"
                     required 
                     autofocus 
                     autocomplete="off"><br>
            <button type="button" id="load-new-board-form">Create new board</button></div><br>`
 }
+

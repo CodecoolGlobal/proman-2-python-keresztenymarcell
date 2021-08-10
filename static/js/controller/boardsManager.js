@@ -6,7 +6,6 @@ import {columnManager} from "./columnManager.js";
 
 export let boardsManager = {
   loadBoards: async function () {
-    await buttonManager
     const boards = await dataHandler.getBoards();
     for (let board of boards) {
       const boardBuilder = htmlFactory(htmlTemplates.board);
@@ -24,7 +23,7 @@ export let boardsManager = {
 
 export let buttonManager = {
   loadBoards: async function () {
-    const buttonBuilder = htmlFactory(htmlTemplates.createboard);
+    const buttonBuilder = htmlFactory(htmlTemplates.newboard);
     const buttoncontent = buttonBuilder();
     domManager.addChild("#root", buttoncontent);
     domManager.addEventListener(
@@ -63,12 +62,9 @@ async function showHideButtonHandler(clickEvent) {
 
 
 async function createNewElement(clickEvent){
-   const button = clickEvent.target
-   const  new_board = await dataHandler.getBoard();
-   const boardBuilder = htmlFactory(htmlTemplates.board);
-   const content = boardBuilder(new_board);
-   domManager.addChild(".board-container", content);
-    button.textContent = "valami";
+  const title = document.getElementById('new-board-title').value
+  const newBoard = await dataHandler.createNewBoard(title)
+  domManager.addChild(".board-header", newBoard);
+  console.log(newBoard)
 };
-
 

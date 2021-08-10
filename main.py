@@ -1,6 +1,8 @@
 from flask import Flask, render_template, url_for, request
 from dotenv import load_dotenv
+import jsonify
 
+from psycopg2.extensions import JSON
 
 from util import json_response
 import mimetypes
@@ -54,6 +56,8 @@ def get_cards_for_board(board_id: int):
 @json_response
 def createNewBoard():
     if request.method =="POST":
+        board_title = request.json["board_title"]
+        print(board_title)
         return queries.create_element(board_title)
 
 

@@ -136,3 +136,30 @@ section.board{
 .card-title{
     padding-right: 16px;
 }
+
+
+#navbar {
+    display: flex;
+    height: max-content;
+}
+
+#navbar-buttons {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+#navbar a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#navbar * {
+    color: brown;
+}
+
+#navbar-buttons * {
+    margin-top: 0.75rem;
+    margin-right: 2rem;
+}
