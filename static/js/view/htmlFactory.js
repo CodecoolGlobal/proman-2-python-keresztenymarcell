@@ -1,8 +1,9 @@
 export const htmlTemplates = {
-    board: 1,
-    column: 2,
-    card: 3,
-    createboard: 4
+    newboard: 1,
+    board: 2,
+    column: 3,
+    card: 4
+
 
 }
 
@@ -58,16 +59,13 @@ function cardBuilder(card) {
 }
 
 
-function initNewBoardDiv(createboard) {
-    return `<div id="new-board-form"></div>
+function initNewBoardDiv() {
+    return `<br><div id="new-board-form">
     <input type="text" 
                     placeholder="Enter new board title" 
                     id="new-board-title" 
                     required 
                     autofocus 
-                    autocomplete="off">
-            <input type="checkbox" value="true" id="private-checkbox">
-            <label for="private-checkbox">Private</label>
-           <button id="submit-new-board-title">Save</button>
-           <button type="button" id="load-new-board-form">Create new board</button>`
+                    autocomplete="off"><br>
+           <button type="button" id="load-new-board-form">Create new board</button></div><br>`
 }

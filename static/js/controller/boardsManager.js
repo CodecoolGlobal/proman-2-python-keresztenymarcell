@@ -6,6 +6,7 @@ import {columnManager} from "./columnManager.js";
 
 export let boardsManager = {
   loadBoards: async function () {
+    await buttonManager
     const boards = await dataHandler.getBoards();
     for (let board of boards) {
       const boardBuilder = htmlFactory(htmlTemplates.board);
@@ -29,6 +30,7 @@ export let buttonManager = {
     domManager.addEventListener(
         "#load-new-board-form",
         "click",
+        createNewElement
       );
   }
 }
@@ -43,7 +45,6 @@ async function openBoard(boardId, button){
 
 async function closeBoard(boardId, button){
   const columnContent = document.querySelector(`.board-container[data-board-id="${boardId}"] .board-columns`)
-  console.log(columnContent)
   columnContent.textContent = ""
   button.dataset.toggleState = "hide"
   button.textContent = "Show Cards"
@@ -60,5 +61,14 @@ async function showHideButtonHandler(clickEvent) {
   }
 }
 
+
+async function createNewElement(clickEvent){
+   const button = clickEvent.target
+   const  new_board = await dataHandler.getBoard();
+   const boardBuilder = htmlFactory(htmlTemplates.board);
+   const content = boardBuilder(new_board);
+   domManager.addChild(".board-container", content);
+    button.textContent = "valami";
+};
 
 
