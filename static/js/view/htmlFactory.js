@@ -1,17 +1,19 @@
 export const htmlTemplates = {
     board: 1,
-    card: 2,
-    column: 3
+    column: 2,
+    card: 3
+
 }
 
 export function htmlFactory(template) {
     switch (template) {
         case htmlTemplates.board:
             return boardBuilder
-        case htmlTemplates.card:
-            return cardBuilder
         case  htmlTemplates.column:
             return columnBuilder
+        case htmlTemplates.card:
+            return cardBuilder
+
         default:
             console.error("Undefined template: " + template)
             return () => { return "" }
@@ -34,6 +36,7 @@ function boardBuilder(board) {
 }
 
 function columnBuilder(column) {
+    console.log(column)
     return `<div class="board-column" data-column-id="${column.id}">
                 <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
                 <button class="delete-column-button" data-delete-status-id="${column.id}" data-delete-owner-id="${column.owner}">X</button>

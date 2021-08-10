@@ -9,7 +9,7 @@ export let cardsManager = {
       const cardBuilder = htmlFactory(htmlTemplates.card);
       const content = cardBuilder(card);
       console.log(card)
-      domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"]`, content);
+      domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, content);
       domManager.addEventListener(
         `.card[data-card-id="${card.id}"]`,
         "click",
@@ -19,4 +19,4 @@ export let cardsManager = {
   },
 };
 
-function deleteButtonHandler(clickEvent) {}
+function deleteButtonHandler(clickEvent) { }

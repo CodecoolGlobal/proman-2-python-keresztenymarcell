@@ -12,7 +12,7 @@ export let dataHandler = {
    return response;
   },
   getStatus: async function (statusId) {
-    // the status is retrieved and then the callback function is called with the status
+
   },
   getCardsByBoardId: async function (boardId) {
     const response = await apiGet(`/api/boards/${boardId}/cards/`);
