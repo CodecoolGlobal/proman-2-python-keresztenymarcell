@@ -11,6 +11,7 @@ export let columnManager = {
         const columnBuilder = htmlFactory(htmlTemplates.column);
         const content = columnBuilder(status);
         domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns`, content);
+
         }
     }
 }

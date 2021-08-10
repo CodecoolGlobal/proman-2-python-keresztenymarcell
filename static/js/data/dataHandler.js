@@ -38,8 +38,33 @@ async function apiGet(url) {
   }
 }
 
-async function apiPost(url, payload) {}
+async function apiPost(url, payload) {
+    await fetch(url, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'},
+        method: 'POST',
+        body: JSON.stringify(payload)
+    })
+}
 
-async function apiDelete(url) {}
+async function apiDelete(url, payload="") {
+    await fetch(url, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: 'DELETE',
+        body: JSON.stringify(payload)
+    })
+}
 
-async function apiPut(url) {}
+async function apiPut(url, payload="") {
+    await fetch(url, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'},
+        method: 'PUT',
+        body: JSON.stringify(payload)
+})
+}
