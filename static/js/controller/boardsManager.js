@@ -21,8 +21,30 @@ export let boardsManager = {
 
 };
 
+async function openBoard(boardId, button){
+  await columnManager.loadColumns(boardId)
+  await cardsManager.loadCards(boardId)
+  button.dataset.toggleState = "show"
+  button.textContent = "Hide Cards"
+}
+
+async function closeBoard(boardId, button){
+  const columnContent = document.querySelector(`.board-container[data-board-id="${boardId}"] .board-columns`)
+  console.log(columnContent)
+  columnContent.textContent = ""
+  button.dataset.toggleState = "hide"
+  button.textContent = "Show Cards"
+}
+
 async function showHideButtonHandler(clickEvent) {
   const boardId = clickEvent.target.dataset.boardId;
-  await columnManager.loadColumns(boardId);
-  await cardsManager.loadCards(boardId);
+  const button = clickEvent.target
+  if(button.dataset.toggleState === "hide"){
+    await openBoard(boardId, button)
+  }
+  else{
+    await closeBoard(boardId, button)
+  }
 }
+
+
