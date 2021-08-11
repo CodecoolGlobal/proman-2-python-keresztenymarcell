@@ -5,7 +5,6 @@ import { domManager } from "../view/domManager.js";
 export let cardsManager = {
   loadCards: async function (boardId) {
     const cards = await dataHandler.getCardsByBoardId(boardId);
-    console.log(cards)
     for (let card of cards) {
       const cardBuilder = htmlFactory(htmlTemplates.card);
       const content = cardBuilder(card);
@@ -27,7 +26,6 @@ async function renameCard(clickEvent){
   let oldTitle = element.textContent
   element.addEventListener('focusout', async function(){
     let title = element.textContent
-    console.log(title)
     if(title !== oldTitle){
       await dataHandler.renameCard(cardId, title)
     }

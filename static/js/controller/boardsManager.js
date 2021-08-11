@@ -65,7 +65,6 @@ async function showHideButtonHandler(clickEvent) {
 async function addStatus(clickEvent){
   const boardID = clickEvent.target.attributes["add-new-status-id"].nodeValue
   const button = document.querySelector(`.board-container[data-board-id="${boardID}"] .toggle-board-button`)
-  console.log(button)
   let status = {
     title: "New Status",
     board_id: boardID

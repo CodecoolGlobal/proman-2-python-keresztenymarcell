@@ -116,7 +116,8 @@ def rename_card_by_id():
 def rename_statuses_by_id():
     status_id = request.json['column_id']
     status_title = request.json['column_title']
-    return queries.rename_statuse_by_id(status_id, status_title)
+    print(request.json)
+    return queries.rename_statuses_by_id(status_id, status_title)
 
 
 def main():

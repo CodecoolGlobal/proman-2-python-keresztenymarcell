@@ -62,6 +62,7 @@ def get_statuses():
     return data_manager.execute_select(
         """
         SELECT id, title, board_id FROM statuses
+        ORDER BY id 
         """
     )
 
@@ -135,7 +136,9 @@ def rename_card_by_id(id, title):
     )
 
 
-def rename_statuse_by_id(id, title):
+def rename_statuses_by_id(id, title):
+    print(id)
+    print(title)
     return data_manager.execute_query(
         """
         UPDATE statuses 

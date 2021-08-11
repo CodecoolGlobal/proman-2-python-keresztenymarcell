@@ -11,19 +11,10 @@ export let columnManager = {
                 const columnBuilder = htmlFactory(htmlTemplates.column);
                 const content = columnBuilder(column)
                 await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns `, content)
+                await domManager.addEventListener(`.board-column-title[column-title-id="${column.id}"]`, "click", renameStatus);
             }
         }
 
-        //Rename clumns
-        const statuses = await dataHandler.getStatuses(boardId);
-        console.log(statuses)
-        for(let status of statuses) {
-        const columnBuilder = htmlFactory(htmlTemplates.column);
-        const content = columnBuilder(status);
-        domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns`, content);
-        domManager.addEventListener(`.board-column-title[column-title-id="${status.id}"]`, "click", renameStatus);
-
-        }
     }
 }
 
@@ -34,7 +25,6 @@ async function renameStatus(clickEvent){
   let oldTitle = element.textContent
   element.addEventListener('focusout', async function(){
     let title = element.textContent
-    console.log(title)
     if(title !== oldTitle){
       await dataHandler.renameColumn(statusID, title)
     }
