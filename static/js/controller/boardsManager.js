@@ -79,10 +79,15 @@ async function createNewBoard(clickEvent){
   let board = {}
   const button = clickEvent.target
   board.title = document.getElementById('new-board-title').value
-  await dataHandler.createNewBoard(board.title)
-  board.id = dataHandler.getNewBoardId()
-  const boardBuilder = htmlFactory(htmlTemplates.board)
-  const newBoard = boardBuilder(board)
-  domManager.addChild("#root", newBoard);
+  if (board.title !== ""){
+    await dataHandler.createNewBoard(board.title)
+    board.id = dataHandler.getNewBoardId()
+    const boardBuilder = htmlFactory(htmlTemplates.board)
+    const newBoard = boardBuilder(board)
+    domManager.addChild("#root", newBoard);
+  }
+  else {
+    alert('Give me a title!')
+  }
 };
 
