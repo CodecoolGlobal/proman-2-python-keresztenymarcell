@@ -60,6 +60,10 @@ export let dataHandler = {
     let payload = { "board_id": boardId, "card_title": cardTitle, "status_id": statusId}
     await apiPost("/api/boards/add-new-card/", payload)
   },
+  deleteCardById: async function(cardId){
+      let payload = {"card_id": cardId}
+      await apiPost(`/api/delete-card/${cardId}`)
+  }
 };
 
 async function apiGet(url) {
