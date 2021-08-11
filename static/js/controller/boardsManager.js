@@ -100,12 +100,11 @@ async function createNewBoard(clickEvent){
 async function createNewCard(clickEvent){
   let boardId = clickEvent.target.attributes["add-new-card-id"].nodeValue;
   let card = {
-    id : 0,
-    title : "New card",
-    status_id : 1
+    id : 25,
+    status_id : 1,
+    title : "New card"
   };
-
-  await dataHandler. createNewCard(card.id, card.title, card.status_id);
+  await dataHandler. createNewCard(boardId, card.title, card.status_id);
   const cardBuilder = htmlFactory(htmlTemplates.card);
   const newCard = cardBuilder(card);
   domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, newCard);

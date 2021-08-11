@@ -98,9 +98,10 @@ def get_last_board_id():
         """
     )
 
-def create_new_card(id, title, status_id):
+def create_new_card(board_id, status_id, title):
     return data_manager.execute_query(
         """
-            INSERT INTO cards (id, title, status_id) VALUES (%(id)s , %(title)s , %(status_id)s );
-        """, {"id": id, "title": title, "status_id": status_id}
+            INSERT INTO cards (board_id, status_id, title, card_order) 
+            VALUES (%(board_id)s , %(status_id)s, %(title)s, 0);
+        """, {"board_id": board_id, "status_id": status_id, "title": title}
     )
