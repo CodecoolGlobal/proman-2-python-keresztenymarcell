@@ -18,6 +18,7 @@ export function htmlFactory(template) {
         case htmlTemplates.card:
             return cardBuilder
 
+
         default:
             console.error("Undefined template: " + template)
             return () => { return "" }

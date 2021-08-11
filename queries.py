@@ -114,3 +114,33 @@ def get_last_board_id():
         SELECT MAX(id) AS id FROM boards;
         """
     )
+
+def create_new_card(board_id, status_id, title):
+    return data_manager.execute_query(
+        """
+            INSERT INTO cards (board_id, status_id, title, card_order) 
+            VALUES (%(board_id)s , %(status_id)s, %(title)s, 0);
+        """, {"board_id": board_id, "status_id": status_id, "title": title}
+    )
+
+
+def rename_card_by_id(id, title):
+    return data_manager.execute_query(
+        """
+        UPDATE cards 
+        SET title = %(title)s
+        WHERE id = %(id)s
+        """,
+        {"id": id, "title": title}
+    )
+
+
+def rename_statuse_by_id(id, title):
+    return data_manager.execute_query(
+        """
+        UPDATE statuses 
+        SET title = %(title)s
+        WHERE id = %(id)s
+        """,
+        {"id": id, "title": title}
+    )

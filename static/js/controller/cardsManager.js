@@ -15,8 +15,30 @@ export let cardsManager = {
         "click",
         deleteButtonHandler
       );
+      domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCard);
     }
   },
 };
+
+
+async function renameCard(clickEvent){
+  let cardId = clickEvent.target.attributes["card-title-id"].nodeValue
+  let element = document.querySelector(`.card-title[card-title-id="${cardId}"]`)
+  let oldTitle = element.textContent
+  element.addEventListener('focusout', async function(){
+    let title = element.textContent
+    console.log(title)
+    if(title !== oldTitle){
+      await dataHandler.renameCard(cardId, title)
+    }
+    if (title === ""){
+      element.textContent = "Unnamed"
+      await dataHandler.renameCard(cardId,title)
+    }
+  })
+
+}
+
+
 
 function deleteButtonHandler(clickEvent) { }

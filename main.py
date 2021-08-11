@@ -94,6 +94,31 @@ def get_newboard_id():
     return queries.get_last_board_id()
 
 
+@app.route("/api/boards/add-new-card/", methods=["GET", "POST"])
+@json_response
+def create_new_card():
+    board_id = request.json["board_id"]
+    card_title = request.json["card_title"]
+    status_id = request.json["status_id"]
+    return queries.create_new_card(board_id, status_id, card_title,)
+
+
+@app.route("/api/rename-card-by-id", methods=['GET', 'POST'])
+@json_response
+def rename_card_by_id():
+    card_id = request.json['card_id']
+    card_title = request.json['card_title']
+    return queries.rename_card_by_id(card_id, card_title)
+
+
+@app.route("/api/rename-column-by-id", methods=['POST'])
+@json_response
+def rename_statuses_by_id():
+    status_id = request.json['column_id']
+    status_title = request.json['column_title']
+    return queries.rename_statuse_by_id(status_id, status_title)
+
+
 def main():
     app.run(debug=True)
 

@@ -163,3 +163,6 @@ section.board{
     margin-top: 0.75rem;
     margin-right: 2rem;
 }
+.add-new-card{
+    display: None;
+}

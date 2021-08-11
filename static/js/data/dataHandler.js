@@ -33,19 +33,32 @@ export let dataHandler = {
     return response;
   },
   getCard: async function (cardId) {
-    // the card is retrieved and then the callback function is called with the card
+      //
   },
+
   renameBoard: async function(boardId, boardTitle){
     let payload = {"board_id": boardId, "board_title": boardTitle}
     await apiPost(`/api/rename-board-by-id`, payload)
   },
 
+  renameCard: async function(cardId, cardTitle){
+    let payload = {"card_id": cardId, "card_title": cardTitle}
+    await apiPost("/api/rename-card-by-id", payload)
+  },
+
+  renameColumn: async function(columnId, columnTitle){
+    let payload = {"column_id": columnId, "column_title": columnTitle}
+    await apiPost("/api/rename-column-by-id", payload)
+  },
+
+
   createNewBoard: async function (boardTitle) {
     let payload = {"board_title": boardTitle}
     await apiPost("/api/boards/add-new-board/", payload)
   },
-  createNewCard: async function (cardTitle, boardId, statusId) {
-    // creates new card, saves it and calls the callback function with its data
+  createNewCard: async function ( boardId, cardTitle, statusId) {
+    let payload = { "board_id": boardId, "card_title": cardTitle, "status_id": statusId}
+    await apiPost("/api/boards/add-new-card/", payload)
   },
 };
 
