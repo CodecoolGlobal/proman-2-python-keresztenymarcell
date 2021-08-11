@@ -12,12 +12,17 @@ export let cardsManager = {
       domManager.addEventListener(
         `.card[data-card-id="${card.id}"]`,
         "click",
-        deleteButtonHandler);
+        cardsManager.deleteCardButtonHandler);
       domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCardHandler);
-
     }
   },
-
+  deleteCardButtonHandler: async function(clickEvent){
+    let cardId = clickEvent.target.dataset.cardId
+    let item = document.querySelector(`.card[data-card-id="${cardId}"]`)
+    let parent = item.parentNode
+    parent.removeChild(item)
+    await dataHandler.removeChildById(cardId)
+  }
 };
 
 
