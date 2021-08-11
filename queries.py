@@ -66,6 +66,28 @@ def get_statuses():
     )
 
 
+def create_new_status(title, board_id):
+
+    return data_manager.execute_query(
+        """
+        INSERT INTO statuses (title, board_id) 
+        VALUES (%(title)s, %(board_id)s) 
+        RETURNING id
+        """,
+        {"title": title, "board_id": board_id}
+    )
+
+
+def get_last_status_id():
+
+    return data_manager.execute_select(
+        """
+        SELECT MAX(id) 
+        FROM statuses
+        """
+    )
+
+
 def rename_board_by_id(id, title):
     return data_manager.execute_query(
         """

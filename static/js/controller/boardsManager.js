@@ -13,6 +13,7 @@ export let boardsManager = {
       domManager.addChild("#root", content);
       domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler);
       domManager.addEventListener(`.board-title[board-title-id="${board.id}"]`, "click", renameBoard);
+      domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
     }
   },
 
@@ -41,6 +42,17 @@ async function showHideButtonHandler(clickEvent) {
   else{
     await closeBoard(boardId, button)
   }
+}
+
+async function addStatus(clickEvent){
+  const boardID = clickEvent.target.attributes["add-new-status-id"].nodeValue
+  let status = {
+    title: "New Status",
+    board_id: boardID
+  }
+  await dataHandler.createNewStatus(status.title, status.board_id)
+  let newID = dataHandler.
+
 }
 
 async function renameBoard(clickEvent){

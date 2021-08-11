@@ -14,6 +14,15 @@ export let dataHandler = {
   getStatus: async function (statusId) {
 
   },
+   createNewStatus: async function(title, boardID){
+    let payload = {"title": title, "board_id": boardID}
+    await apiPost(`/api/create-new-status`, payload)
+  },
+  getLastStatusId: async function(){
+      const response = await apiGet(`/api/get-last-status-id`)
+      return response
+  },
+
   getCardsByBoardId: async function (boardId) {
     const response = await apiGet(`/api/boards/${boardId}/cards/`);
     return response;
@@ -25,6 +34,7 @@ export let dataHandler = {
     let payload = {"board_id": boardId, "board_title": boardTitle}
     await apiPost(`/api/rename-board-by-id`, payload)
   },
+
     createNewBoard: async function (boardTitle) {
     // creates new board, saves it and calls the callback function with its data
   },
