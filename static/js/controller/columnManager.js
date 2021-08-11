@@ -4,12 +4,12 @@ import { domManager } from "../view/domManager.js";
 
 
 export let columnManager = {
-    loadColumns: async function (boardId) {
-        const statuses = await dataHandler.getStatuses();
-        for (let status of statuses) {
-            if (String(status.board_id) === boardId) {
+    loadColumns: async function (boardId){
+        const columns = await dataHandler.getColumns();
+        for(let column of columns){
+            if (String(column.board_id) === boardId){
                 const columnBuilder = htmlFactory(htmlTemplates.column);
-                const content = columnBuilder(status)
+                const content = columnBuilder(column)
                 await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns `, content)
                 await domManager.addEventListener(`.board-column-title[column-title-id="${column.id}"]`, "click", renameStatus);
             }

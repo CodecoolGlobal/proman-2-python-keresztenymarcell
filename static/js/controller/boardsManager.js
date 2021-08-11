@@ -98,15 +98,10 @@ async function renameBoard(clickEvent){
 
 async function deleteBoard(clickEvent){
     const boardId = clickEvent.target.attributes['delete-board-id'].nodeValue;
-    console.log(boardId)
-    console.log("Delete 1 - BoardID")
     await dataHandler.deleteBoardById(boardId)
     let boards = document.getElementsByClassName('board-container');
     for (let board of boards) {
-        console.log(board)
-        console.log("Delete 2- board")
         if(boardId === board.attributes['data-board-id'].nodeValue) {
-            console.log(board)
             root.removeChild(board)
             break;
         }
