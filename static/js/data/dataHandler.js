@@ -33,9 +33,11 @@ export let dataHandler = {
   },
     deleteBoardById: async function(boardId){
         let payload = {"board_id": boardId}
-        console.log(boardId)
-        console.log(payload)
         await apiDelete(`/api/delete-board-by-id/${boardId}`,payload)
+    },
+    deleteStatusById: async function(statusId){
+        let payload = {"status_id": statusId}
+        await apiDelete(`/api/delete-status-by-id/${statusId}`,payload)
     },
 };
 

@@ -50,6 +50,12 @@ def delete_board_by_id(board_id: int):
     return queries.delete_board_by_id(board_id)
 
 
+@app.route("/api/delete-status-by-id/<int:column_id>", methods=['DELETE'])
+@json_response
+def delete_status_by_id(status_id: int):
+    return queries.delete_status_by_id(status_id)
+
+
 @app.route("/api/board/<int:board_id>/column")
 @json_response
 def get_statuses(board_id: int):

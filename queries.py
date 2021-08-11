@@ -82,11 +82,16 @@ def rename_board_by_id(id, title):
     )
 
 
-#         DELETE FROM status
-#         WHERE board_id = %(id)s;
 def delete_board_by_id(board_id):
+    # Elsőször a card utána a többi törlése, másképp hibára fut
+    # MINDEN HIBÁRA IGAZ
     delete_board_id_from_cards(board_id)
     delete_board(board_id)
+
+
+def delete_status_by_id(column_id):
+    delete_status_id_from_cards(column_id)
+    delete_status(column_id)
 
 
 def delete_board(board_id):
@@ -107,4 +112,24 @@ def delete_board_id_from_cards(board_id):
         WHERE board_id = %(id)s;
         """,
         {"id": board_id}
+    )
+
+
+def delete_status_id_from_cards(status_id):
+    return data_manager.execute_query(
+        """
+        DELETE FROM cards
+        WHERE status_id = %(id)s;
+        """,
+        {"id": status_id}
+    )
+
+
+def delete_status(status_id):
+    return data_manager.execute_query(
+        """
+        DELETE FROM statuses
+        WHERE id = %(id)s;
+        """,
+        {"id": status_id}
     )
