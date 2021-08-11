@@ -39,8 +39,6 @@ def get_board_with_id(board_id: int):
 @app.route("/api/rename-board-by-id", methods=['POST'])
 @json_response
 def rename_board_by_id():
-    result = request.json
-    print(result)
     board_id = request.json['board_id']
     board_title = request.json['board_title']
     return queries.rename_board_by_id(board_id, board_title)
@@ -48,8 +46,29 @@ def rename_board_by_id():
 
 @app.route("/api/board/<int:board_id>/column")
 @json_response
-def get_statuses(board_id: int):
-    return queries.get_statuses(board_id)
+def get_status(board_id: int):
+    return
+
+
+@app.route("/api/get-columns")
+@json_response
+def get_statuses():
+    return queries.get_statuses()
+
+
+@app.route("/api/create-new-status", methods=["POST"])
+@json_response
+def create_new_status():
+    title = request.json["title"]
+    board_id = request.json["board_id"]
+    return queries.create_new_status(title, board_id)
+
+
+@app.route("/api/get-last-status-id")
+@json_response
+def get_last_status_id():
+    return queries.get_last_status_id()
+
 
 
 @app.route("/api/boards/<int:board_id>/cards/")

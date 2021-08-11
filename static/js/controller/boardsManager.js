@@ -13,6 +13,7 @@ export let boardsManager = {
       domManager.addChild("#root", content);
       domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler);
       domManager.addEventListener(`.board-title[board-title-id="${board.id}"]`, "click", renameBoard);
+      domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
     }
   },
 };
@@ -54,6 +55,23 @@ async function showHideButtonHandler(clickEvent) {
   }
   else{
     await closeBoard(boardId, button)
+  }
+}
+
+async function addStatus(clickEvent){
+  const boardID = clickEvent.target.attributes["add-new-status-id"].nodeValue
+  const button = document.querySelector(`.board-container[data-board-id="${boardID}"] .toggle-board-button`)
+  console.log(button)
+  let status = {
+    title: "New Status",
+    board_id: boardID
+  }
+  if(button.dataset.toggleState === "show"){
+    await dataHandler.createNewStatus(status.title, status.board_id)
+    status.id = dataHandler.getLastStatusId()
+    const columnBuilder = htmlFactory(htmlTemplates.column)
+    let column = columnBuilder(status)
+    domManager.addChild(`.board-container[data-board-id="${boardID}"] .board-columns `, column)
   }
 }
 

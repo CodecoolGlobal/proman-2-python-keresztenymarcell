@@ -7,8 +7,8 @@ export let dataHandler = {
     const response = await apiGet(`/api/boards/${boardId}`);
     return response;
   },
-  getStatuses: async function (boardId) {
-   const response = await apiGet(`/api/board/${boardId}/column`);
+  getColumns: async function (boardId) {
+   const response = await apiGet(`/api/get-columns`);
    return response;
   },
   getStatus: async function (statusId) {
@@ -17,6 +17,15 @@ export let dataHandler = {
   getNewBoardId: async function () {
     const response = await apiGet("/api/boards/new-board-id/");
     return response;
+  },
+
+   createNewStatus: async function(title, boardID){
+    let payload = {"title": title, "board_id": boardID}
+    await apiPost(`/api/create-new-status`, payload)
+  },
+  getLastStatusId: async function(){
+      const response = await apiGet(`/api/get-last-status-id`)
+      return response
   },
 
   getCardsByBoardId: async function (boardId) {
@@ -30,7 +39,7 @@ export let dataHandler = {
     let payload = {"board_id": boardId, "board_title": boardTitle}
     await apiPost(`/api/rename-board-by-id`, payload)
   },
-  
+
   createNewBoard: async function (boardTitle) {
     let payload = {"board_title": boardTitle}
     await apiPost("/api/boards/add-new-board/", payload)
