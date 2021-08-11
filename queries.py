@@ -85,12 +85,26 @@ def rename_board_by_id(id, title):
 #         DELETE FROM status
 #         WHERE board_id = %(id)s;
 def delete_board_by_id(board_id):
+    delete_board_id_from_cards(board_id)
+    delete_board(board_id)
+
+
+def delete_board(board_id):
+    return data_manager.execute_query(
+        """
+        DELETE FROM boards
+        WHERE
+        id = %(id)s;
+        """,
+        {"id": board_id}
+    )
+
+
+def delete_board_id_from_cards(board_id):
     return data_manager.execute_query(
         """
         DELETE FROM cards
         WHERE board_id = %(id)s;
-        DELETE FROM boards
-        WHERE id = %(id)s;
         """,
         {"id": board_id}
     )
