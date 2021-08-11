@@ -52,10 +52,10 @@ def get_cards_for_board(board_id: int):
     return queries.get_cards_for_board(board_id)
 
 
-@app.route("/api/boards/add-new-board/", methods=["GET", "POST"])
+@app.route("/api/boards/add-new-board/", methods=["GET", "POST", "PUT"])
 @json_response
-def createNewBoard():
-    if request.method =="POST":
+def createboard():
+    if request.method == "POST":
         board_title = request.json["board_title"]
         print(board_title)
         return queries.create_element(board_title)

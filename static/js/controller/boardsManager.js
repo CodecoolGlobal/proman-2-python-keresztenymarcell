@@ -62,9 +62,10 @@ async function showHideButtonHandler(clickEvent) {
 
 
 async function createNewElement(clickEvent){
+  const button = clickEvent.target
   const title = document.getElementById('new-board-title').value
   const newBoard = await dataHandler.createNewBoard(title)
-  domManager.addChild(".board-header", newBoard);
+  domManager.addChild("#root", newBoard);
   console.log(newBoard)
 };
 
