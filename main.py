@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request
 from dotenv import load_dotenv
+import json
 import jsonify
 
 from psycopg2.extensions import JSON
@@ -52,13 +53,11 @@ def get_cards_for_board(board_id: int):
     return queries.get_cards_for_board(board_id)
 
 
-@app.route("/api/boards/add-new-board/", methods=["GET", "POST", "PUT"])
+@app.route("/api/boards/add-new-board/", methods=["GET", "POST"])
 @json_response
 def createboard():
-    if request.method == "POST":
-        board_title = request.json["board_title"]
-        print(board_title)
-        return queries.create_element(board_title)
+    board_title = request.json["board_title"]
+    return queries.create_element(board_title)
 
 
 def main():
