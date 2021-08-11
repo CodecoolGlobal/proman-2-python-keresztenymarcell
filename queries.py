@@ -136,6 +136,16 @@ def rename_card_by_id(id, title):
     )
 
 
+def delete_card_by_id(card_id):
+    return data_manager.execute_query(
+        """
+        DELETE FROM cards
+        WHERE id = %(card_id)s
+        """,
+        {"card_id": card_id}
+    )
+
+
 def rename_statuses_by_id(id, title):
     print(id)
     print(title)

@@ -129,4 +129,5 @@ async function createNewCard(clickEvent){
   const cardBuilder = htmlFactory(htmlTemplates.card);
   const newCard = cardBuilder(card);
   domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, newCard);
+  domManager.addEventListener(`.card[data-card-id="${card.id}"]`, "click", cardsManager.deleteCardButtonHandler)
 }

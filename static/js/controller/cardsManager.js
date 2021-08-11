@@ -21,7 +21,7 @@ export let cardsManager = {
     let item = document.querySelector(`.card[data-card-id="${cardId}"]`)
     let parent = item.parentNode
     parent.removeChild(item)
-    await dataHandler.removeChildById(cardId)
+    await dataHandler.deleteCardById(cardId)
   }
 };
 
