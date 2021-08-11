@@ -46,13 +46,19 @@ async function showHideButtonHandler(clickEvent) {
 
 async function addStatus(clickEvent){
   const boardID = clickEvent.target.attributes["add-new-status-id"].nodeValue
+  const button = document.querySelector(`.board-container[data-board-id="${boardID}"] .toggle-board-button`)
+  console.log(button)
   let status = {
     title: "New Status",
     board_id: boardID
   }
-  await dataHandler.createNewStatus(status.title, status.board_id)
-  let newID = dataHandler.
-
+  if(button.dataset.toggleState === "show"){
+    await dataHandler.createNewStatus(status.title, status.board_id)
+    status.id = dataHandler.getLastStatusId()
+    const columnBuilder = htmlFactory(htmlTemplates.column)
+    let column = columnBuilder(status)
+    domManager.addChild(`.board-container[data-board-id="${boardID}"] .board-columns `, column)
+  }
 }
 
 async function renameBoard(clickEvent){
