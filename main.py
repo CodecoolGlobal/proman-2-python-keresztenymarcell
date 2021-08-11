@@ -45,8 +45,15 @@ def rename_board_by_id():
 
 @app.route("/api/board/<int:board_id>/column")
 @json_response
-def get_statuses(board_id: int):
-    return queries.get_statuses(board_id)
+def get_status(board_id: int):
+    return
+
+
+@app.route("/api/get-columns")
+@json_response
+def get_statuses():
+    return queries.get_statuses()
+
 
 
 @app.route("/api/boards/<int:board_id>/cards/")
