@@ -29,7 +29,7 @@ export let buttonManager = {
     domManager.addEventListener(
         "#load-new-board-form",
         "click",
-        createNewElement
+        createNewBoard
       );
   }
 }
@@ -61,11 +61,14 @@ async function showHideButtonHandler(clickEvent) {
 }
 
 
-async function createNewElement(clickEvent){
+async function createNewBoard(clickEvent){
+  let board = {}
   const button = clickEvent.target
-  const title = document.getElementById('new-board-title').value
-  const newBoard = await dataHandler.createNewBoard(title)
+  board.title = document.getElementById('new-board-title').value
+  await dataHandler.createNewBoard(board.title)
+  board.id = dataHandler.getNewBoardId()
+  const boardBuilder = htmlFactory(htmlTemplates.board)
+  const newBoard = boardBuilder(board)
   domManager.addChild("#root", newBoard);
-  console.log(newBoard)
 };
 

@@ -74,6 +74,14 @@ def get_statuses(board_id):
 def create_element(title):
     return data_manager.execute_query(
         """
-            INSERT INTO boards (title) VALUES (%(title)s);
+            INSERT INTO boards (title) VALUES (%(title)s) RETURNING (id);
         """, {"title": title}
+    )
+
+
+def get_last_board_id():
+    return data_manager.execute_select(
+        """
+        SELECT MAX(id) AS id FROM boards;
+        """
     )

@@ -14,6 +14,11 @@ export let dataHandler = {
   getStatus: async function (statusId) {
 
   },
+  getNewBoardId: async function () {
+    const response = await apiGet("/api/boards/new-board-id/");
+    return response;
+  },
+
   getCardsByBoardId: async function (boardId) {
     const response = await apiGet(`/api/boards/${boardId}/cards/`);
     return response;

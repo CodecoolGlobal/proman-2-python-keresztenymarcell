@@ -60,6 +60,12 @@ def createboard():
     return queries.create_element(board_title)
 
 
+@app.route("/api/boards/new-board-id/", methods=["GET", "POST"])
+@json_response
+def get_newboard_id():
+    return queries.get_last_board_id()
+
+
 def main():
     app.run(debug=True)
 
