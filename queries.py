@@ -123,6 +123,7 @@ def get_last_status_id():
         """
     )
 
+
 def create_new_card(board_id, status_id, title):
     return data_manager.execute_query(
         """

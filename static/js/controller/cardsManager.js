@@ -8,13 +8,12 @@ export let cardsManager = {
     for (let card of cards) {
       const cardBuilder = htmlFactory(htmlTemplates.card);
       const content = cardBuilder(card);
-      domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, content);
-      domManager.addEventListener(
-        `.card[data-card-id="${card.id}"]`,
-        "click",
-        deleteButtonHandler
-      );
-      domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCard);
+      if (String(card.board_id) === boardId) {
+         domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, content);
+         domManager.addEventListener(`.card-remove[data-card-id="${card.id}"]`, "click", deleteButtonHandler);
+         domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCard);
+
+      }
     }
   },
 };

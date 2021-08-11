@@ -10,8 +10,8 @@ export let columnManager = {
             if (String(column.board_id) === boardId){
                 const columnBuilder = htmlFactory(htmlTemplates.column);
                 const content = columnBuilder(column)
-                await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns `, content)
-                await domManager.addEventListener(`.board-column-title[column-title-id="${column.id}"]`, "click", renameStatus);
+                await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns`, content)
+                await domManager.addEventListener(`.board-column-title[board-column-title="${column.id}"]`, "click", renameStatus);
             }
         }
 

@@ -12,7 +12,7 @@ export let dataHandler = {
    return response;
   },
 
-  getColumns: async function (boardId) {
+  getColumns: async function () {
    const response = await apiGet(`/api/get-columns`);
    return response;
   },

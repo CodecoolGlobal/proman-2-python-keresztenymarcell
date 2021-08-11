@@ -50,7 +50,7 @@ def get_status(board_id: int):
     return
 
 
-@app.route("/api/get-columns")
+@app.route("/api/get-columns/")
 @json_response
 def get_statuses():
     return queries.get_statuses()
