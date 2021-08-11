@@ -116,3 +116,14 @@ def rename_card_by_id(id, title):
         """,
         {"id": id, "title": title}
     )
+
+
+def rename_statuse_by_id(id, title):
+    return data_manager.execute_query(
+        """
+        UPDATE statuses 
+        SET title = %(title)s
+        WHERE id = %(id)s
+        """,
+        {"id": id, "title": title}
+    )

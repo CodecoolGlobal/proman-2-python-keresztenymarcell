@@ -88,9 +88,16 @@ def create_new_card():
 @json_response
 def rename_card_by_id():
     card_id = request.json['card_id']
-    print(card_id)
     card_title = request.json['card_title']
     return queries.rename_card_by_id(card_id, card_title)
+
+
+@app.route("/api/rename-column-by-id", methods=['POST'])
+@json_response
+def rename_statuses_by_id():
+    status_id = request.json['column_id']
+    status_title = request.json['column_title']
+    return queries.rename_statuse_by_id(status_id, status_title)
 
 
 def main():

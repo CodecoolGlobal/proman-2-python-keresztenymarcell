@@ -36,7 +36,13 @@ export let dataHandler = {
     let payload = {"card_id": cardId, "card_title": cardTitle}
     await apiPost("/api/rename-card-by-id", payload)
   },
-  
+
+  renameColumn: async function(columnId, columnTitle){
+    let payload = {"column_id": columnId, "column_title": columnTitle}
+    await apiPost("/api/rename-column-by-id", payload)
+  },
+
+
   createNewBoard: async function (boardTitle) {
     let payload = {"board_title": boardTitle}
     await apiPost("/api/boards/add-new-board/", payload)
