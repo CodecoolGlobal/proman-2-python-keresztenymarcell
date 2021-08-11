@@ -84,6 +84,15 @@ def create_new_card():
     return queries.create_new_card(board_id, status_id, card_title,)
 
 
+@app.route("/api/rename-card-by-id", methods=['GET', 'POST'])
+@json_response
+def rename_card_by_id():
+    card_id = request.json['card_id']
+    print(card_id)
+    card_title = request.json['card_title']
+    return queries.rename_card_by_id(card_id, card_title)
+
+
 def main():
     app.run(debug=True)
 

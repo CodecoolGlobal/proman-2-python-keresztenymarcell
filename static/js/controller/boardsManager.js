@@ -70,7 +70,7 @@ async function renameBoard(clickEvent){
     if(title !== oldTitle){
       await dataHandler.renameBoard(boardId, title)
     }
-    else if (title === ""){
+    if (title === ""){
       element.innerHTML = "Unnamed"
       await dataHandler.renameBoard(boardId,title)
     }

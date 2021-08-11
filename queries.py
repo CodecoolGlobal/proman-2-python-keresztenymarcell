@@ -105,3 +105,14 @@ def create_new_card(board_id, status_id, title):
             VALUES (%(board_id)s , %(status_id)s, %(title)s, 0);
         """, {"board_id": board_id, "status_id": status_id, "title": title}
     )
+
+
+def rename_card_by_id(id, title):
+    return data_manager.execute_query(
+        """
+        UPDATE cards 
+        SET title = %(title)s
+        WHERE id = %(id)s
+        """,
+        {"id": id, "title": title}
+    )
