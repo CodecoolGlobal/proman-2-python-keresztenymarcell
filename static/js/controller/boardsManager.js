@@ -11,11 +11,8 @@ export let boardsManager = {
       const boardBuilder = htmlFactory(htmlTemplates.board);
       const content = boardBuilder(board);
       domManager.addChild("#root", content);
-      domManager.addEventListener(
-        `.toggle-board-button[data-board-id="${board.id}"]`,
-        "click",
-        showHideButtonHandler
-      );
+      domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler);
+      domManager.addEventListener(`.board-title[board-title-id="${board.id}"]`, "click", renameBoard);
     }
   },
 };
@@ -58,6 +55,23 @@ async function showHideButtonHandler(clickEvent) {
   else{
     await closeBoard(boardId, button)
   }
+}
+
+async function renameBoard(clickEvent){
+  let boardId = clickEvent.target.attributes["board-title-id"].nodeValue
+  let element = document.querySelector(`.board-title[board-title-id="${boardId}"]`)
+  let oldTitle = element.textContent
+  element.addEventListener('focusout', async function(){
+    let title = element.textContent
+    if(title !== oldTitle){
+      await dataHandler.renameBoard(boardId, title)
+    }
+    else if (title === ""){
+      element.innerHTML = "Unnamed"
+      await dataHandler.renameBoard(boardId,title)
+    }
+  })
+
 }
 
 

@@ -67,8 +67,20 @@ def get_statuses(board_id):
         WHERE board_id = %(board_id)s
         
         ;
-        """, {"board_id" : board_id}
+        """, {"board_id": board_id}
     )
+
+
+def rename_board_by_id(id, title):
+    return data_manager.execute_query(
+        """
+        UPDATE boards 
+        SET title = %(title)s
+        WHERE id = %(id)s
+        """,
+        {"id": id, "title": title}
+    )
+
 
 
 def create_element(title):
