@@ -110,16 +110,14 @@ async function createNewBoard(clickEvent){
     domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler);
 
 
-    const columns1 = await dataHandler.getDefaultColumns();
     await dataHandler.createEmptyStatuses(board.id)
     const columns = await dataHandler.getColumns(board.id)
-    console.log(columns)
-    console.log('columns')
     for (let column of columns) {
-      const columnBuilder = htmlFactory(htmlTemplates.column);
-      const content = columnBuilder(column)
-      domManager.addChild(`.board-container[data-board-id="${board.id}"] .board-columns`, content);
-
+      if (column.board_id === board.id ) {
+        const columnBuilder = htmlFactory(htmlTemplates.column);
+        const content = columnBuilder(column)
+        domManager.addChild(`.board-container[data-board-id="${board.id}"] .board-columns`, content);
+      }
     }
   }
 

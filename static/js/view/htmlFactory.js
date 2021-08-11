@@ -43,7 +43,6 @@ function boardBuilder(board) {
 }
 
 function columnBuilder(column) {
-    console.log(column)
     return `<div class="board-column" data-column-id="${column.id}">
                 <span class="board-column-title" board-column-title="${column.id}" contenteditable="true">${column.title}</span>
                 <button class="delete-column-button" data-delete-status-id="${column.id}" data-delete-owner-id="${column.board_id}">X</button>
