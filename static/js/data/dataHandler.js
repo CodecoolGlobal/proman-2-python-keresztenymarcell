@@ -36,7 +36,7 @@ export let dataHandler = {
     const response = await apiGet(`/api/boards/${boardId}/cards/`);
     return response;
   },
-  getCard: async function (cardId) {
+    getCard: async function (cardId) {
       //
   },
 
@@ -67,7 +67,7 @@ export let dataHandler = {
   deleteCardById: async function(cardId){
       let payload = {"card_id": cardId}
       await apiPost(`/api/delete-card/${cardId}`)
-  }
+  },
     deleteBoardById: async function(boardId){
         let payload = {"board_id": boardId}
         await apiDelete(`/api/delete-board-by-id/${boardId}`,payload)
