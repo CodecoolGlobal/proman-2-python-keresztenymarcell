@@ -83,6 +83,12 @@ def get_last_status_id():
     return queries.get_last_status_id()
 
 
+@app.route("/api/get-last-card-id")
+@json_response
+def get_last_card_id():
+    return queries.get_last_card_id()
+
+
 
 @app.route("/api/boards/<int:board_id>/cards/")
 @json_response
@@ -101,9 +107,9 @@ def createboard():
     return queries.create_element(board_title)
 
 
-@app.route("/api/boards/new-board-id/", methods=["GET", "POST"])
+@app.route("/api/boards/new-board-id")
 @json_response
-def get_newboard_id():
+def get_new_board_id():
     return queries.get_last_board_id()
 
 
@@ -124,12 +130,17 @@ def rename_card_by_id():
     return queries.rename_card_by_id(card_id, card_title)
 
 
+@app.route("/api/delete-card/<int:card_id>", methods=["POST"])
+@json_response
+def delete_card_by_id(card_id):
+    return queries.delete_card_by_id(card_id)
+
+
 @app.route("/api/rename-column-by-id", methods=['POST'])
 @json_response
 def rename_statuses_by_id():
     status_id = request.json['column_id']
     status_title = request.json['column_title']
-    print(request.json)
     return queries.rename_statuses_by_id(status_id, status_title)
 
 

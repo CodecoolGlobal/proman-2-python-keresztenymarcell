@@ -72,10 +72,11 @@ async function addStatus(clickEvent){
   }
   if(button.dataset.toggleState === "show"){
     await dataHandler.createNewStatus(status.title, status.board_id)
-    status.id = dataHandler.getLastStatusId()
+    let result = await dataHandler.getLastStatusId()
+    status.id = result[0]["id"]
     const columnBuilder = htmlFactory(htmlTemplates.column)
     let column = columnBuilder(status)
-    domManager.addChild(`.board-container[data-board-id="${boardID}"] .board-columns `, column)
+    await domManager.addChild(`.board-container[data-board-id="${boardID}"] .board-columns `, column)
   }
 }
 
@@ -118,18 +119,20 @@ async function createNewBoard(clickEvent){
   board.title = document.getElementById('new-board-title').value
   if (board.title !== ""){
     await dataHandler.createNewBoard(board.title)
-    board.id = dataHandler.getNewBoardId()
+    let result = await dataHandler.getNewBoardId()
+    board.id = result[0]["id"]
     const boardBuilder = htmlFactory(htmlTemplates.board)
     const newBoard = boardBuilder(board)
     domManager.addChild("#root", newBoard);
-
+    domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler)
+    domManager.addEventListener(`.board-title[board-title-id="${board.id}"]`, "click", renameBoard);
+    domManager.addEventListener(`.add-new-card[add-new-card-id="${board.id}"]`, "click", createNewCard)
+    domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
   }
   else {
     alert('Give me a title!')
   }
-};
-
-
+}
 
 async function createNewCard(clickEvent){
   let boardId = clickEvent.target.attributes["add-new-card-id"].nodeValue;
@@ -138,8 +141,13 @@ async function createNewCard(clickEvent){
     status_id : 1,
     title : "New card"
   };
-  await dataHandler. createNewCard(boardId, card.title, card.status_id);
+  card.status_id = clickEvent.target.parentElement.parentElement.children[2].children[0].dataset.columnId
+  console.log(card.status_id)
+  await dataHandler.createNewCard(boardId, card.title, card.status_id);
   const cardBuilder = htmlFactory(htmlTemplates.card);
+  let result = await dataHandler.getLastCardId()
+  card.id = result[0]["id"]
   const newCard = cardBuilder(card);
-  domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, newCard);
+  await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, newCard);
+  await domManager.addEventListener(`.card[data-card-id="${card.id}"]`, "click", cardsManager.deleteCardButtonHandler)
 }

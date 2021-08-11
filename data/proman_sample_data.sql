@@ -95,6 +95,12 @@ INSERT INTO cards VALUES (nextval('cards_id_seq'), 5, 2, 'in progress card', 1);
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 5, 3, 'planning', 1);
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 5, 4, 'done card 1', 1);
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 5, 4, 'done card 1', 2);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 5, 'new card 1', 1);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 5, 'new card 2', 2);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 6, 'in progress card', 1);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 7, 'planning', 1);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 8, 'done card 1', 1);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 8, 'done card 1', 2);
 
 ---
 --- add constraints

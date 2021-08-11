@@ -15,7 +15,7 @@ export let dataHandler = {
 
   },
   getNewBoardId: async function () {
-    const response = await apiGet("/api/boards/new-board-id/");
+    const response = await apiGet("/api/boards/new-board-id");
     return response;
   },
 
@@ -26,7 +26,11 @@ export let dataHandler = {
   getLastStatusId: async function(){
       const response = await apiGet(`/api/get-last-status-id`)
       return response
-  },
+    },
+    getLastCardId: async function(){
+      const response = await apiGet(`api/get-last-card-id`)
+        return response
+    },
 
   getCardsByBoardId: async function (boardId) {
     const response = await apiGet(`/api/boards/${boardId}/cards/`);
@@ -56,10 +60,14 @@ export let dataHandler = {
     let payload = {"board_title": boardTitle}
     await apiPost("/api/boards/add-new-board/", payload)
   },
-  createNewCard: async function ( boardId, cardTitle, statusId) {
+  createNewCard: async function (boardId, cardTitle, statusId) {
     let payload = { "board_id": boardId, "card_title": cardTitle, "status_id": statusId}
     await apiPost("/api/boards/add-new-card/", payload)
   },
+  deleteCardById: async function(cardId){
+      let payload = {"card_id": cardId}
+      await apiPost(`/api/delete-card/${cardId}`)
+  }
     deleteBoardById: async function(boardId){
         let payload = {"board_id": boardId}
         await apiDelete(`/api/delete-board-by-id/${boardId}`,payload)

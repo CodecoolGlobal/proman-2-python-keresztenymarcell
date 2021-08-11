@@ -12,15 +12,21 @@ export let cardsManager = {
       domManager.addEventListener(
         `.card[data-card-id="${card.id}"]`,
         "click",
-        deleteButtonHandler
-      );
-      domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCard);
+        cardsManager.deleteCardButtonHandler);
+      domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCardHandler);
     }
   },
+  deleteCardButtonHandler: async function(clickEvent){
+    let cardId = clickEvent.target.dataset.cardId
+    let item = document.querySelector(`.card[data-card-id="${cardId}"]`)
+    let parent = item.parentNode
+    parent.removeChild(item)
+    await dataHandler.deleteCardById(cardId)
+  }
 };
 
 
-async function renameCard(clickEvent){
+async function renameCardHandler(clickEvent){
   let cardId = clickEvent.target.attributes["card-title-id"].nodeValue
   let element = document.querySelector(`.card-title[card-title-id="${cardId}"]`)
   let oldTitle = element.textContent
@@ -39,4 +45,4 @@ async function renameCard(clickEvent){
 
 
 
-function deleteButtonHandler(clickEvent) { }
+
