@@ -27,7 +27,6 @@ async function openBoard(boardId, button){
 
 async function closeBoard(boardId, button){
   const columnContent = document.querySelector(`.board-container[data-board-id="${boardId}"] .board-columns`)
-  console.log(columnContent)
   columnContent.textContent = ""
   button.dataset.toggleState = "hide"
   button.textContent = "Show Cards"
@@ -47,14 +46,14 @@ async function showHideButtonHandler(clickEvent) {
 async function renameBoard(clickEvent){
   let boardId = clickEvent.target.attributes["board-title-id"].nodeValue
   let element = document.querySelector(`.board-title[board-title-id="${boardId}"]`)
-  let oldContent = element.textContent
+  let oldTitle = element.textContent
   element.addEventListener('focusout', async function(){
     let title = element.textContent
-    if(title !== oldContent){
+    if(title !== oldTitle){
       await dataHandler.renameBoard(boardId, title)
     }
-    else{
-      element.innerHTML = "unnamed"
+    else if (title === ""){
+      element.innerHTML = "Unnamed"
       await dataHandler.renameBoard(boardId,title)
     }
   })
