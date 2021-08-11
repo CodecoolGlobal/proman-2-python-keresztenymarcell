@@ -1,6 +1,9 @@
 from flask import Flask, render_template, url_for, request
 from dotenv import load_dotenv
+import json
+import jsonify
 
+from psycopg2.extensions import JSON
 
 from util import json_response
 import mimetypes
@@ -37,8 +40,6 @@ def get_board_with_id(board_id: int):
 @app.route("/api/rename-board-by-id", methods=['POST'])
 @json_response
 def rename_board_by_id():
-    result = request.json
-    print(result)
     board_id = request.json['board_id']
     board_title = request.json['board_title']
     return queries.rename_board_by_id(board_id, board_title)
@@ -58,8 +59,29 @@ def delete_status_by_id(status_id: int):
 
 @app.route("/api/board/<int:board_id>/column")
 @json_response
-def get_statuses(board_id: int):
-    return queries.get_statuses(board_id)
+def get_status(board_id: int):
+    return
+
+
+@app.route("/api/get-columns")
+@json_response
+def get_statuses():
+    return queries.get_statuses()
+
+
+@app.route("/api/create-new-status", methods=["POST"])
+@json_response
+def create_new_status():
+    title = request.json["title"]
+    board_id = request.json["board_id"]
+    return queries.create_new_status(title, board_id)
+
+
+@app.route("/api/get-last-status-id")
+@json_response
+def get_last_status_id():
+    return queries.get_last_status_id()
+
 
 
 @app.route("/api/boards/<int:board_id>/cards/")
@@ -70,6 +92,45 @@ def get_cards_for_board(board_id: int):
     :param board_id: id of the parent board
     """
     return queries.get_cards_for_board(board_id)
+
+
+@app.route("/api/boards/add-new-board/", methods=["GET", "POST"])
+@json_response
+def createboard():
+    board_title = request.json["board_title"]
+    return queries.create_element(board_title)
+
+
+@app.route("/api/boards/new-board-id/", methods=["GET", "POST"])
+@json_response
+def get_newboard_id():
+    return queries.get_last_board_id()
+
+
+@app.route("/api/boards/add-new-card/", methods=["GET", "POST"])
+@json_response
+def create_new_card():
+    board_id = request.json["board_id"]
+    card_title = request.json["card_title"]
+    status_id = request.json["status_id"]
+    return queries.create_new_card(board_id, status_id, card_title,)
+
+
+@app.route("/api/rename-card-by-id", methods=['GET', 'POST'])
+@json_response
+def rename_card_by_id():
+    card_id = request.json['card_id']
+    card_title = request.json['card_title']
+    return queries.rename_card_by_id(card_id, card_title)
+
+
+@app.route("/api/rename-column-by-id", methods=['POST'])
+@json_response
+def rename_statuses_by_id():
+    status_id = request.json['column_id']
+    status_title = request.json['column_title']
+    print(request.json)
+    return queries.rename_statuses_by_id(status_id, status_title)
 
 
 def main():

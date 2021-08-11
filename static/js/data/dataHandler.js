@@ -7,29 +7,58 @@ export let dataHandler = {
     const response = await apiGet(`/api/boards/${boardId}`);
     return response;
   },
-  getStatuses: async function (boardId) {
-   const response = await apiGet(`/api/board/${boardId}/column`);
+  getColumns: async function (boardId) {
+   const response = await apiGet(`/api/get-columns`);
    return response;
   },
   getStatus: async function (statusId) {
 
   },
+  getNewBoardId: async function () {
+    const response = await apiGet("/api/boards/new-board-id/");
+    return response;
+  },
+
+   createNewStatus: async function(title, boardID){
+    let payload = {"title": title, "board_id": boardID}
+    await apiPost(`/api/create-new-status`, payload)
+  },
+  getLastStatusId: async function(){
+      const response = await apiGet(`/api/get-last-status-id`)
+      return response
+  },
+
   getCardsByBoardId: async function (boardId) {
     const response = await apiGet(`/api/boards/${boardId}/cards/`);
     return response;
   },
   getCard: async function (cardId) {
-    // the card is retrieved and then the callback function is called with the card
+      //
   },
+
   renameBoard: async function(boardId, boardTitle){
     let payload = {"board_id": boardId, "board_title": boardTitle}
     await apiPost(`/api/rename-board-by-id`, payload)
   },
-    createNewBoard: async function (boardTitle) {
-    // creates new board, saves it and calls the callback function with its data
+
+  renameCard: async function(cardId, cardTitle){
+    let payload = {"card_id": cardId, "card_title": cardTitle}
+    await apiPost("/api/rename-card-by-id", payload)
   },
-  createNewCard: async function (cardTitle, boardId, statusId) {
-    // creates new card, saves it and calls the callback function with its data
+
+  renameColumn: async function(columnId, columnTitle){
+    let payload = {"column_id": columnId, "column_title": columnTitle}
+    await apiPost("/api/rename-column-by-id", payload)
+  },
+
+
+  createNewBoard: async function (boardTitle) {
+    let payload = {"board_title": boardTitle}
+    await apiPost("/api/boards/add-new-board/", payload)
+  },
+  createNewCard: async function ( boardId, cardTitle, statusId) {
+    let payload = { "board_id": boardId, "card_title": cardTitle, "status_id": statusId}
+    await apiPost("/api/boards/add-new-card/", payload)
   },
     deleteBoardById: async function(boardId){
         let payload = {"board_id": boardId}

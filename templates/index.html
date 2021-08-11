@@ -15,6 +15,17 @@
         <script type="module" src="{{ url_for('static', filename='js/main.js') }}" defer></script>
     </head>
     <body>
+        <nav id="navbar">
+            <a draggable="false" href="#">
+                <div id="logo">
+                    <img src="/static/img/logo.png" alt="proman" draggable="false">
+                </div>
+            </a>
+            <div id="navbar-buttons">
+                <a href="#">Log in</a>
+                <a href="">Register</a>
+            </div>
+        </nav>
         <div id="root"></div>
     </body>
 </html>

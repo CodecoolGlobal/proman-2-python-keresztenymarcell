@@ -1,18 +1,23 @@
 export const htmlTemplates = {
-    board: 1,
-    column: 2,
-    card: 3
+    newboard: 1,
+    board: 2,
+    column: 3,
+    card: 4
+
 
 }
 
 export function htmlFactory(template) {
     switch (template) {
+        case htmlTemplates.newboard:
+            return initNewBoardDiv
         case htmlTemplates.board:
             return boardBuilder
         case  htmlTemplates.column:
             return columnBuilder
         case htmlTemplates.card:
             return cardBuilder
+
 
         default:
             console.error("Undefined template: " + template)
@@ -30,7 +35,7 @@ function boardBuilder(board) {
                     <button class="toggle-board-button" data-board-id="${board.id}" data-toggle-state="hide">
                     Show Cards <i class="fas fa-chevron-down"></i>
                     </button>
-                </div>
+                </div><br>
                 <div class="board-columns">
                 
                 </div>
@@ -41,7 +46,7 @@ function columnBuilder(column) {
     console.log(column)
     return `<div class="board-column" data-column-id="${column.id}">
                 <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
-                <button class="delete-column-button" data-delete-status-id="${column.id}" data-delete-owner-id="${column.owner}">X</button>
+                <button class="delete-column-button" data-delete-status-id="${column.id}" data-delete-owner-id="${column.board_id}">X</button>
                 <div class="board-column-content"></div>
             </div>`
 }
@@ -54,3 +59,17 @@ function cardBuilder(card) {
                 <div class="card-remove" data-card-id="${card.id}">X</div>
             </div>`;
 }
+
+
+function initNewBoardDiv() {
+    return `<br><div id="new-board-form">
+    <input type="text" 
+                    placeholder="Enter new board title" 
+                    id="new-board-title" 
+                    name="new-board-title"
+                    required 
+                    autofocus 
+                    autocomplete="off"><br>
+           <button type="button" id="load-new-board-form">Create new board</button></div><br>`
+}
+
