@@ -48,12 +48,15 @@ async function closeBoard(boardId, button){
 
 async function showHideButtonHandler(clickEvent) {
   const boardId = clickEvent.target.dataset.boardId;
-  const button = clickEvent.target
+  const button = clickEvent.target;
+  const add_new_button = document.querySelector(`.add-new-card[add-new-card-id="${boardId}"]`);
   if(button.dataset.toggleState === "hide"){
     await openBoard(boardId, button)
+    add_new_button.style.display = "inline";
   }
   else{
     await closeBoard(boardId, button)
+    add_new_button.style.display = "None";
   }
 }
 
