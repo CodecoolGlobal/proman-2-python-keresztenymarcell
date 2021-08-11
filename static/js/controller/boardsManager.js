@@ -89,6 +89,7 @@ async function createNewBoard(clickEvent){
     const boardBuilder = htmlFactory(htmlTemplates.board)
     const newBoard = boardBuilder(board)
     domManager.addChild("#root", newBoard);
+
   }
   else {
     alert('Give me a title!')
@@ -108,5 +109,4 @@ async function createNewCard(clickEvent){
   const cardBuilder = htmlFactory(htmlTemplates.card);
   const newCard = cardBuilder(card);
   domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, newCard);
-  let element = document.querySelector(`.add-new-card[add-new-card-id="${boardId}"]`);
 }
