@@ -13,6 +13,7 @@ export let boardsManager = {
       domManager.addChild("#root", content);
       domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler);
       domManager.addEventListener(`.board-title[board-title-id="${board.id}"]`, "click", renameBoard);
+      domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
     }
   },
 
@@ -57,7 +58,22 @@ async function renameBoard(clickEvent){
       await dataHandler.renameBoard(boardId,title)
     }
   })
-
 }
 
+async function deleteBoard(clickEvent){
+    const boardId = clickEvent.target.attributes['delete-board-id'].nodeValue;
+    console.log(boardId)
+    console.log("Delete 1 - BoardID")
+    await dataHandler.deleteBoardById(boardId)
+    let boards = document.getElementsByClassName('board-container');
+    for (let board of boards) {
+        console.log(board)
+        console.log("Delete 2- board")
+        if(boardId === board.attributes['data-board-id'].nodeValue) {
+            console.log(board)
+            root.removeChild(board)
+            break;
+        }
+    }
+}
 

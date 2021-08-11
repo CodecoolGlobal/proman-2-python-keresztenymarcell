@@ -31,6 +31,12 @@ export let dataHandler = {
   createNewCard: async function (cardTitle, boardId, statusId) {
     // creates new card, saves it and calls the callback function with its data
   },
+    deleteBoardById: async function(boardId){
+        let payload = {"board_id": boardId}
+        console.log(boardId)
+        console.log(payload)
+        await apiDelete(`/api/delete-board-by-id/${boardId}`,payload)
+    },
 };
 
 async function apiGet(url) {

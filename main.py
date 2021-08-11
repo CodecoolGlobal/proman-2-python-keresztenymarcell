@@ -27,6 +27,7 @@ def get_boards():
     """
     return queries.get_boards()
 
+
 @app.route("/api/boards/<int:board_id>")
 @json_response
 def get_board_with_id(board_id: int):
@@ -41,6 +42,12 @@ def rename_board_by_id():
     board_id = request.json['board_id']
     board_title = request.json['board_title']
     return queries.rename_board_by_id(board_id, board_title)
+
+
+@app.route("/api/delete-board-by-id/<int:board_id>", methods=['DELETE'])
+@json_response
+def delete_board_by_id(board_id: int):
+    return queries.delete_board_by_id(board_id)
 
 
 @app.route("/api/board/<int:board_id>/column")
