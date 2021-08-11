@@ -15,7 +15,7 @@ export let dataHandler = {
 
   },
   getNewBoardId: async function () {
-    const response = await apiGet("/api/boards/new-board-id/");
+    const response = await apiGet("/api/boards/new-board-id");
     return response;
   },
 
@@ -26,7 +26,11 @@ export let dataHandler = {
   getLastStatusId: async function(){
       const response = await apiGet(`/api/get-last-status-id`)
       return response
-  },
+    },
+    getLastCardId: async function(){
+      const response = await apiGet(`api/get-last-card-id`)
+        return response
+    },
 
   getCardsByBoardId: async function (boardId) {
     const response = await apiGet(`/api/boards/${boardId}/cards/`);

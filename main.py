@@ -70,6 +70,12 @@ def get_last_status_id():
     return queries.get_last_status_id()
 
 
+@app.route("/api/get-last-card-id")
+@json_response
+def get_last_card_id():
+    return queries.get_last_card_id()
+
+
 
 @app.route("/api/boards/<int:board_id>/cards/")
 @json_response
@@ -88,9 +94,9 @@ def createboard():
     return queries.create_element(board_title)
 
 
-@app.route("/api/boards/new-board-id/", methods=["GET", "POST"])
+@app.route("/api/boards/new-board-id")
 @json_response
-def get_newboard_id():
+def get_new_board_id():
     return queries.get_last_board_id()
 
 
