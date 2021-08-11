@@ -75,6 +75,7 @@ async function addStatus(clickEvent){
     const columnBuilder = htmlFactory(htmlTemplates.column)
     let column = columnBuilder(status)
     domManager.addChild(`.board-container[data-board-id="${boardID}"] .board-columns `, column)
+
   }
 }
 
@@ -100,24 +101,28 @@ async function createNewBoard(clickEvent){
   let board = {}
   const button = clickEvent.target
   board.title = document.getElementById('new-board-title').value
-  if (board.title !== ""){
+  if (board.title !== "") {
     await dataHandler.createNewBoard(board.title)
     board.id = dataHandler.getNewBoardId()
     const boardBuilder = htmlFactory(htmlTemplates.board)
     const newBoard = boardBuilder(board)
     await domManager.addChild("#root", newBoard);
+    domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler);
+
+
+    const columns1 = await dataHandler.getDefaultColumns();
     await dataHandler.createEmptyStatuses(board.id)
-    const columns = await dataHandler.getColumns();
-    for(let column of columns){
+    const columns = await dataHandler.getColumns(board.id)
+    console.log(columns)
+    console.log('columns')
+    for (let column of columns) {
       const columnBuilder = htmlFactory(htmlTemplates.column);
-                const content = columnBuilder(column)
-                domManager.addChild(`.board-container[data-board-id="${board.id}"] .board-columns` , content);
+      const content = columnBuilder(column)
+      domManager.addChild(`.board-container[data-board-id="${board.id}"] .board-columns`, content);
 
     }
-
-
-
   }
+
   else {
     alert('Give me a title!')
   }

@@ -116,6 +116,13 @@ def get_last_board_id():
         """
     )
 
+def get_last_status_id():
+    return data_manager.execute_select(
+        """
+        SELECT MAX(id) AS id FROM statuses;
+        """
+    )
+
 def create_new_card(board_id, status_id, title):
     return data_manager.execute_query(
         """
@@ -125,12 +132,26 @@ def create_new_card(board_id, status_id, title):
     )
 
 
-def add_default_statuses_to_new_board(id, title, board_id):
+def get_default_columnes():
+    return data_manager.execute_select(
+        """
+        SELECT id, title FROM statuses
+        WHERE id >= 1 AND id <=4;
+        """
+    )
+
+
+def add_default_statuses_to_new_board(board_id):
     return data_manager.execute_query(
         """
-            INSERT INTO statuses (id, title, board_id) 
-            VALUES (%(id)s , %(title)s, %(board_id)s);
-        """, {"id": id, "title": title, "board_id": board_id}
+            INSERT INTO statuses (title, board_id) 
+            VALUES 
+            ('New', %(board_id)s),
+            ('In progress', %(board_id)s),
+            ('Testing', %(board_id)s),
+            ('Done', %(board_id)s);
+
+        """, {"board_id": board_id}
     )
 
 
@@ -146,8 +167,6 @@ def rename_card_by_id(id, title):
 
 
 def rename_statuses_by_id(id, title):
-    print(id)
-    print(title)
     return data_manager.execute_query(
         """
         UPDATE statuses 

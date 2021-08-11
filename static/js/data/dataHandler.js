@@ -7,6 +7,11 @@ export let dataHandler = {
     const response = await apiGet(`/api/boards/${boardId}`);
     return response;
   },
+  getDefaultColumns: async function () {
+   const response = await apiGet(`/api/get-default-columns`);
+   return response;
+  },
+
   getColumns: async function (boardId) {
    const response = await apiGet(`/api/get-columns`);
    return response;
