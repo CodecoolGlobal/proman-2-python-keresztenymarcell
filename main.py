@@ -75,6 +75,15 @@ def get_newboard_id():
     return queries.get_last_board_id()
 
 
+@app.route("/api/boards/add-new-card/", methods=["GET", "POST"])
+@json_response
+def create_new_card():
+    board_id = request.json["board_id"]
+    card_title = request.json["card_title"]
+    status_id = request.json["status_id"]
+    return queries.create_new_card(board_id, card_title, status_id)
+
+
 def main():
     app.run(debug=True)
 

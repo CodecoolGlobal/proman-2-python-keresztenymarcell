@@ -13,6 +13,7 @@ export let boardsManager = {
       domManager.addChild("#root", content);
       domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler);
       domManager.addEventListener(`.board-title[board-title-id="${board.id}"]`, "click", renameBoard);
+      domManager.addEventListener(`.add-new-card[add-new-card-id="${board.id}"]`, "click", createNewCard)
     }
   },
 };
@@ -94,3 +95,19 @@ async function createNewBoard(clickEvent){
   }
 };
 
+
+
+async function createNewCard(clickEvent){
+  let boardId = clickEvent.target.attributes["add-new-card-id"].nodeValue;
+  let card = {
+    id : 0,
+    title : "New card",
+    status_id : 1
+  };
+
+  await dataHandler. createNewCard(card.id, card.title, card.status_id);
+  const cardBuilder = htmlFactory(htmlTemplates.card);
+  const newCard = cardBuilder(card);
+  domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, newCard);
+  let element = document.querySelector(`.add-new-card[add-new-card-id="${boardId}"]`);
+}

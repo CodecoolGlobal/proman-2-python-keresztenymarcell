@@ -97,3 +97,10 @@ def get_last_board_id():
         SELECT MAX(id) AS id FROM boards;
         """
     )
+
+def create_new_card(id, title, status_id):
+    return data_manager.execute_query(
+        """
+            INSERT INTO cards (id, title, status_id) VALUES (%(id)s , %(title)s , %(status_id)s );
+        """, {"id": id, "title": title, "status_id": status_id}
+    )

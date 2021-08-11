@@ -24,8 +24,9 @@ export let dataHandler = {
     return response;
   },
   getCard: async function (cardId) {
-    // the card is retrieved and then the callback function is called with the card
+      //
   },
+
   renameBoard: async function(boardId, boardTitle){
     let payload = {"board_id": boardId, "board_title": boardTitle}
     await apiPost(`/api/rename-board-by-id`, payload)
@@ -36,7 +37,8 @@ export let dataHandler = {
     await apiPost("/api/boards/add-new-board/", payload)
   },
   createNewCard: async function (cardTitle, boardId, statusId) {
-    // creates new card, saves it and calls the callback function with its data
+    let payload = {"card_title": cardTitle, "board_id": boardId, "status_id": statusId}
+    await apiPost("/api/boards/add-new-card/", payload)
   },
 };
 
