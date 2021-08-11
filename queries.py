@@ -125,6 +125,15 @@ def create_new_card(board_id, status_id, title):
     )
 
 
+def add_default_statuses_to_new_board(id, title, board_id):
+    return data_manager.execute_query(
+        """
+            INSERT INTO statuses (id, title, board_id) 
+            VALUES (%(id)s , %(title)s, %(board_id)s);
+        """, {"id": id, "title": title, "board_id": board_id}
+    )
+
+
 def rename_card_by_id(id, title):
     return data_manager.execute_query(
         """

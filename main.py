@@ -103,6 +103,15 @@ def create_new_card():
     return queries.create_new_card(board_id, status_id, card_title,)
 
 
+@app.route("/api/boards/add-default-statuses/", methods=["GET", "POST"])
+@json_response
+def add_default_statuses():
+    status_id = request.json["status_id"]
+    status_title = request.json["status_title"]
+    board_id = queries.get_last_board_id()[0]['id']
+    return queries.add_default_statuses_to_new_board(status_id, status_title, board_id)
+
+
 @app.route("/api/rename-card-by-id", methods=['GET', 'POST'])
 @json_response
 def rename_card_by_id():

@@ -105,7 +105,17 @@ async function createNewBoard(clickEvent){
     board.id = dataHandler.getNewBoardId()
     const boardBuilder = htmlFactory(htmlTemplates.board)
     const newBoard = boardBuilder(board)
-    domManager.addChild("#root", newBoard);
+    await domManager.addChild("#root", newBoard);
+    await dataHandler.createEmptyStatuses(board.id)
+    const columns = await dataHandler.getColumns();
+    for(let column of columns){
+      const columnBuilder = htmlFactory(htmlTemplates.column);
+                const content = columnBuilder(column)
+                domManager.addChild(`.board-container[data-board-id="${board.id}"] .board-columns` , content);
+
+    }
+
+
 
   }
   else {
@@ -127,3 +137,5 @@ async function createNewCard(clickEvent){
   const newCard = cardBuilder(card);
   domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, newCard);
 }
+
+
