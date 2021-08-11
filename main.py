@@ -111,12 +111,17 @@ def rename_card_by_id():
     return queries.rename_card_by_id(card_id, card_title)
 
 
+@app.route("/api/delete-card/<int:card_id>")
+@json_response
+def delete_card_by_id(card_id):
+    return queries.delete_card_by_id(card_id)
+
+
 @app.route("/api/rename-column-by-id", methods=['POST'])
 @json_response
 def rename_statuses_by_id():
     status_id = request.json['column_id']
     status_title = request.json['column_title']
-    print(request.json)
     return queries.rename_statuses_by_id(status_id, status_title)
 
 

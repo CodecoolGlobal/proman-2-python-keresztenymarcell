@@ -114,7 +114,7 @@ async function createNewBoard(clickEvent){
   else {
     alert('Give me a title!')
   }
-};
+}
 
 async function createNewCard(clickEvent){
   let boardId = clickEvent.target.attributes["add-new-card-id"].nodeValue;

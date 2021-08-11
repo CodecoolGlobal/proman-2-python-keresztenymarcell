@@ -56,7 +56,7 @@ export let dataHandler = {
     let payload = {"board_title": boardTitle}
     await apiPost("/api/boards/add-new-board/", payload)
   },
-  createNewCard: async function ( boardId, cardTitle, statusId) {
+  createNewCard: async function (boardId, cardTitle, statusId) {
     let payload = { "board_id": boardId, "card_title": cardTitle, "status_id": statusId}
     await apiPost("/api/boards/add-new-card/", payload)
   },
