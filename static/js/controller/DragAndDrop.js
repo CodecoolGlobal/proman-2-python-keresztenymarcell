@@ -1,12 +1,12 @@
 import { dataHandler } from "../data/dataHandler.js";
 
+
 let actualCard = null;
 
 
 export async function DragAndDrop() {
     const cardSlots = document.querySelectorAll('.board-column-content');
     const cards = document.querySelectorAll('.card');
-
 
 
     for (const card of cards){
@@ -20,32 +20,31 @@ export async function DragAndDrop() {
         cardSlot.addEventListener('dragenter', dragEnter);
         cardSlot.addEventListener('dragleave', dragLeave);
         cardSlot.addEventListener('drop', dragDrop);
-
     }
 
 
     function dragStart(e) {
         actualCard = e.currentTarget;
-        console.log(actualCard)
-        console.log('start')
     }
 
+
     function dragEnd() {
-        console.log('end')
     }
+
 
     function dragOver(e) {
         e.preventDefault();
     }
 
+
     function dragEnter(e) {
         e.preventDefault();
-        console.log('enter')
     }
 
+
     function dragLeave() {
-        console.log('leave')
     }
+
 
     function dragDrop(e) {
         let statusTitle = e.currentTarget.parentNode.children;
@@ -57,12 +56,15 @@ export async function DragAndDrop() {
 
         if( board_id_2 === board_id){
             e.currentTarget.appendChild(actualCard);
-            actualCard.innerHTML = title
             let card_title = actualCard.textContent
             let status_id = e.currentTarget.parentNode.dataset.columnId;
             let card_id = actualCard.dataset.cardId;
+            let card_order = actualCard.dataset.card_order
+            actualCard.innerHTML = title +
+                `<div class="card-archive" data-card-archive-id="${card_id}">A</div>
+                <div class="card-remove" data-card-id="${card_id}"><img src="static/img/trash.png" alt="trash_icon"></div>
+            </div>`
             dataHandler.updateCards(status_id, card_id, card_title);
-            console.log('drop')
         }
     }
 }

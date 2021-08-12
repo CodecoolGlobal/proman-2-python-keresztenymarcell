@@ -166,9 +166,6 @@ def rename_statuses_by_id():
 @app.route("/api/card/<int:status_id>/<int:card_id>/<string:card_title>")
 @json_response
 def update_cards(status_id, card_id, card_title):
-    print(status_id)
-    print(card_id)
-    print(card_title)
     return queries.get_update_status(status_id, card_id, card_title)
 
 
