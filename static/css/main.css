@@ -135,8 +135,12 @@ section.board{
 
 .card-title{
     padding-right: 16px;
+    width: 75%;
 }
 
+.function-buttons{
+    width: 25%;
+}
 
 #navbar {
     display: flex;
@@ -166,3 +170,4 @@ section.board{
 .add-new-card{
     display: None;
 }
+

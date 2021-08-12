@@ -45,7 +45,7 @@ function boardBuilder(board) {
 function columnBuilder(column) {
     return `<div class="board-column" data-column-id="${column.id}">
                 <span class="board-column-title" board-column-title="${column.id}" contenteditable="true">${column.title}</span>
-                <button class="delete-column-button" data-delete-status-id="${column.id}" data-delete-owner-id="${column.board_id}">X</button>
+                <button class="delete-column-button" data-delete-status-id="${column.id}" data-delete-owner-id="${column.board_id}"><img src="static/img/trash.png" alt="trash_icon"></button>
                 <div class="board-column-content"></div>
             </div>`
 }
@@ -54,8 +54,10 @@ function columnBuilder(column) {
 function cardBuilder(card) {
     return `<div class="card" data-card-id="${card.id}" data-card-order="${card.card_order}" draggable="true">
                 <span class="card-title" card-title-id="${card.id}" contenteditable="true">${card.title}</span>
-                <div class="card-archive" data-card-archive-id="${card.id}">A</div>
-                <div class="card-remove" data-card-id="${card.id}">X</div>
+                <div class="function_buttons">
+                    <div class="card-archive" data-card-archive-id="${card.id}">A</div>
+                    <div class="card-remove" data-card-id="${card.id}"><img src="static/img/trash.png" alt="trash_icon"></div>
+                </div>
             </div>`;
 }
 
