@@ -1,28 +1,26 @@
 import { dataHandler } from "../data/dataHandler.js";
 
 let actualCard = null;
-const cardSlots = document.querySelectorAll('.board-column-content');
-const cards = document.querySelectorAll('.card')
+
+
+export async function dragDrop() {
+    const cardSlots = document.querySelectorAll('.board-column-content');
+    const cards = document.querySelectorAll('.card');
 
 
 
-export function dragDrop() {
-    console.log(cardSlots)
-    console.log(cards)
-
-    for (const card of cards) {
-        console.log(card)
+    for (const card of cards){
         card.addEventListener('dragstart', dragStart);
         card.addEventListener('dragend', dragEnd);
     }
 
 
     for (const cardSlot of cardSlots) {
-        console.log(cardSlot)
         cardSlot.addEventListener('dragover', dragOver);
         cardSlot.addEventListener('dragenter', dragEnter);
         cardSlot.addEventListener('dragleave', dragLeave);
         cardSlot.addEventListener('drop', dragDrop);
+
     }
 
 
@@ -50,6 +48,19 @@ export function dragDrop() {
     }
 
     function dragDrop(e) {
-        console.log('drop')
+
+        console.log(actualCard);
+        let board = e.currentTarget.parentNode.parentElement;
+        let board_id = board.parentNode.dataset.boardId
+        let board_2 = actualCard.parentNode.parentElement;
+        let board_id_2 = board_2.parentNode.parentNode.dataset.boardId;
+
+        if( board_id_2 === board_id){
+            e.currentTarget.appendChild(actualCard);
+            let status_id = e.currentTarget.parentNode.dataset.columnId;
+            let card_id = actualCard.dataset.cardId;
+            dataHandler.updateCards(status_id, card_id);
+            console.log('drop')
+        }
     }
 }
