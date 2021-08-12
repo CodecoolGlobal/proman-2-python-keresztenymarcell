@@ -1,6 +1,7 @@
 import { dataHandler } from "../data/dataHandler.js";
 import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
+import {DragAndDrop} from "../controller/DragAndDrop.js";
 
 
 export let columnManager = {
@@ -33,6 +34,7 @@ export async function addStatus(clickEvent){
     let column = columnBuilder(status)
     await domManager.addChild(`.board-container[data-board-id="${boardID}"] .board-columns `, column)
     await domManager.addEventListener(`.delete-column-button[data-delete-status-id="${status.id}"]`, "click", deleteStatus);
+    await DragAndDrop()
   }
 }
 
@@ -50,6 +52,7 @@ async function renameStatus(clickEvent){
       await dataHandler.renameColumn(statusID,title)
     }
   })
+
 }
 
 export async function deleteStatus(clickEvent){
