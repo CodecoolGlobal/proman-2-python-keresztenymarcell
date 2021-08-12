@@ -61,7 +61,6 @@ INSERT INTO statuses(title, board_id) VALUES ('delete_test', 2);
 
 INSERT INTO boards(title) VALUES ('SCRUM Overlord');
 INSERT INTO boards(title) VALUES ('Web Module');
-INSERT INTO boards(title) VALUES ('Web Module 2');
 
 
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 1, 1, 'new card 1', 1);
@@ -69,9 +68,18 @@ INSERT INTO cards VALUES (nextval('cards_id_seq'), 1, 1, 'new card 2', 2);
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 1, 2, 'in progress card', 1);
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 1, 3, 'planning', 1);
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 1, 4, 'done card 1', 1);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 1, 4, 'done card 1', 2);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 5, 'new card 1', 1);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 5, 'new card 2', 2);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 1, 4, 'done card 2', 2);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 6, 'new card 1', 1);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 6, 'new card 2', 2);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 7, 'in progress card 1', 1);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 7, 'in progress card 2', 2);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 7, 'in progress card 3', 3);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 7, 'in progress card 4', 4);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 8, 'planning card 1', 1);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 8, 'planning card 2', 2);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 9, 'done card 1', 1);
+INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 9, 'done card 2', 2);
+
 
 
 
