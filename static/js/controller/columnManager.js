@@ -12,6 +12,7 @@ export let columnManager = {
                 const content = columnBuilder(column)
                 await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns `, content)
                 await domManager.addEventListener(`.board-column-title[column-title-id="${column.id}"]`, "click", renameStatus);
+                await domManager.addEventListener(`.delete-column-button[data-delete-status-id="${column.id}"]`, "click", deleteStatus);
             }
         }
     }
@@ -37,15 +38,14 @@ async function renameStatus(clickEvent){
 
 async function deleteStatus(clickEvent){
     const statusId = clickEvent.target.attributes['data-delete-status-id'].nodeValue;
-    console.log(statusId)
-    console.log("Delete 1 - StatusID")
-    await dataHandler.deleteStatusById(statusId)
+    const BoardId = clickEvent.target.attributes['data-delete-owner-id'].nodeValue;
+    await dataHandler.deleteStatusById(statusId);
     let statuses = document.getElementsByClassName('board-column');
     let owner = document.querySelector(`.board-container[data_board-id="${BoardId}"] .board-columns`);
     for (let status of statuses) {
         if(statusId === status.attributes['data-column-id'].nodeValue) {
             console.log(status)
-            parent.removeChild(status)
+            owner.removeChild(status)
             break;
         }
     }
