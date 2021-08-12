@@ -1,6 +1,9 @@
 import { dataHandler } from "../data/dataHandler.js";
 import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
+import { dragDrop } from "../controller/dragDrop.js";
+
+
 
 export let cardsManager = {
   loadCards: async function (boardId) {
@@ -8,13 +11,14 @@ export let cardsManager = {
     for (let card of cards) {
       const cardBuilder = htmlFactory(htmlTemplates.card);
       const content = cardBuilder(card);
-      domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, content);
+      domManager.addChild(`[data-board-id="${card.board_id}"] [data-column-id="${card.status_id}"] .board-column-content`, content);
       domManager.addEventListener(
         `.card[data-card-id="${card.id}"] .card-remove`,
         "click",
         cardsManager.deleteCardButtonHandler);
       domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCardHandler);
     }
+    await dragDrop();
   },
   deleteCardButtonHandler: async function(clickEvent){
     let cardId = clickEvent.target.dataset.cardId
@@ -26,7 +30,7 @@ export let cardsManager = {
 };
 
 
-async function renameCardHandler(clickEvent){
+export async function renameCardHandler(clickEvent){
   let cardId = clickEvent.target.attributes["card-title-id"].nodeValue
   let element = document.querySelector(`.card-title[card-title-id="${cardId}"]`)
   let oldTitle = element.textContent

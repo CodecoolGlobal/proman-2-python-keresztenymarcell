@@ -146,5 +146,6 @@ async function createNewCard(clickEvent){
   card.id = await dataHandler.getLastCardId()
   const newCard = cardBuilder(card);
   await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, newCard);
-  await domManager.addEventListener(`.card[data-card-id="${card.id}"]`, "click", cardsManager.deleteCardButtonHandler)
+  await domManager.addEventListener(`.card[data-card-id="${card.id}"] .card-remove`, "click", cardsManager.deleteCardButtonHandler);
+  await domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", cardsManager.renameCardHandler);
 }
