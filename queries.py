@@ -169,8 +169,6 @@ def rename_statuses_by_id(id, title):
 
 
 def delete_board_by_id(board_id):
-    # Elsőször a card utána a többi törlése, másképp hibára fut
-    # MINDEN HIBÁRA IGAZ
     delete_board_id_from_cards(board_id)
     delete_board_id_from_statuses(board_id)
     delete_board(board_id)
