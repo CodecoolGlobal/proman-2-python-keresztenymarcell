@@ -46,6 +46,15 @@ def get_cards_for_board(board_id):
     return matching_cards
 
 
+def get_card_order_by_board_status_id(board_id, status_id):
+    data_manager.execute_select(
+        """
+        SELECT MAX(card_order) as id FROM cards
+        WHERE board_id = %(board_id)s AND status_id = %(status_id)s
+        """,
+        {"board_id": board_id, "status_id": status_id}
+    )
+
 def get_board_with_id(board_id):
     return data_manager.execute_select(
         """
@@ -98,7 +107,6 @@ def rename_board_by_id(id, title):
         """,
         {"id": id, "title": title}
     )
-
 
 
 def create_element(title):
@@ -156,8 +164,6 @@ def delete_card_by_id(card_id):
 
 
 def rename_statuses_by_id(id, title):
-    print(id)
-    print(title)
     return data_manager.execute_query(
         """
         UPDATE statuses 
