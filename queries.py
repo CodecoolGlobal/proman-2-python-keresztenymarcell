@@ -2,11 +2,6 @@ import data_manager
 
 
 def get_card_status(status_id):
-    """
-    Find the first status matching the given id
-    :param status_id:
-    :return: str
-    """
     status = data_manager.execute_select(
         """
         SELECT * FROM statuses s
@@ -14,17 +9,10 @@ def get_card_status(status_id):
         ;
         """
         , {"status_id": status_id})
-
     return status
 
 
 def get_boards():
-    """
-    Gather all boards
-    :return:
-    """
-    # remove this code once you implement the database
-
     return data_manager.execute_select(
         """
         SELECT * FROM boards
@@ -35,7 +23,6 @@ def get_boards():
 
 
 def get_cards_for_board(board_id):
-
     matching_cards = data_manager.execute_select(
         """
         SELECT * FROM cards
@@ -80,7 +67,6 @@ def get_statuses():
 
 
 def create_new_status(title, board_id):
-
     return data_manager.execute_query(
         """
         INSERT INTO statuses (title, board_id) 
@@ -92,7 +78,6 @@ def create_new_status(title, board_id):
 
 
 def get_last_status_id():
-
     return data_manager.execute_select(
         """
         SELECT MAX(id) 
@@ -112,8 +97,7 @@ def rename_board_by_id(id, title):
     )
 
 
-
-def create_element(title):
+def create_board(title):
     return data_manager.execute_query(
         """
             INSERT INTO boards (title) VALUES (%(title)s) RETURNING (id);
@@ -203,8 +187,6 @@ def delete_card_by_id(card_id):
 
 
 def rename_statuses_by_id(id, title):
-    print(id)
-    print(title)
     return data_manager.execute_query(
         """
         UPDATE statuses 
@@ -276,11 +258,14 @@ def delete_status(status_id):
         {"id": status_id}
     )
 
-def get_update_status(status_id, card_id):
+
+def get_update_status(status_id, card_id, card_title):
     return data_manager.execute_query(
         """
         UPDATE cards
-        SET status_id = %(status_id)s
+        SET
+         status_id = %(status_id)s,
+         title = %(card_title)s
         WHERE id = %(card_id)s
-        """, {"status_id": status_id, "card_id": card_id}
+        """, {"status_id": status_id, "card_id": card_id, "card_title":card_title}
     )

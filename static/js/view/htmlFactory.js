@@ -3,8 +3,6 @@ export const htmlTemplates = {
     board: 2,
     column: 3,
     card: 4
-
-
 }
 
 export function htmlFactory(template) {
@@ -18,12 +16,12 @@ export function htmlFactory(template) {
         case htmlTemplates.card:
             return cardBuilder
 
-
         default:
             console.error("Undefined template: " + template)
             return () => { return "" }
     }
 }
+
 
 function boardBuilder(board) {
     return `<div class="board-container" data-board-id="${board.id}" >
@@ -36,9 +34,7 @@ function boardBuilder(board) {
                     Show Cards <i class="fas fa-chevron-down"></i>
                     </button>
                 </div><br>
-                <div class="board-columns">
-                
-                </div>
+                <div class="board-columns"></div>
             </div>`;
 }
 

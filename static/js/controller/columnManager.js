@@ -3,13 +3,11 @@ import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
 
 
-
 export let columnManager = {
     loadColumns: async function (boardId){
         const columns = await dataHandler.getColumns();
         for(let column of columns){
             if (String(column.board_id) === boardId){
-                console.log(column)
                 const columnBuilder = htmlFactory(htmlTemplates.column);
                 const content = columnBuilder(column)
                 await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns `, content)
@@ -18,7 +16,6 @@ export let columnManager = {
             }
         }
     }
-
 }
 
 
@@ -36,8 +33,8 @@ async function renameStatus(clickEvent){
       await dataHandler.renameColumn(statusID,title)
     }
   })
-
 }
+
 
 export async function deleteStatus(clickEvent){
     const statusId = clickEvent.target.closest('[data-delete-status-id]').attributes['data-delete-status-id'].nodeValue;
