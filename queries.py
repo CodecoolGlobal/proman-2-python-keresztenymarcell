@@ -55,6 +55,7 @@ def get_card_order_by_board_status_id(board_id, status_id):
         {"board_id": board_id, "status_id": status_id}
     )
 
+
 def get_board_with_id(board_id):
     return data_manager.execute_select(
         """
