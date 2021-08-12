@@ -197,4 +197,10 @@ section.board{
     height: 15%;
 }
 
+#alertId {
+    display: none;
+    text-align: center;
+    width: 30%;
+}
+
 

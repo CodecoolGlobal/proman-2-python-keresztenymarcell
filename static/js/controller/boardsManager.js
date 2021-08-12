@@ -121,6 +121,7 @@ async function createNewBoard(clickEvent){
   let board = {}
   board.title = document.getElementById('new-board-title').value
   if (board.title !== ""){
+    document.getElementById('alertId').style.display = "None";
     await dataHandler.createNewBoard(board.title)
     board.id = await dataHandler.getNewBoardId()
     const boardBuilder = htmlFactory(htmlTemplates.board)
@@ -134,7 +135,9 @@ async function createNewBoard(clickEvent){
     await dataHandler.createEmptyStatuses(board.id)
   }
   else {
-    alert('Give me a title!')
+    let alert = document.getElementById('alertId')
+    alert.style.display = "inline";
+
   }
 }
 
