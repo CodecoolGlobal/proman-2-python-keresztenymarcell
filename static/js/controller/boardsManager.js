@@ -135,12 +135,12 @@ async function createNewCard(clickEvent){
   let card = {
     id : 25,
     status_id : 1,
-    title : "New card"
-
+    title : "New card",
+    card_order: await dataHandler.getCardOrderByBoardColumnId(boardId, 1) + 1
   };
   card.status_id = clickEvent.target.parentElement.parentElement.children[2].children[0].dataset.columnId
   console.log(card.status_id)
-  await dataHandler.createNewCard(boardId, card.title, card.status_id);
+  await dataHandler.createNewCard(boardId, card.title, card.status_id, card.card_order);
   const cardBuilder = htmlFactory(htmlTemplates.card);
   let result = await dataHandler.getLastCardId()
   card.id = result[0]["id"]

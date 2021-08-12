@@ -28,7 +28,7 @@ DROP TABLE IF EXISTS cards;
 CREATE TABLE statuses (
     id       SERIAL PRIMARY KEY     NOT NULL,
     title    VARCHAR(200)           NOT NULL,
-    board_id INTEGER
+    board_id INTEGER                NOT NULL
 );
 
 CREATE TABLE boards (
@@ -84,23 +84,7 @@ INSERT INTO cards VALUES (nextval('cards_id_seq'), 3, 3, 'planning', 1);
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 3, 4, 'done card 1', 1);
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 3, 4, 'done card 1', 2);
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 4, 1, 'new card 1', 1);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 4, 1, 'new card 2', 2);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 4, 2, 'in progress card', 1);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 4, 3, 'planning', 1);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 4, 4, 'done card 1', 1);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 4, 4, 'done card 1', 2);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 5, 1, 'new card 1', 1);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 5, 1, 'new card 2', 2);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 5, 2, 'in progress card', 1);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 5, 3, 'planning', 1);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 5, 4, 'done card 1', 1);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 5, 4, 'done card 1', 2);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 5, 'new card 1', 1);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 5, 'new card 2', 2);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 6, 'in progress card', 1);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 7, 'planning', 1);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 8, 'done card 1', 1);
-INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 8, 'done card 1', 2);
+
 
 ---
 --- add constraints

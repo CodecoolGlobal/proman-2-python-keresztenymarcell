@@ -126,12 +126,13 @@ def get_last_board_id():
     )
 
 
-def create_new_card(board_id, status_id, title):
+def create_new_card(board_id, status_id, title, card_order):
     return data_manager.execute_query(
         """
             INSERT INTO cards (board_id, status_id, title, card_order) 
-            VALUES (%(board_id)s , %(status_id)s, %(title)s, 0);
-        """, {"board_id": board_id, "status_id": status_id, "title": title}
+            VALUES (%(board_id)s , %(status_id)s, %(title)s, %(card_order)s);
+        """,
+        {"board_id": board_id, "status_id": status_id, "title": title, "card_order": card_order}
     )
 
 
