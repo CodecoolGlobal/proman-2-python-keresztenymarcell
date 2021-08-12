@@ -136,6 +136,7 @@ async function createNewCard(clickEvent){
     id : 25,
     status_id : 1,
     title : "New card"
+
   };
   card.status_id = clickEvent.target.parentElement.parentElement.children[2].children[0].dataset.columnId
   console.log(card.status_id)

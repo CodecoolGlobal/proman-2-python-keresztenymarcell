@@ -26,15 +26,19 @@ export let dataHandler = {
   getLastStatusId: async function(){
       const response = await apiGet(`/api/get-last-status-id`)
       return response
-    },
-    getLastCardId: async function(){
+  },
+  getLastCardId: async function(){
       const response = await apiGet(`api/get-last-card-id`)
-        return response
-    },
-
+      return response
+  },
   getCardsByBoardId: async function (boardId) {
     const response = await apiGet(`/api/boards/${boardId}/cards/`);
     return response;
+
+  },
+  getCardOrderByBoardColumnId: async function(boardId, statusId){
+      const response = await apiGet(`/api/cards/${boardId}/${statusId}`)
+      return response
   },
     getCard: async function (cardId) {
       //
