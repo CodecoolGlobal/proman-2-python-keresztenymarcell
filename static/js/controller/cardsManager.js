@@ -21,7 +21,7 @@ export let cardsManager = {
     await dragDrop();
   },
   deleteCardButtonHandler: async function(clickEvent){
-    let cardId = clickEvent.target.dataset.cardId
+    let cardId = clickEvent.target.closest('[data-card-id]').dataset.cardId
     let item = document.querySelector(`.card[data-card-id="${cardId}"]`)
     let parent = item.parentNode
     parent.removeChild(item)

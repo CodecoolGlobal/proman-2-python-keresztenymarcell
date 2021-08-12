@@ -2,7 +2,7 @@ import { dataHandler } from "../data/dataHandler.js";
 import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
 import { cardsManager } from "./cardsManager.js";
-import {columnManager} from "./columnManager.js";
+import { columnManager } from "./columnManager.js";
 
 export let boardsManager = {
   loadBoards: async function () {
@@ -38,7 +38,7 @@ async function openBoard(boardId, button){
   await columnManager.loadColumns(boardId)
   await cardsManager.loadCards(boardId)
   button.dataset.toggleState = "show"
-  button.textContent = "Hide Cards"
+  button.innerHTML = 'Hide Cards <i class="fas fa-chevron-up">'
 }
 
 
@@ -46,7 +46,7 @@ async function closeBoard(boardId, button){
   const columnContent = document.querySelector(`.board-container[data-board-id="${boardId}"] .board-columns`)
   columnContent.textContent = ""
   button.dataset.toggleState = "hide"
-  button.textContent = "Show Cards"
+  button.innerHTML = 'Show Cards <i class="fas fa-chevron-down">'
 }
 
 async function showHideButtonHandler(clickEvent) {
