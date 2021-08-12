@@ -134,6 +134,7 @@ async function createNewBoard(clickEvent){
     await domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
     await dataHandler.createEmptyStatuses(board.id)
   }
+
   else {
     let alert = document.getElementById('alertId')
     alert.style.display = "inline";
