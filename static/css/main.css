@@ -133,14 +133,19 @@ section.board{
     cursor: pointer;
 }
 
-.card-title{
-    padding-right: 16px;
-    width: 75%;
+.card-archive{
+    display: block;
+    position: absolute;
+    top: 4px;
+    right: 40px;
+    font-size: 12px;
+    cursor: pointer;
 }
 
-.function-buttons{
-    width: 25%;
+.card-title{
+    padding-right: 16px;
 }
+
 
 #navbar {
     display: flex;
