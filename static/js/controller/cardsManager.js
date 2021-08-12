@@ -18,7 +18,6 @@ export let cardsManager = {
       domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCardHandler);
       DragAndDrop()
     }
-
   },
   deleteCardButtonHandler: async function(clickEvent){
     let cardId = clickEvent.target.closest('[data-card-id]').dataset.cardId
@@ -44,7 +43,6 @@ export async function renameCardHandler(clickEvent){
       await dataHandler.renameCard(cardId,title)
     }
   })
-
 }
 
 

@@ -5,6 +5,7 @@ import { cardsManager } from "./cardsManager.js";
 import {columnManager, deleteStatus} from "./columnManager.js";
 import {DragAndDrop} from "./DragAndDrop.js";
 
+
 export let boardsManager = {
   loadBoards: async function () {
     const boards = await dataHandler.getBoards();
@@ -35,6 +36,7 @@ export let buttonManager = {
   }
 }
 
+
 async function openBoard(boardId, button){
   await columnManager.loadColumns(boardId)
   await cardsManager.loadCards(boardId)
@@ -50,6 +52,7 @@ async function closeBoard(boardId, button){
   button.innerHTML = 'Show Cards <i class="fas fa-chevron-down">'
 }
 
+
 async function showHideButtonHandler(clickEvent) {
   const boardId = clickEvent.target.dataset.boardId;
   const button = clickEvent.target;
@@ -63,6 +66,7 @@ async function showHideButtonHandler(clickEvent) {
     add_new_button.style.display = "None";
   }
 }
+
 
 async function addStatus(clickEvent){
   const boardID = clickEvent.target.attributes["add-new-status-id"].nodeValue
@@ -82,6 +86,7 @@ async function addStatus(clickEvent){
   }
 }
 
+
 async function renameBoard(clickEvent){
   let boardId = clickEvent.target.attributes["board-title-id"].nodeValue
   let element = document.querySelector(`.board-title[board-title-id="${boardId}"]`)
@@ -98,6 +103,7 @@ async function renameBoard(clickEvent){
   })
 }
 
+
 async function deleteBoard(clickEvent){
     const boardId = clickEvent.target.attributes['delete-board-id'].nodeValue;
     await dataHandler.deleteBoardById(boardId)
@@ -109,6 +115,7 @@ async function deleteBoard(clickEvent){
         }
     }
 }
+
 
 async function createNewBoard(clickEvent){
   let board = {}
@@ -124,13 +131,13 @@ async function createNewBoard(clickEvent){
     domManager.addEventListener(`.add-new-card[add-new-card-id="${board.id}"]`, "click", createNewCard)
     domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
     await domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
-
     await dataHandler.createEmptyStatuses(board.id)
   }
   else {
     alert('Give me a title!')
   }
 }
+
 
 async function createNewCard(clickEvent){
   let boardId = clickEvent.target.attributes["add-new-card-id"].nodeValue;
@@ -140,6 +147,7 @@ async function createNewCard(clickEvent){
     title : "New card",
     card_order: 1
   };
+
   card.card_order = await dataHandler.getCardOrderByBoardColumnId(boardId, card.status_id) + 1
   await dataHandler.createNewCard(boardId, card.title, card.status_id, card.card_order);
   const cardBuilder = htmlFactory(htmlTemplates.card);

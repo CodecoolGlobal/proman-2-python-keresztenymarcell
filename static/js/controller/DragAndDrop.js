@@ -59,11 +59,7 @@ export async function DragAndDrop() {
             let card_title = actualCard.textContent
             let status_id = e.currentTarget.parentNode.dataset.columnId;
             let card_id = actualCard.dataset.cardId;
-            let card_order = actualCard.dataset.card_order
-            actualCard.innerHTML = title +
-                `<div class="card-archive" data-card-archive-id="${card_id}">A</div>
-                <div class="card-remove" data-card-id="${card_id}"><img src="static/img/trash.png" alt="trash_icon"></div>
-            </div>`
+            actualCard.innerHTML = title
             dataHandler.updateCards(status_id, card_id, card_title);
         }
     }
