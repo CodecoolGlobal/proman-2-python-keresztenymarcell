@@ -1,8 +1,8 @@
 import { dataHandler } from "../data/dataHandler.js";
 import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
-import { cardsManager } from "./cardsManager.js";
-import {columnManager, deleteStatus} from "./columnManager.js";
+import { cardsManager, renameCardHandler } from "./cardsManager.js";
+import {columnManager, addStatus} from "./columnManager.js";
 import {DragAndDrop} from "./DragAndDrop.js";
 
 
@@ -68,23 +68,6 @@ async function showHideButtonHandler(clickEvent) {
 }
 
 
-async function addStatus(clickEvent){
-  const boardID = clickEvent.target.attributes["add-new-status-id"].nodeValue
-  const button = document.querySelector(`.board-container[data-board-id="${boardID}"] .toggle-board-button`)
-  let status = {
-    title: "New Status",
-    board_id: boardID
-  }
-  if(button.dataset.toggleState === "show"){
-    await dataHandler.createNewStatus(status.title, status.board_id)
-    status.id = await dataHandler.getLastStatusId()
-    const columnBuilder = htmlFactory(htmlTemplates.column)
-    let column = columnBuilder(status)
-    await domManager.addChild(`.board-container[data-board-id="${boardID}"] .board-columns `, column)
-    await domManager.addEventListener(`.delete-column-button[data-delete-status-id="${status.id}"]`, "click", deleteStatus);
-    await DragAndDrop()
-  }
-}
 
 
 async function renameBoard(clickEvent){
@@ -134,7 +117,6 @@ async function createNewBoard(clickEvent){
     await domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
     await dataHandler.createEmptyStatuses(board.id)
   }
-
   else {
     let alert = document.getElementById('alertId')
     alert.style.display = "inline";
@@ -150,7 +132,6 @@ async function createNewCard(clickEvent){
     title : "New card",
     card_order: 1
   };
-
   card.card_order = await dataHandler.getCardOrderByBoardColumnId(boardId, card.status_id) + 1
   await dataHandler.createNewCard(boardId, card.title, card.status_id, card.card_order);
   const cardBuilder = htmlFactory(htmlTemplates.card);
@@ -158,6 +139,6 @@ async function createNewCard(clickEvent){
   const newCard = cardBuilder(card);
   await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, newCard);
   await domManager.addEventListener(`.card[data-card-id="${card.id}"] .card-remove`, "click", cardsManager.deleteCardButtonHandler);
-  await domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", cardsManager.renameCardHandler);
+  await domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCardHandler);
   await DragAndDrop()
 }

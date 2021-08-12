@@ -19,6 +19,23 @@ export let columnManager = {
 }
 
 
+export async function addStatus(clickEvent){
+  const boardID = clickEvent.target.attributes["add-new-status-id"].nodeValue
+  const button = document.querySelector(`.board-container[data-board-id="${boardID}"] .toggle-board-button`)
+  let status = {
+    title: "New Status",
+    board_id: boardID
+  }
+  if(button.dataset.toggleState === "show"){
+    await dataHandler.createNewStatus(status.title, status.board_id)
+    status.id = await dataHandler.getLastStatusId()
+    const columnBuilder = htmlFactory(htmlTemplates.column)
+    let column = columnBuilder(status)
+    await domManager.addChild(`.board-container[data-board-id="${boardID}"] .board-columns `, column)
+    await domManager.addEventListener(`.delete-column-button[data-delete-status-id="${status.id}"]`, "click", deleteStatus);
+  }
+}
+
 async function renameStatus(clickEvent){
   let statusID = clickEvent.target.attributes["column-title-id"].nodeValue
   let element = document.querySelector(`.board-column-title[column-title-id="${statusID}"]`)
