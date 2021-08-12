@@ -86,8 +86,8 @@ export let dataHandler = {
         await apiDelete(`/api/board/delete-status-by-id/${statusId}`,payload)
     },
   createEmptyStatuses: async function (boardId) {
-    let payload = { "board_id": boardId}
-    await apiPost("/api/boards/add-default-statuses/", payload)
+    let payload = {"board_id": boardId}
+    await apiPost("/api/boards/add-default-statuses", payload)
   },
 };
 
