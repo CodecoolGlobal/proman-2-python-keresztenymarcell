@@ -3,7 +3,6 @@ import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
 import { DragAndDrop } from "./DragAndDrop.js";
 
-
 export let cardsManager = {
   loadCards: async function (boardId) {
     const cards = await dataHandler.getCardsByBoardId(boardId);

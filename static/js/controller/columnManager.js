@@ -18,7 +18,6 @@ export let columnManager = {
     }
 }
 
-
 export async function addStatus(clickEvent){
   const boardID = clickEvent.target.attributes["add-new-status-id"].nodeValue
   const button = document.querySelector(`.board-container[data-board-id="${boardID}"] .toggle-board-button`)
@@ -26,6 +25,7 @@ export async function addStatus(clickEvent){
     title: "New Status",
     board_id: boardID
   }
+
   if(button.dataset.toggleState === "show"){
     await dataHandler.createNewStatus(status.title, status.board_id)
     status.id = await dataHandler.getLastStatusId()
@@ -51,7 +51,6 @@ async function renameStatus(clickEvent){
     }
   })
 }
-
 
 export async function deleteStatus(clickEvent){
     const statusId = clickEvent.target.closest('[data-delete-status-id]').attributes['data-delete-status-id'].nodeValue;
