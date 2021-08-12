@@ -3,6 +3,7 @@ import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
 import { cardsManager } from "./cardsManager.js";
 import {columnManager, deleteStatus} from "./columnManager.js";
+import {DragAndDrop} from "./valami.js";
 
 export let boardsManager = {
   loadBoards: async function () {
@@ -146,4 +147,5 @@ async function createNewCard(clickEvent){
   await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, newCard);
   await domManager.addEventListener(`.card[data-card-id="${card.id}"] .card-remove`, "click", cardsManager.deleteCardButtonHandler);
   await domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", cardsManager.renameCardHandler);
+  await DragAndDrop()
 }

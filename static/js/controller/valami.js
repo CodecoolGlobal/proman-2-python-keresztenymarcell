@@ -3,7 +3,7 @@ import { dataHandler } from "../data/dataHandler.js";
 let actualCard = null;
 
 
-export async function dragDrop() {
+export async function DragAndDrop() {
     const cardSlots = document.querySelectorAll('.board-column-content');
     const cards = document.querySelectorAll('.card');
 

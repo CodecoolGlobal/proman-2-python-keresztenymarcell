@@ -1,8 +1,7 @@
 import { dataHandler } from "../data/dataHandler.js";
 import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
-import { dragDrop } from "../controller/dragDrop.js";
-
+import { DragAndDrop } from "../controller/valami.js";
 
 
 export let cardsManager = {
@@ -17,8 +16,9 @@ export let cardsManager = {
         "click",
         cardsManager.deleteCardButtonHandler);
       domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCardHandler);
+      DragAndDrop()
     }
-    await dragDrop();
+
   },
   deleteCardButtonHandler: async function(clickEvent){
     let cardId = clickEvent.target.closest('[data-card-id]').dataset.cardId
@@ -26,7 +26,7 @@ export let cardsManager = {
     let parent = item.parentNode
     parent.removeChild(item)
     await dataHandler.deleteCardById(cardId)
-  }
+  },
 };
 
 
