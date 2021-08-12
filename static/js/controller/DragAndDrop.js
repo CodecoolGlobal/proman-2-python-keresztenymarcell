@@ -25,10 +25,12 @@ export async function DragAndDrop() {
 
     function dragStart(e) {
         actualCard = e.currentTarget;
+        actualCard.style.filter = "grayscale(100)"
     }
 
 
     function dragEnd() {
+        actualCard.style.filter = "grayscale(0)"
     }
 
 

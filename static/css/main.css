@@ -124,6 +124,7 @@ section.board{
     border-radius: var(--border-radius);
     margin: 4px 0;
     padding: 4px;
+    filter: grayscale(0);
 }
 
 .delete-column-button{
@@ -230,4 +231,7 @@ input#new-board-title {
     border-radius: 16px;
     margin-bottom: 20px;
 }
+
+
+
 
