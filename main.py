@@ -57,10 +57,16 @@ def get_status(board_id: int):
     return
 
 
-@app.route("/api/get-columns")
+@app.route("/api/get-columns/")
 @json_response
 def get_statuses():
     return queries.get_statuses()
+
+
+@app.route("/api/get-default-columns")
+@json_response
+def get_default_statuses():
+    return queries.get_default_columnes()
 
 
 @app.route("/api/board/delete-status-by-id/<int:column_id>", methods=['DELETE'])
@@ -119,6 +125,13 @@ def create_new_card():
     card_title = request.json["card_title"]
     status_id = request.json["status_id"]
     return queries.create_new_card(board_id, status_id, card_title,)
+
+
+@app.route("/api/boards/add-default-statuses/", methods=["GET", "POST"])
+@json_response
+def add_default_statuses():
+    board_id = queries.get_last_board_id()[0]['id']
+    return queries.add_default_statuses_to_new_board(board_id)
 
 
 @app.route("/api/rename-card-by-id", methods=['GET', 'POST'])
