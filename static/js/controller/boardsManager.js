@@ -3,7 +3,7 @@ import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
 import { cardsManager } from "./cardsManager.js";
 import {columnManager, deleteStatus} from "./columnManager.js";
-import {DragAndDrop} from "./valami.js";
+import {DragAndDrop} from "./DragAndDrop.js";
 
 export let boardsManager = {
   loadBoards: async function () {

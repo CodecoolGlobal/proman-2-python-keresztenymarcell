@@ -1,7 +1,7 @@
 import { dataHandler } from "../data/dataHandler.js";
 import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
-import { DragAndDrop } from "../controller/valami.js";
+import { DragAndDrop } from "./DragAndDrop.js";
 
 
 export let cardsManager = {
