@@ -48,16 +48,16 @@ CREATE TABLE cards (
 --- insert data
 ---
 
-INSERT INTO statuses(title, board_id) VALUES ('new', 1);
-INSERT INTO statuses(title, board_id) VALUES ('in progress', 1);
-INSERT INTO statuses(title, board_id) VALUES ('testing', 1);
-INSERT INTO statuses(title, board_id) VALUES ('done', 1);
-INSERT INTO statuses(title, board_id) VALUES ('delete_test', 1);
-INSERT INTO statuses(title, board_id) VALUES ('new', 2);
-INSERT INTO statuses(title, board_id) VALUES ('in progress', 2);
-INSERT INTO statuses(title, board_id) VALUES ('testing', 2);
-INSERT INTO statuses(title, board_id) VALUES ('done', 2);
-INSERT INTO statuses(title, board_id) VALUES ('delete_test', 2);
+INSERT INTO statuses(title, board_id) VALUES ('New', 1);
+INSERT INTO statuses(title, board_id) VALUES ('In progress', 1);
+INSERT INTO statuses(title, board_id) VALUES ('Testing', 1);
+INSERT INTO statuses(title, board_id) VALUES ('Done', 1);
+INSERT INTO statuses(title, board_id) VALUES ('Delete_test', 1);
+INSERT INTO statuses(title, board_id) VALUES ('New', 2);
+INSERT INTO statuses(title, board_id) VALUES ('In progress', 2);
+INSERT INTO statuses(title, board_id) VALUES ('Testing', 2);
+INSERT INTO statuses(title, board_id) VALUES ('Done', 2);
+INSERT INTO statuses(title, board_id) VALUES ('Delete_test', 2);
 
 INSERT INTO boards(title) VALUES ('SCRUM Overlord');
 INSERT INTO boards(title) VALUES ('Web Module');
