@@ -97,7 +97,7 @@ def rename_board_by_id(id, title):
     )
 
 
-def create_element(title):
+def create_board(title):
     return data_manager.execute_query(
         """
             INSERT INTO boards (title) VALUES (%(title)s) RETURNING (id);
