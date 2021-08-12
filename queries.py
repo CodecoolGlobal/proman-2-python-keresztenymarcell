@@ -122,19 +122,21 @@ def create_element(title):
 
 
 def get_last_board_id():
-    return data_manager.execute_select(
+    result = data_manager.execute_select(
         """
         SELECT MAX(id) AS id FROM boards;
         """
     )
+    return result[0]["id"]
 
 
 def get_last_status_id():
-    return data_manager.execute_select(
+    result = data_manager.execute_select(
         """
         SELECT MAX(id) AS id FROM statuses;
         """
     )
+    return result[0]["id"]
 
 
 def create_new_card(board_id, status_id, title, card_order):

@@ -72,8 +72,7 @@ async function addStatus(clickEvent){
   }
   if(button.dataset.toggleState === "show"){
     await dataHandler.createNewStatus(status.title, status.board_id)
-    let result = await dataHandler.getLastStatusId()
-    status.id = result[0]["id"]
+    status.id = await dataHandler.getLastStatusId()
     const columnBuilder = htmlFactory(htmlTemplates.column)
     let column = columnBuilder(status)
     await domManager.addChild(`.board-container[data-board-id="${boardID}"] .board-columns `, column)
@@ -111,12 +110,10 @@ async function deleteBoard(clickEvent){
 
 async function createNewBoard(clickEvent){
   let board = {}
-  const button = clickEvent.target
   board.title = document.getElementById('new-board-title').value
   if (board.title !== ""){
     await dataHandler.createNewBoard(board.title)
-    let result = await dataHandler.getNewBoardId()
-    board.id = result[0]["id"]
+    board.id = await dataHandler.getNewBoardId()
     const boardBuilder = htmlFactory(htmlTemplates.board)
     const newBoard = boardBuilder(board)
     domManager.addChild("#root", newBoard);
