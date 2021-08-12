@@ -48,12 +48,19 @@ export async function dragDrop() {
     }
 
     function dragDrop(e) {
-        e.currentTarget.appendChild(actualCard);
-        let status_id = e.currentTarget.parentNode.dataset.columnId;
-        let card_id = actualCard.dataset.cardId;
-        console.log(status_id);
-        console.log(card_id)
-        dataHandler.updateCards(status_id, card_id);
-        console.log('drop')
+
+        console.log(actualCard);
+        let board = e.currentTarget.parentNode.parentElement;
+        let board_id = board.parentNode.dataset.boardId
+        let board_2 = actualCard.parentNode.parentElement;
+        let board_id_2 = board_2.parentNode.parentNode.dataset.boardId;
+
+        if( board_id_2 === board_id){
+            e.currentTarget.appendChild(actualCard);
+            let status_id = e.currentTarget.parentNode.dataset.columnId;
+            let card_id = actualCard.dataset.cardId;
+            dataHandler.updateCards(status_id, card_id);
+            console.log('drop')
+        }
     }
 }
