@@ -7,7 +7,12 @@ export let dataHandler = {
     const response = await apiGet(`/api/boards/${boardId}`);
     return response;
   },
-  getColumns: async function (boardId) {
+  getDefaultColumns: async function () {
+   const response = await apiGet(`/api/get-default-columns`);
+   return response;
+  },
+
+  getColumns: async function () {
    const response = await apiGet(`/api/get-columns`);
    return response;
   },
@@ -80,6 +85,10 @@ export let dataHandler = {
         let payload = {"status_id": statusId}
         await apiDelete(`/api/board/delete-status-by-id/${statusId}`,payload)
     },
+  createEmptyStatuses: async function (boardId) {
+    let payload = { "board_id": boardId}
+    await apiPost("/api/boards/add-default-statuses/", payload)
+  },
 };
 
 async function apiGet(url) {

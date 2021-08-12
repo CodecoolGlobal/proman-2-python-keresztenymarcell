@@ -124,6 +124,8 @@ async function createNewBoard(clickEvent){
     domManager.addEventListener(`.add-new-card[add-new-card-id="${board.id}"]`, "click", createNewCard)
     domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
     domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
+
+    await dataHandler.createEmptyStatuses(board.id)
   }
   else {
     alert('Give me a title!')
