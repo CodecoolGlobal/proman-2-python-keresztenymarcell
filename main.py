@@ -66,7 +66,7 @@ def get_statuses():
 @app.route("/api/get-default-columns")
 @json_response
 def get_default_statuses():
-    return queries.get_default_columnes()
+    return queries.get_default_columns()
 
 
 @app.route("/api/board/delete-status-by-id/<int:column_id>", methods=['DELETE'])

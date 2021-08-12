@@ -142,7 +142,7 @@ def get_last_card_id():
     )
 
 
-def get_default_columnes():
+def get_default_columns():
     return data_manager.execute_select(
         """
         SELECT id, title FROM statuses

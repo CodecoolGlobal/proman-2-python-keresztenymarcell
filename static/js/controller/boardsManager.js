@@ -126,14 +126,6 @@ async function createNewBoard(clickEvent){
     domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
 
     await dataHandler.createEmptyStatuses(board.id)
-    const columns = await dataHandler.getColumns(board.id)
-    for (let column of columns) {
-      if (column.board_id === board.id ) {
-        const columnBuilder = htmlFactory(htmlTemplates.column);
-        const content = columnBuilder(column)
-        domManager.addChild(`.board-container[data-board-id="${board.id}"] .board-columns`, content);
-      }
-  }
   }
   else {
     alert('Give me a title!')
