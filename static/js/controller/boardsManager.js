@@ -78,6 +78,7 @@ async function addStatus(clickEvent){
     let column = columnBuilder(status)
     await domManager.addChild(`.board-container[data-board-id="${boardID}"] .board-columns `, column)
     await domManager.addEventListener(`.delete-column-button[data-delete-status-id="${status.id}"]`, "click", deleteStatus);
+    await DragAndDrop()
   }
 }
 
