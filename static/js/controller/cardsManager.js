@@ -28,6 +28,24 @@ export let cardsManager = {
   },
 };
 
+export async function createNewCard(clickEvent){
+  let boardId = clickEvent.target.attributes["add-new-card-id"].nodeValue;
+  let card = {
+    id : 25,
+    status_id : clickEvent.target.parentElement.parentElement.children[2].children[0].dataset.columnId,
+    title : "New card",
+    card_order: 1
+  };
+  card.card_order = await dataHandler.getCardOrderByBoardColumnId(boardId, card.status_id) + 1
+  await dataHandler.createNewCard(boardId, card.title, card.status_id, card.card_order);
+  const cardBuilder = htmlFactory(htmlTemplates.card);
+  card.id = await dataHandler.getLastCardId();
+  const newCard = cardBuilder(card);
+  await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, newCard);
+  await domManager.addEventListener(`.card[data-card-id="${card.id}"] .card-remove`, "click", cardsManager.deleteCardButtonHandler);
+  await domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCardHandler);
+  await DragAndDrop()
+}
 
 export async function renameCardHandler(clickEvent){
   let cardId = clickEvent.target.attributes["card-title-id"].nodeValue
