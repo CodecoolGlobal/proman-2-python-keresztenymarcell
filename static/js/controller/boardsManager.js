@@ -2,7 +2,7 @@ import { dataHandler } from "../data/dataHandler.js";
 import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
 import { cardsManager } from "./cardsManager.js";
-import { columnManager } from "./columnManager.js";
+import {columnManager, deleteStatus} from "./columnManager.js";
 
 export let boardsManager = {
   loadBoards: async function () {
@@ -77,6 +77,7 @@ async function addStatus(clickEvent){
     const columnBuilder = htmlFactory(htmlTemplates.column)
     let column = columnBuilder(status)
     await domManager.addChild(`.board-container[data-board-id="${boardID}"] .board-columns `, column)
+    await domManager.addEventListener(`.delete-column-button[data-delete-status-id="${status.id}"]`, "click", deleteStatus);
   }
 }
 

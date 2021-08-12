@@ -17,6 +17,7 @@ export let columnManager = {
             }
         }
     }
+
 }
 
 
@@ -37,7 +38,7 @@ async function renameStatus(clickEvent){
 
 }
 
-async function deleteStatus(clickEvent){
+export async function deleteStatus(clickEvent){
     const statusId = clickEvent.target.closest('[data-delete-status-id]').attributes['data-delete-status-id'].nodeValue;
     const boardId = clickEvent.target.closest('[data-delete-owner-id]').attributes['data-delete-owner-id'].nodeValue;
     await dataHandler.deleteStatusById(statusId);
