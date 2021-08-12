@@ -47,13 +47,14 @@ def get_cards_for_board(board_id):
 
 
 def get_card_order_by_board_status_id(board_id, status_id):
-    data_manager.execute_select(
+    result = data_manager.execute_select(
         """
-        SELECT MAX(card_order) as id FROM cards
+        SELECT MAX(card_order) as card_order FROM cards
         WHERE board_id = %(board_id)s AND status_id = %(status_id)s
         """,
         {"board_id": board_id, "status_id": status_id}
     )
+    return result[0]["card_order"]
 
 
 def get_board_with_id(board_id):
@@ -146,11 +147,12 @@ def create_new_card(board_id, status_id, title, card_order):
 
 
 def get_last_card_id():
-    return data_manager.execute_select(
+    result = data_manager.execute_select(
         """
         SELECT MAX(id) AS id FROM cards;
         """
     )
+    return result[0]["id"]
 
 
 def get_default_columns():
