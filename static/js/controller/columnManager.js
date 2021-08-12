@@ -38,10 +38,11 @@ async function renameStatus(clickEvent){
 
 async function deleteStatus(clickEvent){
     const statusId = clickEvent.target.attributes['data-delete-status-id'].nodeValue;
-    const BoardId = clickEvent.target.attributes['data-delete-owner-id'].nodeValue;
+    const boardId = clickEvent.target.attributes['data-delete-owner-id'].nodeValue;
     await dataHandler.deleteStatusById(statusId);
     let statuses = document.getElementsByClassName('board-column');
-    let owner = document.querySelector(`.board-container[data_board-id="${BoardId}"] .board-columns`);
+    let owner = document.querySelector(`.board-container[data-board-id="${boardId}"] .board-columns `);
+    console.log(owner)
     for (let status of statuses) {
         if(statusId === status.attributes['data-column-id'].nodeValue) {
             console.log(status)
