@@ -1,17 +1,14 @@
 import { dataHandler } from "../data/dataHandler.js";
 
 let actualCard = null;
-const cardSlots = document.querySelectorAll('.board-column-content');
-const cards = document.querySelectorAll('.card')
 
 
+export async function dragDrop() {
+    const cardSlots = document.querySelectorAll('.board-column-content');
+    const cards = document.querySelectorAll('.card')
 
-export function dragDrop() {
-    console.log(cardSlots)
-    console.log(cards)
 
-    for (const card of cards) {
-        console.log(card)
+    for (const card of cards){
         card.addEventListener('dragstart', dragStart);
         card.addEventListener('dragend', dragEnd);
     }
@@ -50,6 +47,7 @@ export function dragDrop() {
     }
 
     function dragDrop(e) {
+        e.currentTarget.appendChild(actualCard);
         console.log('drop')
     }
 }
