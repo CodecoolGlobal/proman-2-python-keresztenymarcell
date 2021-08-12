@@ -137,7 +137,6 @@ async function createNewBoard(clickEvent){
   else {
     let alert = document.getElementById('alertId')
     alert.style.display = "inline";
-
   }
 }
 
