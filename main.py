@@ -117,6 +117,7 @@ def get_cards_for_board(board_id: int):
 def get_card_order_by_board_status_id(board_id: int, status_id: int):
     return queries.get_card_order_by_board_status_id(board_id, status_id)
 
+
 @app.route("/api/boards/add-new-board/", methods=["GET", "POST"])
 @json_response
 def createboard():
@@ -162,10 +163,14 @@ def rename_statuses_by_id():
     return queries.rename_statuses_by_id(status_id, status_title)
 
 
-@app.route("/api/card/<int:status_id>/<int:card_id>")
+@app.route("/api/card/<int:status_id>/<int:card_id>/<string:card_title>")
 @json_response
-def update_cards(status_id, card_id):
-    return queries.get_update_status(status_id, card_id)
+def update_cards(status_id, card_id, card_title):
+    print(status_id)
+    print(card_id)
+    print(card_title)
+    return queries.get_update_status(status_id, card_id, card_title)
+
 
 def main():
     app.run(debug=True)
