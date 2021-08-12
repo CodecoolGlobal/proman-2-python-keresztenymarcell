@@ -3,6 +3,7 @@ import { htmlFactory, htmlTemplates } from "../view/htmlFactory.js";
 import { domManager } from "../view/domManager.js";
 
 
+
 export let columnManager = {
     loadColumns: async function (boardId){
         const columns = await dataHandler.getColumns();

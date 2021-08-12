@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>ProMan</title>
-
+        <link href='//fonts.googleapis.com/css?family=Montserrat:thin,extra-light,light,100,200,300,400,500,600,700,800'
+            rel='stylesheet' type='text/css'>
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}">
@@ -19,7 +20,7 @@
         <nav id="navbar">
             <a draggable="false" href="#">
                 <div id="logo">
-                    <img src="/static/img/logo.png" alt="proman" draggable="false">
+                    <img class="logo" src="/static/img/Trollface.png" alt="proman" draggable="false">
                 </div>
             </a>
             <div id="navbar-buttons">
@@ -27,6 +28,9 @@
                 <a href="">Register</a>
             </div>
         </nav>
+        <div>
+            <h1 class="pageTitle">Trollo</h1>
+        </div>
         <div id="root"></div>
     </body>
 </html>
