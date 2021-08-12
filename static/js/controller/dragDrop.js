@@ -5,7 +5,8 @@ let actualCard = null;
 
 export async function dragDrop() {
     const cardSlots = document.querySelectorAll('.board-column-content');
-    const cards = document.querySelectorAll('.card')
+    const cards = document.querySelectorAll('.card');
+
 
 
     for (const card of cards){
@@ -15,11 +16,11 @@ export async function dragDrop() {
 
 
     for (const cardSlot of cardSlots) {
-        console.log(cardSlot)
         cardSlot.addEventListener('dragover', dragOver);
         cardSlot.addEventListener('dragenter', dragEnter);
         cardSlot.addEventListener('dragleave', dragLeave);
         cardSlot.addEventListener('drop', dragDrop);
+
     }
 
 
@@ -48,6 +49,11 @@ export async function dragDrop() {
 
     function dragDrop(e) {
         e.currentTarget.appendChild(actualCard);
+        let status_id = e.currentTarget.parentNode.dataset.columnId;
+        let card_id = actualCard.dataset.cardId;
+        console.log(status_id);
+        console.log(card_id)
+        dataHandler.updateCards(status_id, card_id);
         console.log('drop')
     }
 }

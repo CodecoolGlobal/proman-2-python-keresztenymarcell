@@ -89,6 +89,10 @@ export let dataHandler = {
     let payload = { "board_id": boardId}
     await apiPost("/api/boards/add-default-statuses/", payload)
   },
+    updateCards: async function (status_id, card_id) {
+      const response = await apiGet(`/api/card/${status_id}/${card_id}`);
+      return response;
+    }
 };
 
 async function apiGet(url) {
