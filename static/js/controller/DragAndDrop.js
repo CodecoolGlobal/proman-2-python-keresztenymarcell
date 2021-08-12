@@ -47,8 +47,6 @@ export async function DragAndDrop() {
 
 
     function dragDrop(e) {
-        let statusTitle = e.currentTarget.parentNode.children;
-        let title = statusTitle.item(0).textContent;
         let board = e.currentTarget.parentNode.parentElement;
         let board_id = board.parentNode.dataset.boardId
         let board_2 = actualCard.parentNode.parentElement;
@@ -56,11 +54,9 @@ export async function DragAndDrop() {
 
         if( board_id_2 === board_id){
             e.currentTarget.appendChild(actualCard);
-            let card_title = actualCard.textContent
             let status_id = e.currentTarget.parentNode.dataset.columnId;
             let card_id = actualCard.dataset.cardId;
-            actualCard.innerHTML = title
-            dataHandler.updateCards(status_id, card_id, card_title);
+            dataHandler.updateCards(status_id, card_id);
         }
     }
 }

@@ -259,13 +259,12 @@ def delete_status(status_id):
     )
 
 
-def get_update_status(status_id, card_id, card_title):
+def get_update_status(status_id, card_id):
     return data_manager.execute_query(
         """
         UPDATE cards
         SET
-         status_id = %(status_id)s,
-         title = %(card_title)s
+         status_id = %(status_id)s
         WHERE id = %(card_id)s
-        """, {"status_id": status_id, "card_id": card_id, "card_title":card_title}
+        """, {"status_id": status_id, "card_id": card_id}
     )

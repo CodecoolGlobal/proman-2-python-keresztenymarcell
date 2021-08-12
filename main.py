@@ -151,10 +151,10 @@ def rename_statuses_by_id():
     return queries.rename_statuses_by_id(status_id, status_title)
 
 
-@app.route("/api/card/<int:status_id>/<int:card_id>/<string:card_title>")
+@app.route("/api/card/<int:status_id>/<int:card_id>/")
 @json_response
-def update_cards(status_id, card_id, card_title):
-    return queries.get_update_status(status_id, card_id, card_title)
+def update_cards(status_id, card_id):
+    return queries.get_update_status(status_id, card_id)
 
 
 def main():
