@@ -99,6 +99,11 @@ def get_cards_for_board(board_id: int):
     return queries.get_cards_for_board(board_id)
 
 
+@app.route("/api/cards/<int:board_id>/<int:status_id>")
+@json_response
+def get_card_order_by_board_status_id(board_id: int, status_id: int):
+    return queries.get_card_order_by_board_status_id(board_id, status_id)
+
 @app.route("/api/boards/add-new-board/", methods=["GET", "POST"])
 @json_response
 def createboard():
