@@ -69,10 +69,11 @@ def get_default_statuses():
     return queries.get_default_columns()
 
 
-@app.route("/api/boards/add-default-statuses/", methods=["GET", "POST"])
+@app.route("/api/boards/add-default-statuses", methods=["GET", "POST"])
 @json_response
 def add_default_statuses():
-    board_id = queries.get_last_board_id()[0]['id'] + 1
+
+    board_id = request.json["board_id"]
     return queries.add_default_statuses_to_new_board(board_id)
 
 
