@@ -74,7 +74,7 @@ export let dataHandler = {
     },
     deleteStatusById: async function(statusId){
         let payload = {"status_id": statusId}
-        await apiDelete(`/api/delete-status-by-id/${statusId}`,payload)
+        await apiDelete(`/api/board/delete-status-by-id/${statusId}`,payload)
     },
 };
 

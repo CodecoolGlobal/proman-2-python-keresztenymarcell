@@ -172,6 +172,7 @@ def delete_board_by_id(board_id):
     # Elsőször a card utána a többi törlése, másképp hibára fut
     # MINDEN HIBÁRA IGAZ
     delete_board_id_from_cards(board_id)
+    delete_board_id_from_statuses(board_id)
     delete_board(board_id)
 
 
@@ -195,6 +196,16 @@ def delete_board_id_from_cards(board_id):
     return data_manager.execute_query(
         """
         DELETE FROM cards
+        WHERE board_id = %(id)s;
+        """,
+        {"id": board_id}
+    )
+
+
+def delete_board_id_from_statuses(board_id):
+    return data_manager.execute_query(
+        """
+        DELETE FROM statuses
         WHERE board_id = %(id)s;
         """,
         {"id": board_id}

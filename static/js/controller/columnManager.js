@@ -41,9 +41,8 @@ async function deleteStatus(clickEvent){
     console.log("Delete 1 - StatusID")
     await dataHandler.deleteStatusById(statusId)
     let statuses = document.getElementsByClassName('board-column');
+    let owner = document.querySelector(`.board-container[data_board-id="${BoardId}"] .board-columns`);
     for (let status of statuses) {
-        console.log(status)
-        console.log("Delete 2- Status")
         if(statusId === status.attributes['data-column-id'].nodeValue) {
             console.log(status)
             parent.removeChild(status)

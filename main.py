@@ -51,12 +51,6 @@ def delete_board_by_id(board_id: int):
     return queries.delete_board_by_id(board_id)
 
 
-@app.route("/api/delete-status-by-id/<int:column_id>", methods=['DELETE'])
-@json_response
-def delete_status_by_id(status_id: int):
-    return queries.delete_status_by_id(status_id)
-
-
 @app.route("/api/board/<int:board_id>/column")
 @json_response
 def get_status(board_id: int):
@@ -67,6 +61,12 @@ def get_status(board_id: int):
 @json_response
 def get_statuses():
     return queries.get_statuses()
+
+
+@app.route("/api/board/delete-status-by-id/<int:column_id>", methods=['DELETE'])
+@json_response
+def delete_status_by_id(column_id: int):
+    return queries.delete_status_by_id(column_id)
 
 
 @app.route("/api/create-new-status", methods=["POST"])
@@ -87,7 +87,6 @@ def get_last_status_id():
 @json_response
 def get_last_card_id():
     return queries.get_last_card_id()
-
 
 
 @app.route("/api/boards/<int:board_id>/cards/")
