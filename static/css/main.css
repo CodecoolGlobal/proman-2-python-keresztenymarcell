@@ -88,7 +88,7 @@ section.board{
 
 .board-columns{
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 }
 
 .board-column{
@@ -212,6 +212,17 @@ section.board{
 }
 
 
+button.toggle-board-button{
+    float: right;
+}
+
+span.board-column-title{
+    position: center;
+}
+
+.board-column{
+    flex-wrap: wrap;
+}
 .pageTitle {
     color: white;
 }
@@ -225,12 +236,16 @@ section.board{
 button.toggle-board-button{
     margin-top: 8px;
     float: right;
+    margin-right: 4px;
 }
 
 input#new-board-title {
     border-radius: 16px;
     margin-bottom: 20px;
 }
+
+h1{
+    font-family: 'Lobster', cursive}
 
 
 
