@@ -157,6 +157,16 @@ def update_cards(status_id, card_id):
     return queries.get_update_status(status_id, card_id)
 
 
+@app.route("/api/registration/register-user", methods=['POST'])
+@json_response
+def register_user():
+    username = request.json['username']
+    psw = request.json['psw']
+    if queries.check_user(username):
+        return True
+    return queries.register_user(username, psw) # should return false if registration was successful
+
+
 def main():
     app.run(debug=True)
 

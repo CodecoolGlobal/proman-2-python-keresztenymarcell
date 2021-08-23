@@ -268,3 +268,26 @@ def get_update_status(status_id, card_id):
         WHERE id = %(card_id)s
         """, {"status_id": status_id, "card_id": card_id}
     )
+
+
+def check_user(username):
+    query = """
+            SELECT username FROM users
+            WHERE username = %(username)s"""
+    user = data_manager.execute_select(query, {"username": username}, fetchall=False)
+    if user["username"] != "":
+        return True
+    else:
+        return False
+
+
+def register_user(username, password):
+    query = """
+            INSERT INTO users (username, password)
+            VALUES (%(username)s, %(password)s)
+            RETURNING username"""
+    successful = data_manager.execute_select(query, {'username': username, 'password': password}, fetchall=False)
+    if successful['username'] != "":
+        return False
+    else:
+        return True
