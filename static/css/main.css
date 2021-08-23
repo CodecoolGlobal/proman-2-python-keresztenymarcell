@@ -245,8 +245,12 @@ input#new-board-title {
 }
 
 h1{
-    font-family: 'Lobster', cursive}
+    font-family: 'Lobster', cursive
+}
 
+.card{
+    border-radius: 4px;
+}
 
 
 
