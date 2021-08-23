@@ -268,3 +268,12 @@ def get_update_status(status_id, card_id):
         WHERE id = %(card_id)s
         """, {"status_id": status_id, "card_id": card_id}
     )
+
+
+def add_new_user(username, password):
+    return data_manager.execute_query(
+        """
+            INSERT INTO users (username, password) 
+            VALUES (%(username)s , %(password)s)
+        """, {"username": username, "password": password}
+    )

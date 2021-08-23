@@ -157,6 +157,19 @@ def update_cards(status_id, card_id):
     return queries.get_update_status(status_id, card_id)
 
 
+@app.route("/api/user/", methods=["GET", "POST"])
+@json_response
+def get_login_route():
+    username = request.json['username']
+    print(username)
+    password = request.json['password']
+    print(password)
+    return queries.add_new_user(username, password)
+
+
+
+
+
 def main():
     app.run(debug=True)
 

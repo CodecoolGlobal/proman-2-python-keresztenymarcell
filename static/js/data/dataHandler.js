@@ -77,12 +77,16 @@ export let dataHandler = {
         await apiDelete(`/api/board/delete-status-by-id/${statusId}`,payload)
     },
   createEmptyStatuses: async function (boardId) {
-    let payload = {"board_id": boardId}
+    let payload = {"board_id": boardId};
     await apiPost("/api/boards/add-default-statuses", payload)
   },
    updateCards: async function (status_id, card_id) {
       const response = await apiGet(`/api/card/${status_id}/${card_id}/`);
       return response;
+    },
+    get_loginData: async function (username, password){
+      let payload = {"username": username , "password":password};
+       await apiPost("/api/user/", payload)
     }
 };
 
