@@ -1,5 +1,5 @@
 import {boardsManager, buttonManager} from "./controller/boardsManager.js";
-import { modalManager } from "../controller/modalManager.js";
+import { modalManager } from "./controller/modalManager.js";
 
 
 function init() {
