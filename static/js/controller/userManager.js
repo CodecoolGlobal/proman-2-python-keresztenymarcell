@@ -2,6 +2,7 @@ import {dataHandler} from "../data/dataHandler.js";
 
 const verificationList = [];
 
+
 export async function userManagerFunc() {
     const button = document.querySelector('#loginModalButton')
 
@@ -29,7 +30,7 @@ async function checkLogin(){
 
 async function verification(){
     if (verificationList.includes('true')){
-            alert('correct')
+            alert('Login OK! Please close the window!')
             verificationList.length = 0;
         }
     else {
