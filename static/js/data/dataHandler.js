@@ -84,13 +84,8 @@ export let dataHandler = {
       const response = await apiGet(`/api/card/${status_id}/${card_id}/`);
       return response;
     },
-    get_loginData: async function (username, password){
-      let payload = {"username": username , "password":password};
-       await apiPost("/api/user/", payload)
-    },
-
-    getUserData: async function () {
-      const response = await apiGet(`/api/user/data`);
+    getLogin: async function () {
+      const response = await apiGet(`/api/login`);
       return response;
     },
 };

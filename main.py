@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect, session
 from dotenv import load_dotenv
 
 
@@ -151,18 +151,9 @@ def update_cards(status_id, card_id):
     return queries.get_update_status(status_id, card_id)
 
 
-@app.route("/api/user/", methods=["GET", "POST"])
+@app.route("/api/login", methods=["GET", "POST"])
 @json_response
-def get_login_route():
-    username = request.json['username']
-    password = request.json['password']
-    safe_password = queries.hash_password(password)
-    return queries.add_new_user(username, safe_password)
-
-
-@app.route("/api/user/data", methods=["GET", "POST"])
-@json_response
-def get_user_data():
+def login():
     return queries.get_all_user_data()
 
 

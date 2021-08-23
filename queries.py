@@ -270,15 +270,6 @@ def get_update_status(status_id, card_id):
     )
 
 
-def add_new_user(username, password):
-    return data_manager.execute_query(
-        """
-            INSERT INTO users (username, password) 
-            VALUES (%(username)s , %(password)s)
-        """, {"username": username, "password": password}
-    )
-
-
 def get_all_user_data():
     return data_manager.execute_select(
         """
@@ -287,11 +278,20 @@ def get_all_user_data():
     )
 
 
+def get_password_by_username(username):
+    return data_manager.execute_select(
+        """
+        SELECT password FROM users
+        WHERE username = %(username)s
+        """,{'username':username}
+    )
+
+
 def hash_password(plain_text_password):
     hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
     return hashed_bytes.decode('utf-8')
 
 
-#def verify_password(plain_text_password, hashed_password):
- #   hashed_bytes_password = hashed_password.encode('utf-8')
-  #  return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
+def verify_password(plain_text_password, hashed_password):
+    hashed_bytes_password = hashed_password.encode('utf-8')
+    return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
