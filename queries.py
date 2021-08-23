@@ -277,3 +277,11 @@ def add_new_user(username, password):
             VALUES (%(username)s , %(password)s)
         """, {"username": username, "password": password}
     )
+
+
+def get_all_user_data():
+    return data_manager.execute_select(
+        """
+        SELECT username, password FROM users
+        """
+    )

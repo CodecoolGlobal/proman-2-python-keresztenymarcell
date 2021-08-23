@@ -87,7 +87,12 @@ export let dataHandler = {
     get_loginData: async function (username, password){
       let payload = {"username": username , "password":password};
        await apiPost("/api/user/", payload)
-    }
+    },
+
+    getUserData: async function () {
+      const response = await apiGet(`/api/user/data`);
+      return response;
+    },
 };
 
 

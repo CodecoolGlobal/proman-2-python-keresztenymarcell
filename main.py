@@ -43,12 +43,6 @@ def delete_board_by_id(board_id: int):
     return queries.delete_board_by_id(board_id)
 
 
-@app.route("/api/board/<int:board_id>/column")
-@json_response
-def get_status(board_id: int):
-    return
-
-
 @app.route("/api/get-columns/")
 @json_response
 def get_statuses():
@@ -161,19 +155,18 @@ def update_cards(status_id, card_id):
 @json_response
 def get_login_route():
     username = request.json['username']
-    print(username)
     password = request.json['password']
-    print(password)
     return queries.add_new_user(username, password)
 
 
-
+@app.route("/api/user/data", methods=["GET", "POST"])
+@json_response
+def get_user_data():
+    return queries.get_all_user_data()
 
 
 def main():
     app.run(debug=True)
-
-    # Serving the favicon
     with app.app_context():
         app.add_url_rule('/favicon.ico', redirect_to=url_for('static', filename='favicon/favicon.ico'))
 
