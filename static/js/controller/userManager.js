@@ -5,7 +5,7 @@ export async function userManagerFunc() {
 
     button.addEventListener(
         "click",
-        checkLogin,
+        //checkLogin,
         get_login
       );
   }

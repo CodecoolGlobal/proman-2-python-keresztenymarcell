@@ -156,7 +156,8 @@ def update_cards(status_id, card_id):
 def get_login_route():
     username = request.json['username']
     password = request.json['password']
-    return queries.add_new_user(username, password)
+    safe_password = queries.hash_password(password)
+    return queries.add_new_user(username, safe_password)
 
 
 @app.route("/api/user/data", methods=["GET", "POST"])
