@@ -10,6 +10,7 @@ export async function userManagerFunc() {
         "click",
         checkLogin
       );
+    await logOut();
   }
 
 
@@ -33,9 +34,8 @@ async function verification(){
             alert('Login OK! Please close the window!')
             verificationList.length = 0;
             const username = document.querySelector('#username').value;
-            //sessionStorage.setItem('user',username)
-            localStorage.setItem('user',username);
-            document.querySelector('#logedinuser').innerHTML = 'Logged in as:' + " " + localStorage.getItem('user')
+            sessionStorage.setItem('user',username);
+            document.querySelector('#logedinuser').innerHTML = 'Logged in as:' + " " + sessionStorage.getItem('user')
             document.querySelector('#login').textContent = "";
             document.querySelector('#registration').textContent = "";
             document.querySelector('#logout').textContent = "Logout";
@@ -44,4 +44,18 @@ async function verification(){
         alert('please try again!')
         verificationList.length = 0;
     }
+}
+
+async function logOut(){
+    const logOutButton = document.querySelector('#logout')
+    logOutButton.addEventListener('click',logOutHandler )
+}
+
+
+async function logOutHandler(){
+    sessionStorage.removeItem('user');
+    document.querySelector('#logedinuser').innerHTML = "";
+    document.querySelector('#login').textContent = "Log in";
+    document.querySelector('#registration').textContent = "Register";
+    document.querySelector('#logout').textContent = "";
 }
