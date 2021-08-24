@@ -1,5 +1,5 @@
-import data_manager
-import bcrypt
+import data_manager, bcrypt
+
 
 def get_card_status(status_id):
     status = data_manager.execute_select(
@@ -278,13 +278,20 @@ def get_all_user_data():
     )
 
 
-def get_password_by_username(username):
-    return data_manager.execute_select(
-        """
-        SELECT password FROM users
-        WHERE username = %(username)s
-        """,{'username':username}
-    )
+def check_user(username):
+    query = """
+            SELECT username FROM users
+            WHERE username = %(username)s"""
+    user = data_manager.execute_select(query, {"username": username}, fetchall=False)
+    return True if user is not None else False
+
+
+def register_user(username, password):
+    password = hash_password(password)
+    query = """
+            INSERT INTO users (username, password)
+            VALUES (%(username)s, %(password)s)"""
+    return data_manager.execute_query(query, {'username': username, 'password': password})
 
 
 def hash_password(plain_text_password):

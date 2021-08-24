@@ -11,7 +11,7 @@ export function htmlFactory(template) {
             return initNewBoardDiv
         case htmlTemplates.board:
             return boardBuilder
-        case  htmlTemplates.column:
+        case htmlTemplates.column:
             return columnBuilder
         case htmlTemplates.card:
             return cardBuilder
@@ -76,4 +76,5 @@ function initNewBoardDiv() {
            <button type="button" id="load-new-board-form">Create new board</button>
            <button type="button" id="load-private-board-form">Create new private board</button></div><br>`
 }
+
 
