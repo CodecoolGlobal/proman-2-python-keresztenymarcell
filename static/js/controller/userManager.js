@@ -32,6 +32,11 @@ async function verification(){
     if (verificationList.includes('true')){
             alert('Login OK! Please close the window!')
             verificationList.length = 0;
+            const username = document.querySelector('#username').value;
+            localStorage.setItem('user',username);
+            document.querySelector('#logedinuser').innerHTML = 'Logged in as:' + " " + localStorage.getItem('user')
+            document.querySelector('#login').textContent = "";
+            document.querySelector('#registration').textContent = "";
         }
     else {
         alert('please try again!')
