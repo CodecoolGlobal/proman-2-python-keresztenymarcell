@@ -62,6 +62,8 @@ export async function renameCardHandler(clickEvent){
   })
 }
 
-
+// draggable cards
+// drop zones find collision if data-column-id ===
+// card1 => dragover card-status-id switch
 
 
