@@ -34,7 +34,9 @@ CREATE TABLE statuses (
 
 CREATE TABLE boards (
     id          SERIAL PRIMARY KEY  NOT NULL,
-    title       VARCHAR(200)        NOT NULL
+    title       VARCHAR(200)        NOT NULL,
+    user_id     INTEGER             NOT NULL,
+    private_id  INTEGER             NOT NULL
 );
 
 CREATE TABLE cards (
@@ -67,8 +69,8 @@ INSERT INTO statuses(title, board_id) VALUES ('Testing', 2);
 INSERT INTO statuses(title, board_id) VALUES ('Done', 2);
 INSERT INTO statuses(title, board_id) VALUES ('Delete_test', 2);
 
-INSERT INTO boards(title) VALUES ('SCRUM Overlord');
-INSERT INTO boards(title) VALUES ('Web Module');
+INSERT INTO boards(title, user_id, private_id) VALUES ('SCRUM Overlord', 1, 0);
+INSERT INTO boards(title, user_id, private_id) VALUES ('Web Module', 1, 0);
 
 
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 1, 1, 'new card 1', 1);
@@ -88,8 +90,7 @@ INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 8, 'planning card 2', 2);
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 9, 'done card 1', 1);
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 2, 9, 'done card 2', 2);
 
-
-
+INSERT INTO users(username, password) VALUES ('sajt', 'sajtos');
 
 ---
 --- add constraints
@@ -103,3 +104,6 @@ ALTER TABLE ONLY cards
 
 ALTER TABLE ONLY statuses
     ADD CONSTRAINT fk_statuses_board_id FOREIGN KEY (board_id) REFERENCES boards(id);
+
+ALTER TABLE ONLY boards
+    ADD CONSTRAINT fk_boards_user_id FOREIGN KEY (user_id) REFERENCES  users(id);
