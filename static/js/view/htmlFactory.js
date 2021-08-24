@@ -73,6 +73,7 @@ function initNewBoardDiv() {
                     required 
                     autofocus 
                     autocomplete="off"><br>
-           <button type="button" id="load-new-board-form">Create new board</button></div><br>`
+           <button type="button" id="load-new-board-form">Create new board</button>
+           <button type="button" id="load-private-board-form">Create new private board</button></div><br>`
 }
 

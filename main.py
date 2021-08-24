@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect, session
 from dotenv import load_dotenv
 
 
@@ -41,12 +41,6 @@ def rename_board_by_id():
 @json_response
 def delete_board_by_id(board_id: int):
     return queries.delete_board_by_id(board_id)
-
-
-@app.route("/api/board/<int:board_id>/column")
-@json_response
-def get_status(board_id: int):
-    return
 
 
 @app.route("/api/get-columns/")
@@ -157,10 +151,14 @@ def update_cards(status_id, card_id):
     return queries.get_update_status(status_id, card_id)
 
 
+@app.route("/api/login", methods=["GET", "POST"])
+@json_response
+def login():
+    return queries.get_all_user_data()
+
+
 def main():
     app.run(debug=True)
-
-    # Serving the favicon
     with app.app_context():
         app.add_url_rule('/favicon.ico', redirect_to=url_for('static', filename='favicon/favicon.ico'))
 
