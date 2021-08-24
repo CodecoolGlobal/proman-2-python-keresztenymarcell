@@ -1,5 +1,5 @@
 import data_manager
-
+import bcrypt
 
 def get_card_status(status_id):
     status = data_manager.execute_select(
@@ -268,3 +268,30 @@ def get_update_status(status_id, card_id):
         WHERE id = %(card_id)s
         """, {"status_id": status_id, "card_id": card_id}
     )
+
+
+def get_all_user_data():
+    return data_manager.execute_select(
+        """
+        SELECT username, password FROM users
+        """
+    )
+
+
+def get_password_by_username(username):
+    return data_manager.execute_select(
+        """
+        SELECT password FROM users
+        WHERE username = %(username)s
+        """,{'username':username}
+    )
+
+
+def hash_password(plain_text_password):
+    hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
+    return hashed_bytes.decode('utf-8')
+
+
+def verify_password(plain_text_password, hashed_password):
+    hashed_bytes_password = hashed_password.encode('utf-8')
+    return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
