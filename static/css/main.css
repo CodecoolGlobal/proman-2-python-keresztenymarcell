@@ -259,3 +259,25 @@ h1{
 #closeModalButton, #loginModalButton {
     border-radius: 16px;
 }
+
+input.form-control{
+    border-radius: 16px;
+}
+
+.col-form-label, .modal-title{
+    font-weight: 100;
+    margin-top: 6px;
+    display: inline-block;
+    font-size: 20px;
+    color: darkred;
+    font-weight: 300;
+    min-width: 200px;
+}
+
+.modal-title {
+    font-weight: 300;
+}
+
+.modal-footer{
+    justify-content:center;
+}
