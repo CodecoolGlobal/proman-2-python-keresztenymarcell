@@ -41,8 +41,9 @@ export let dataHandler = {
       const response = await apiGet(`/api/cards/${boardId}/${statusId}`)
       return response
   },
-    getCard: async function (cardId) {
-      //
+  getUserId: async function(username){
+      const response = await apiGet(`/api/me/${username}`)
+      return response
   },
   renameBoard: async function(boardId, boardTitle){
     let payload = {"board_id": boardId, "board_title": boardTitle}
@@ -55,6 +56,10 @@ export let dataHandler = {
   renameColumn: async function(columnId, columnTitle){
     let payload = {"column_id": columnId, "column_title": columnTitle}
     await apiPost("/api/rename-column-by-id", payload)
+  },
+  createNewPrivateBoard: async function (boardTitle) {
+    let payload = {"board_title": boardTitle}
+    await apiPost("/api/boards/add-new-private-board/", payload)
   },
   createNewBoard: async function (boardTitle) {
     let payload = {"board_title": boardTitle}

@@ -28,7 +28,12 @@ export let buttonManager = {
     domManager.addEventListener(
         "#load-new-board-form",
         "click",
-        createNewBoard
+        createNewBoard,
+      );
+    domManager.addEventListener(
+        "#load-private-board-form",
+        "click",
+        createNewPrivateBoard,
       );
   }
 }
@@ -90,28 +95,52 @@ async function deleteBoard(clickEvent){
 }
 
 async function createNewBoard(){
-  let board = {}
-  const newTableInputField = document.getElementById('new-board-title');
-  board.title = newTableInputField.value;
-  newTableInputField.value = '';
-  if (board.title !== ""){
-    document.getElementById('alertId').style.display = "None";
-    await dataHandler.createNewBoard(board.title)
-    board.id = await dataHandler.getNewBoardId()
-    const boardBuilder = htmlFactory(htmlTemplates.board)
-    const newBoard = boardBuilder(board)
-    domManager.addChild("#root", newBoard);
-    domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler)
-    domManager.addEventListener(`.board-title[board-title-id="${board.id}"]`, "click", renameBoard);
-    domManager.addEventListener(`.add-new-card[add-new-card-id="${board.id}"]`, "click", createNewCard)
-    domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
-    await domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
-    await dataHandler.createEmptyStatuses(board.id)
+    let board = {}
     const newTableInputField = document.getElementById('new-board-title');
-    console.log(newTableInputField.innerText);
-  }
-  else {
-    let alert = document.getElementById('alertId')
-    alert.style.display = "inline";
-  }
+    board.title = newTableInputField.value;
+    newTableInputField.value = '';
+    if (board.title !== ""){
+        await dataHandler.createNewBoard(board.title)
+        document.getElementById('alertId').style.display = "None";
+        board.id = await dataHandler.getNewBoardId()
+        const boardBuilder = htmlFactory(htmlTemplates.board)
+        const newBoard = boardBuilder(board)
+        domManager.addChild("#root", newBoard);
+        domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler)
+        domManager.addEventListener(`.board-title[board-title-id="${board.id}"]`, "click", renameBoard);
+        domManager.addEventListener(`.add-new-card[add-new-card-id="${board.id}"]`, "click", createNewCard)
+        domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
+        await domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
+        await dataHandler.createEmptyStatuses(board.id)
+    }
+    else {
+        let alert = document.getElementById('alertId')
+        alert.style.display = "inline";
+    }
+}
+
+
+async function createNewPrivateBoard(){
+    let board = {}
+    const newTableInputField = document.getElementById('new-board-title');
+    board.title = newTableInputField.value;
+    newTableInputField.value = '';
+    if (board.title !== ""){
+        await dataHandler.createNewPrivateBoard(board.title)
+        document.getElementById('alertId').style.display = "None";
+        board.id = await dataHandler.getNewBoardId()
+        const boardBuilder = htmlFactory(htmlTemplates.board)
+        const newBoard = boardBuilder(board)
+        domManager.addChild("#root", newBoard);
+        domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler)
+        domManager.addEventListener(`.board-title[board-title-id="${board.id}"]`, "click", renameBoard);
+        domManager.addEventListener(`.add-new-card[add-new-card-id="${board.id}"]`, "click", createNewCard)
+        domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
+        await domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
+        await dataHandler.createEmptyStatuses(board.id)
+    }
+    else {
+        let alert = document.getElementById('alertId')
+        alert.style.display = "inline";
+    }
 }

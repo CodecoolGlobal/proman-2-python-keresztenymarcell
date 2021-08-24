@@ -32,11 +32,13 @@ async function checkLogin(){
 
 async function verification(){
     if (verificationList.includes('true')) {
-        //valami
         verificationList.length = 0;
         const username = document.querySelector('#username').value;
+        const user = await dataHandler.getUserId(username);
+        const user_id = user[0]['id']
         myModal.hide();
         sessionStorage.setItem('user', username);
+        sessionStorage.setItem('user_id', user_id);
         document.querySelector('#logedinuser').innerHTML = 'Logged in as:' + " " + sessionStorage.getItem('user')
         document.querySelector('#login').textContent = "";
         document.querySelector('#registration').textContent = "";
