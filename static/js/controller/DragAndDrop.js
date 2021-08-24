@@ -25,14 +25,30 @@ export async function DragAndDrop() {
     }
 
 
+    // function dropCard(e) {
+    //
+    //     // dataHandler.changeCardOrder()
+    // }
+
     function dragStart(e) {
         actualCard = e.currentTarget;
         actualCard.style.filter = "grayscale(100)"
+        const cards = e.currentTarget.parentElement.children
+        for (let i in cards) {
+            cards[i].dataset.cardOrder = +i + 1
+        }
     }
 
 
-    function dragEnd() {
+    function dragEnd(e) {
         actualCard.style.filter = "grayscale(0)"
+        const cardId = e.currentTarget.dataset.cardId
+        const parent = e.currentTarget.parentElement
+        // (Array.prototype.indexOf.call(parent.children, e.currentTarget)+1)
+        // const array = Array.from(parent.children)
+        // console.log(array.indexOf(e.currentTarget))
+        const newPosition = parent.children.length
+        dataHandler.changeCardOrder(newPosition, cardId)
     }
 
 

@@ -22,6 +22,14 @@ def get_boards():
     )
 
 
+def change_card_order(new_position, card_id):
+    return data_manager.execute_query("""
+             UPDATE cards
+             SET card_order = %(new_position)s
+             WHERE cards.id = %(card_id)s;
+             """, {'new_position': new_position, 'card_id': card_id})
+
+
 def get_cards_for_board(board_id):
     matching_cards = data_manager.execute_select(
         """

@@ -157,6 +157,12 @@ def update_cards(status_id, card_id):
     return queries.get_update_status(status_id, card_id)
 
 
+@app.route("/api/card/move_card_order/<new_position>/<card_id>", methods=["PUT"])
+@json_response
+def change_card_order(new_position, card_id):
+    return queries.change_card_order(new_position, card_id)
+
+
 def main():
     app.run(debug=True)
 

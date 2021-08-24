@@ -83,6 +83,9 @@ export let dataHandler = {
    updateCards: async function (status_id, card_id) {
       const response = await apiGet(`/api/card/${status_id}/${card_id}/`);
       return response;
+    },
+    changeCardOrder: async function (newPosition, cardId) {
+       return await apiPut(`/api/card/move_card_order/${newPosition}/${cardId}`);
     }
 };
 
