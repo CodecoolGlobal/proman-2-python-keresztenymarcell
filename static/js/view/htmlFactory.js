@@ -2,7 +2,8 @@ export const htmlTemplates = {
     newboard: 1,
     board: 2,
     column: 3,
-    card: 4
+    card: 4,
+    archive: 5
 }
 
 export function htmlFactory(template) {
@@ -15,7 +16,8 @@ export function htmlFactory(template) {
             return columnBuilder
         case htmlTemplates.card:
             return cardBuilder
-
+        case htmlTemplates.archive:
+            return archiveBuilder
         default:
             console.error("Undefined template: " + template)
             return () => { return "" }
@@ -68,3 +70,9 @@ function initNewBoardDiv() {
            <button type="button" id="load-new-board-form">Create new board</button></div><br>`
 }
 
+function archiveBuilder(boardId) {
+    return `<div class="archive" archive-board-id="${boardId}">
+                <span class="archive-title">Archive</span>
+                <div class="archive-content" archive-owner-id="${boardId}"></div>
+            </div>`
+}
