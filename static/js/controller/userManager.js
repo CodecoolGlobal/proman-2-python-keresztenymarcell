@@ -33,6 +33,7 @@ async function verification(){
             alert('Login OK! Please close the window!')
             verificationList.length = 0;
             const username = document.querySelector('#username').value;
+            //sessionStorage.setItem('user',username)
             localStorage.setItem('user',username);
             document.querySelector('#logedinuser').innerHTML = 'Logged in as:' + " " + localStorage.getItem('user')
             document.querySelector('#login').textContent = "";
