@@ -97,11 +97,11 @@ def rename_board_by_id(id, title):
     )
 
 
-def create_board(title, user_id):
+def create_board(title):
     return data_manager.execute_query(
         """
-            INSERT INTO boards (title, user_id, private_id) VALUES ((%(title)s), (%(user_id)s), '0') RETURNING (id);
-        """, {"title": title, "user_id": user_id}
+            INSERT INTO boards (title, user_id, private_id) VALUES ((%(title)s), NULL, '0') RETURNING (id);
+        """, {"title": title}
     )
 
 

@@ -104,7 +104,7 @@ def get_card_order_by_board_status_id(board_id: int, status_id: int):
 @json_response
 def createboard():
     board_title = request.json["board_title"]
-    return queries.create_board(board_title, 0)
+    return queries.create_board(board_title)
 
 
 @app.route("/api/boards/new-board-id")
