@@ -46,15 +46,3 @@ async function registrationHandler() {
         myModal.hide();
     }
 }
-
-function closeModal() {
-    // document.querySelector('.modal-backdrop').style.display = "none";
-    document.getElementById('registration-modal').style.display = "none";
-    document.getElementById("registration-modal").classList.remove("show");
-}
-
-function openModal() {
-    // document.querySelector('.modal-backdrop').style.display = "block";
-    document.getElementById('registration-modal').style.display = "block";
-    document.getElementById("registration-modal").classList.add("show");
-}
