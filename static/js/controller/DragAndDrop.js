@@ -12,7 +12,7 @@ export async function DragAndDrop() {
     for (const card of cards){
         card.addEventListener('dragstart', dragStart);
         card.addEventListener('dragend', dragEnd);
-        card.addEventListener('drop', changeStatusId)
+
     }
 
 
@@ -40,9 +40,6 @@ export async function DragAndDrop() {
         e.preventDefault();
     }
 
-    function changeStatusId(e) {
-        e.target.id = e.currentTarget.id
-    }
 
     function dragEnter(e) {
         e.preventDefault();
