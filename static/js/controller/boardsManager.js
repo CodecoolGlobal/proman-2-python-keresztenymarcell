@@ -92,7 +92,9 @@ async function deleteBoard(clickEvent){
 
 async function createNewBoard(){
   let board = {}
-  board.title = document.getElementById('new-board-title').value
+  const newTableInputField = document.getElementById('new-board-title');
+  board.title = newTableInputField.value;
+  newTableInputField.value = '';
   if (board.title !== ""){
     document.getElementById('alertId').style.display = "None";
     await dataHandler.createNewBoard(board.title)
@@ -106,6 +108,8 @@ async function createNewBoard(){
     domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
     await domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
     await dataHandler.createEmptyStatuses(board.id)
+    const newTableInputField = document.getElementById('new-board-title');
+    console.log(newTableInputField.innerText);
   }
   else {
     let alert = document.getElementById('alertId')
