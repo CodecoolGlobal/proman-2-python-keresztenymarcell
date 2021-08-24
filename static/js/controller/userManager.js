@@ -26,14 +26,15 @@ async function checkLogin(){
                 verificationList.push('false')
             }
         }
-        await verification()
+        await verification();
+
     }
 
 async function verification(){
     if (verificationList.includes('true')) {
-        alert('Login OK! Please close the window!')
         verificationList.length = 0;
         const username = document.querySelector('#username').value;
+        myModal.hide();
         sessionStorage.setItem('user', username);
         document.querySelector('#logedinuser').innerHTML = 'Logged in as:' + " " + sessionStorage.getItem('user')
         document.querySelector('#login').textContent = "";
@@ -42,7 +43,8 @@ async function verification(){
         document.querySelector('#load-private-board-form').style.display = 'inline';
     }
     else {
-        alert('please try again!')
+        alertMsg();
+        myModal.show();
         verificationList.length = 0;
     }
 }
@@ -61,3 +63,16 @@ async function logOutHandler(){
     document.querySelector('#logout').textContent = "";
     document.querySelector('#load-private-board-form').style.display = 'None';
 }
+
+
+
+function alertMsg(){
+       document.querySelector('.alertMsg').innerHTML = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                                      <strong>Holy guacamole!</strong> Invalid username or password. Please try again.
+                                                                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                                 </div>`
+}
+
+const myModal = new window.bootstrap.Modal(document.getElementById('login-modal'), {
+  keyboard: false
+})
