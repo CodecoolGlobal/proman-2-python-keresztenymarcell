@@ -39,11 +39,19 @@ function boardBuilder(board) {
 }
 
 function columnBuilder(column) {
-    return `<div class="board-column" data-column-id="${column.id}">
+    if (column.title !== 'New' && column.title !== 'In progress' && column.title !== 'Testing' && column.title !== 'Done') {
+        return `<div class="board-column" data-column-id="${column.id}" title-id="${column.title}">
                 <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
                 <button class="delete-column-button" data-delete-status-id="${column.id}" data-delete-owner-id="${column.board_id}"><img class="trashcan" src="static/img/trash.png" alt="trash_icon"></button>
                 <div class="board-column-content"></div>
             </div>`
+    } else {
+        return `<div class="board-column" data-column-id="${column.id}" title-id="${column.title}">
+                <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
+                <div class="board-column-content"></div>
+            </div>`
+    }
+
 }
 
 
