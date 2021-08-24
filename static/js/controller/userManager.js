@@ -1,4 +1,5 @@
 import {dataHandler} from "../data/dataHandler.js";
+import {domManager} from "../view/domManager.js";
 
 const verificationList = [];
 
@@ -69,10 +70,11 @@ async function logOutHandler(){
 
 
 function alertMsg(){
-       document.querySelector('.alertMsg').innerHTML = `<div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert-login">
+    const alert = `<div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert-login">
                                                                       <strong>Holy guacamole!</strong> Invalid username or password. Please try again.
                                                                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                                                  </div>`
+    domManager.addChild('#modal-login-form', alert);
 }
 
 const myModal = new window.bootstrap.Modal(document.getElementById('login-modal'), {
