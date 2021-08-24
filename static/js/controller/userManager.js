@@ -32,6 +32,7 @@ async function checkLogin(){
 
 async function verification(){
     if (verificationList.includes('true')) {
+        //valami
         verificationList.length = 0;
         const username = document.querySelector('#username').value;
         myModal.hide();
