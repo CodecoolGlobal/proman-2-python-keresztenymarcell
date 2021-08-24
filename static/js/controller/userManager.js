@@ -60,6 +60,7 @@ async function logOut(){
 
 async function logOutHandler(){
     sessionStorage.removeItem('user');
+    sessionStorage.removeItem('user_id');
     document.querySelector('#logedinuser').innerHTML = "";
     document.querySelector('#login').textContent = "Log in";
     document.querySelector('#registration').textContent = "Register";

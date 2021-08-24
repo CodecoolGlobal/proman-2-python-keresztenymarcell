@@ -98,6 +98,8 @@ def rename_board_by_id(id, title):
 
 
 def create_board(title, user_id, private_id):
+    if user_id is None:
+        user_id = 'NULL'
     return data_manager.execute_query(
         """
             INSERT INTO boards (title, user_id, private_id) 

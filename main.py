@@ -104,14 +104,9 @@ def get_card_order_by_board_status_id(board_id: int, status_id: int):
 @json_response
 def create_new_board():
     board_title = request.json["board_title"]
-    return queries.create_board(board_title, 2, 0)
-
-
-@app.route("/api/boards/add-new-private-board/", methods=["GET", "POST"])
-@json_response
-def create_new_private_board():
-    board_title = request.json["board_title"]
-    return queries.create_board(board_title, 2, 1)
+    user_id = request.json["user_id"]
+    private_value = request.json["private_board"]
+    return queries.create_board(board_title, user_id, private_value)
 
 
 @app.route("/api/boards/new-board-id")
@@ -166,7 +161,7 @@ def login():
 
 @app.route("/api/me/<string:username>", methods=["GET", "POST"])
 @json_response
-def getUserIdByName(username):
+def get_user_id_by_name(username):
     return queries.get_userid_by_name(username)
 
 

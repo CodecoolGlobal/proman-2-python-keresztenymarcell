@@ -7,10 +7,6 @@ export let dataHandler = {
     const response = await apiGet(`/api/boards/${boardId}`);
     return response;
   },
-  getDefaultColumns: async function () {
-   const response = await apiGet(`/api/get-default-columns`);
-   return response;
-  },
   getColumns: async function () {
    const response = await apiGet(`/api/get-columns`);
    return response;
@@ -57,12 +53,8 @@ export let dataHandler = {
     let payload = {"column_id": columnId, "column_title": columnTitle}
     await apiPost("/api/rename-column-by-id", payload)
   },
-  createNewPrivateBoard: async function (boardTitle) {
-    let payload = {"board_title": boardTitle}
-    await apiPost("/api/boards/add-new-private-board/", payload)
-  },
-  createNewBoard: async function (boardTitle) {
-    let payload = {"board_title": boardTitle}
+  createNewBoard: async function (boardTitle, userID, privateBoard) {
+    let payload = {"board_title": boardTitle, "user_id":userID, "private_board":privateBoard}
     await apiPost("/api/boards/add-new-board/", payload)
   },
   createNewCard: async function (boardId, cardTitle, statusId, cardOrder) {
@@ -71,7 +63,7 @@ export let dataHandler = {
   },
   deleteCardById: async function(cardId){
       let payload = {"card_id": cardId}
-      await apiPost(`/api/delete-card/${cardId}`)
+      await apiPost(`/api/delete-card/${cardId}`,payload)
   },
   deleteBoardById: async function(boardId){
         let payload = {"board_id": boardId}
