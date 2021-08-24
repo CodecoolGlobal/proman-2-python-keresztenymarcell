@@ -1,4 +1,4 @@
-import data_manager
+import data_manager, bcrypt
 
 
 def get_card_status(status_id):
@@ -275,19 +275,22 @@ def check_user(username):
             SELECT username FROM users
             WHERE username = %(username)s"""
     user = data_manager.execute_select(query, {"username": username}, fetchall=False)
-    if user["username"] != "":
-        return True
-    else:
-        return False
+    return True if user is not None else False
 
 
 def register_user(username, password):
+    password = hash_password(password)
     query = """
             INSERT INTO users (username, password)
-            VALUES (%(username)s, %(password)s)
-            RETURNING username"""
-    successful = data_manager.execute_select(query, {'username': username, 'password': password}, fetchall=False)
-    if successful['username'] != "":
-        return False
-    else:
-        return True
+            VALUES (%(username)s, %(password)s)"""
+    return data_manager.execute_query(query, {'username': username, 'password': password})
+
+
+def hash_password(plain_text_password):
+    hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
+    return hashed_bytes.decode('utf-8')
+
+
+def verify_password(plain_text_password, hashed_password):
+    hashed_bytes_password = hashed_password.encode('utf-8')
+    return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)

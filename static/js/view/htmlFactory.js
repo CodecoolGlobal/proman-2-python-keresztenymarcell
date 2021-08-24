@@ -11,7 +11,7 @@ export function htmlFactory(template) {
             return initNewBoardDiv
         case htmlTemplates.board:
             return boardBuilder
-        case  htmlTemplates.column:
+        case htmlTemplates.column:
             return columnBuilder
         case htmlTemplates.card:
             return cardBuilder
@@ -67,4 +67,5 @@ function initNewBoardDiv() {
                     autocomplete="off"><br>
            <button type="button" id="load-new-board-form">Create new board</button></div><br>`
 }
+
 

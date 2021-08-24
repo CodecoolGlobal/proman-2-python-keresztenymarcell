@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, jsonify
 from dotenv import load_dotenv
 
 
@@ -162,9 +162,14 @@ def update_cards(status_id, card_id):
 def register_user():
     username = request.json['username']
     psw = request.json['psw']
-    if queries.check_user(username):
-        return True
-    return queries.register_user(username, psw) # should return false if registration was successful
+    is_existing_user = queries.check_user(username)
+    # is_existing_user = str(is_existing_user).lower()
+    return_object_existing = {'response': is_existing_user}
+    if is_existing_user:
+        return return_object_existing
+    queries.register_user(username, psw) # should return false if registration was successful
+    return_object_reg = {'response': False}
+    return return_object_reg
 
 
 def main():

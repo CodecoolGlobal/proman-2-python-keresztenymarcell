@@ -85,8 +85,8 @@ export let dataHandler = {
         return response;
     },
     registerUser: async function (registrationData) {
-        let payload = registrationData;
-        return await apiPost("/api/registration/register-user/", payload);
+        const response = await apiPost("/api/registration/register-user", registrationData);
+        return response.response
     },
 };
 
@@ -102,14 +102,17 @@ async function apiGet(url) {
 
 
 async function apiPost(url, payload) {
-    await fetch(url, {
+    let response = await fetch(url, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         method: 'POST',
         body: JSON.stringify(payload)
-    })
+    });
+    if (response.status === 200) {
+        return response.json()
+    }
 }
 
 
