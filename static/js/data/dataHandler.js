@@ -88,8 +88,8 @@ export let dataHandler = {
         const response = await apiPost("/api/registration/register-user", registrationData);
         return response.response
     },
-    getLogin: async function () {
-      const response = await apiGet(`/api/login`);
+    getLogin: async function (userDataToCheck) {
+      const response = await apiPost(`/api/login`, userDataToCheck);
       return response;
     },
 };

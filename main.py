@@ -154,7 +154,11 @@ def update_cards(status_id, card_id):
 @app.route("/api/login", methods=["GET", "POST"])
 @json_response
 def login():
-    return queries.get_all_user_data()
+    username = request.json['username']
+    psw = request.json['password']
+    user_password = queries.get_password(username)['password']
+    is_valid_user = queries.verify_password(psw, user_password)
+    return is_valid_user
 
 
 @app.route("/api/registration/register-user", methods=['POST'])

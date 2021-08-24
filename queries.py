@@ -270,11 +270,11 @@ def get_update_status(status_id, card_id):
     )
 
 
-def get_all_user_data():
+def get_password(username):
     return data_manager.execute_select(
         """
-        SELECT username, password FROM users
-        """
+        SELECT password FROM users WHERE username = %(username)s
+        """, {'username': username}, fetchall=False
     )
 
 

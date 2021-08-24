@@ -17,23 +17,17 @@ export async function userManagerFunc() {
 async function checkLogin(){
         const username = document.querySelector('#username').value;
         const password = document.querySelector('#password').value;
-        const userData = await dataHandler.getLogin();
-        for (let data of userData){
-           if (data.username === username  && password === data.password){
-                verificationList.push('true')
-            }
-            else {
-                verificationList.push('false')
-            }
+        const userUserDataToCheck = {
+            'username': username,
+            'password': password
         }
-        await verification();
+        const userData = await dataHandler.getLogin(userUserDataToCheck);
+        await verification(userData);
 
     }
 
-async function verification(){
-    if (verificationList.includes('true')) {
-        //valami
-        verificationList.length = 0;
+async function verification(userData){
+    if (userData) {
         const username = document.querySelector('#username').value;
         myModal.hide();
         sessionStorage.setItem('user', username);
