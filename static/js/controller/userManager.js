@@ -37,6 +37,7 @@ async function verification(){
             document.querySelector('#logedinuser').innerHTML = 'Logged in as:' + " " + localStorage.getItem('user')
             document.querySelector('#login').textContent = "";
             document.querySelector('#registration').textContent = "";
+            document.querySelector('#logout').textContent = "Logout";
         }
     else {
         alert('please try again!')
