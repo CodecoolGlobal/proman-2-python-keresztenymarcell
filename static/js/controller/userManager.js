@@ -13,7 +13,6 @@ export async function userManagerFunc() {
     await logOut();
   }
 
-
 async function checkLogin(){
         const username = document.querySelector('#username').value;
         const password = document.querySelector('#password').value;
@@ -23,12 +22,19 @@ async function checkLogin(){
         }
         const userData = await dataHandler.getLogin(userUserDataToCheck);
         await verification(userData);
-
     }
+
+function clearInputFields() {
+    document.getElementById('username').value = "";
+    document.getElementById('password').value = "";
+}
 
 async function verification(userData){
     if (userData) {
         const username = document.querySelector('#username').value;
+        if (document.getElementById('alert-login')) {
+            document.getElementById('alert-login').remove();
+        }
         myModal.hide();
         sessionStorage.setItem('user', username);
         document.querySelector('#logedinuser').innerHTML = 'Logged in as:' + " " + sessionStorage.getItem('user')
@@ -36,6 +42,7 @@ async function verification(userData){
         document.querySelector('#registration').textContent = "";
         document.querySelector('#logout').textContent = "Logout";
         document.querySelector('#load-private-board-form').style.display = 'inline';
+        clearInputFields();
     }
     else {
         alertMsg();
@@ -62,7 +69,7 @@ async function logOutHandler(){
 
 
 function alertMsg(){
-       document.querySelector('.alertMsg').innerHTML = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+       document.querySelector('.alertMsg').innerHTML = `<div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert-login">
                                                                       <strong>Holy guacamole!</strong> Invalid username or password. Please try again.
                                                                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                                                  </div>`

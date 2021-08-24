@@ -39,10 +39,10 @@ async function registrationHandler() {
     } else {
         if (document.getElementById('alert-div')) {
             document.getElementById('alert-div').remove();
-            document.getElementById('recipient-registration-name').value = "";
-            document.getElementById('psw1').value = "";
-            document.getElementById('psw2').value = "";
         }
+        document.getElementById('recipient-registration-name').value = "";
+        document.getElementById('psw1').value = "";
+        document.getElementById('psw2').value = "";
         myModal.hide();
     }
 }
