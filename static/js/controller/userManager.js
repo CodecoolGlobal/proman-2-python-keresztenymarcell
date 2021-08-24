@@ -30,16 +30,17 @@ async function checkLogin(){
     }
 
 async function verification(){
-    if (verificationList.includes('true')){
-            alert('Login OK! Please close the window!')
-            verificationList.length = 0;
-            const username = document.querySelector('#username').value;
-            sessionStorage.setItem('user',username);
-            document.querySelector('#logedinuser').innerHTML = 'Logged in as:' + " " + sessionStorage.getItem('user')
-            document.querySelector('#login').textContent = "";
-            document.querySelector('#registration').textContent = "";
-            document.querySelector('#logout').textContent = "Logout";
-        }
+    if (verificationList.includes('true')) {
+        alert('Login OK! Please close the window!')
+        verificationList.length = 0;
+        const username = document.querySelector('#username').value;
+        sessionStorage.setItem('user', username);
+        document.querySelector('#logedinuser').innerHTML = 'Logged in as:' + " " + sessionStorage.getItem('user')
+        document.querySelector('#login').textContent = "";
+        document.querySelector('#registration').textContent = "";
+        document.querySelector('#logout').textContent = "Logout";
+        document.querySelector('#load-private-board-form').style.display = 'inline';
+    }
     else {
         alert('please try again!')
         verificationList.length = 0;
@@ -58,4 +59,5 @@ async function logOutHandler(){
     document.querySelector('#login').textContent = "Log in";
     document.querySelector('#registration').textContent = "Register";
     document.querySelector('#logout').textContent = "";
+    document.querySelector('#load-private-board-form').style.display = 'None';
 }
