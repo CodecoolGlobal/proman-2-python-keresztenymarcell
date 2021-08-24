@@ -255,3 +255,7 @@ h1{
 #load-private-board-form{
     display: None;
 }
+
+#closeModalButton, #loginModalButton {
+    border-radius: 16px;
+}
