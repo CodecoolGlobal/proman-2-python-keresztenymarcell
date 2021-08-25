@@ -3,6 +3,10 @@ import {domManager, clearBoard} from "../view/domManager.js";
 import {resetForm} from "../controller/modalManager.js";
 import {boardsManager, buttonManager} from "./boardsManager.js";
 
+
+const myModal = new window.bootstrap.Modal(document.getElementById('login-modal'), {
+  keyboard: false
+})
 const verificationList = [];
 
 
@@ -37,14 +41,9 @@ async function verification(userData){
         myModal.hide();
         sessionStorage.setItem('user', username);
         sessionStorage.setItem('id', user_id);
-        document.querySelector('#logedinuser').innerHTML = 'Logged in as:' + " " + sessionStorage.getItem('user')
-        document.querySelector('#login').textContent = "";
-        document.querySelector('#registration').textContent = "";
-        document.querySelector('#logout').textContent = "Logout";
-        clearBoard();
-        await buttonManager.loadBoards();
-        document.querySelector('#load-private-board-form').style.display = 'inline';
-        await boardsManager.loadBoards();
+        changeNavbar()
+        await boardRefreshByUserData()
+        await markPrivateBoard()
     }
     else {
         alertMsg();
@@ -68,7 +67,7 @@ async function logOutHandler(){
     document.querySelector('#logout').textContent = "";
     document.querySelector('#load-private-board-form').style.display = 'None';
     clearBoard();
-    await buttonManager.loadBoards();
+    await buttonManager.loadButtons();
     await boardsManager.loadBoards();
 }
 
@@ -81,6 +80,32 @@ function alertMsg(){
     domManager.addChild('#modal-login-form', alert);
 }
 
-const myModal = new window.bootstrap.Modal(document.getElementById('login-modal'), {
-  keyboard: false
-})
+function changeNavbar(){
+    document.querySelector('#logedinuser').innerHTML = 'Logged in as:' + " " + sessionStorage.getItem('user')
+    document.querySelector('#login').textContent = "";
+    document.querySelector('#registration').textContent = "";
+    document.querySelector('#logout').textContent = "Logout";
+}
+
+
+async function boardRefreshByUserData(){
+    clearBoard();
+    await buttonManager.loadButtons();
+    document.querySelector('#load-private-board-form').style.display = 'inline';
+    await boardsManager.loadBoards();
+}
+
+async function markPrivateBoard(){
+    const allBoards = document.querySelectorAll('.board-container');
+    for (let board of allBoards) {
+        const boardId = parseInt(board.dataset.boardId);
+        const boardUserId = parseInt(board.dataset.user);
+        const privateStatus = parseInt(board.dataset.private);
+        if (boardUserId && privateStatus === 0){
+            board.firstElementChild.firstElementChild.textContent = "public"
+        }
+        else if (boardUserId !== NaN && privateStatus === 1){
+            board.firstElementChild.firstElementChild.textContent = "private"
+        }
+    }
+}

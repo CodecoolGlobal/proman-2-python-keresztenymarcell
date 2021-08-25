@@ -8,6 +8,10 @@ export let dataHandler = {
         }
         return response;
     },
+    getUserBoards: async function (userId) {
+        const response = await apiGet(`/api/boards/${userId}`);
+        return response;
+    },
     getBoard: async function (boardId) {
         const response = await apiGet(`/api/boards/${boardId}`);
         return response;

@@ -36,7 +36,7 @@ CREATE TABLE boards (
     id          SERIAL PRIMARY KEY  NOT NULL,
     title       VARCHAR(200)        NOT NULL,
     user_id     INTEGER              NULL,
-    private_id  INTEGER             NOT NULL
+    private  INTEGER             NOT NULL
 );
 
 CREATE TABLE cards (
@@ -69,8 +69,8 @@ INSERT INTO statuses(title, board_id) VALUES ('Testing', 2);
 INSERT INTO statuses(title, board_id) VALUES ('Done', 2);
 INSERT INTO statuses(title, board_id) VALUES ('Archive', 2);
 
-INSERT INTO boards(title, user_id, private_id) VALUES ('SCRUM Overlord', null, 0);
-INSERT INTO boards(title, user_id, private_id) VALUES ('Web Module', null, 0);
+INSERT INTO boards(title, user_id, private) VALUES ('SCRUM Overlord', null, 0);
+INSERT INTO boards(title, user_id, private) VALUES ('Web Module', null, 0);
 
 
 INSERT INTO cards VALUES (nextval('cards_id_seq'), 1, 1, 'new card 1', 1);

@@ -24,6 +24,12 @@ def get_boards(user_id):
     return boards
 
 
+@app.route("/api/boards/<int:user_id>")
+@json_response
+def get_user_boards(user_id: int):
+    return queries.get_user_boards(user_id)
+
+
 @app.route("/api/boards/<int:board_id>")
 @json_response
 def get_board_with_id(board_id: int):

@@ -18,7 +18,7 @@ def get_boards(user_id):
     if user_id is not None:
         query = """
             SELECT * FROM boards
-            WHERE private_id = 0 OR user_id = {user_id}
+            WHERE private = 0 OR user_id = {user_id}
             ORDER BY id
             ;
             """
@@ -26,12 +26,22 @@ def get_boards(user_id):
     else:
         query = """
             SELECT * FROM boards
-            WHERE private_id = 0
+            WHERE private = 0
             ORDER BY id
             ;
             """
         return data_manager.execute_select(query)
 
+
+def get_user_boards(user_id):
+    userBoards = data_manager.execute_select(
+        """
+        SELECT * FROM boards
+        WHERE user_id = %(user_id)s
+        ;
+        """
+        , {"user_id": user_id})
+    return userBoards
 
 
 def get_cards_for_board(board_id):
@@ -120,12 +130,12 @@ def rename_board_by_id(id, title):
     )
 
 
-def create_board(title, user_id, private_id):
+def create_board(title, user_id, private):
     return data_manager.execute_query(
         """
-            INSERT INTO boards (title, user_id, private_id) 
-            VALUES (%(title)s, %(user_id)s, %(private_id)s) RETURNING (id);
-        """, {"title": title, "user_id": user_id, "private_id": private_id})
+            INSERT INTO boards (title, user_id, private) 
+            VALUES (%(title)s, %(user_id)s, %(private)s) RETURNING (id);
+        """, {"title": title, "user_id": user_id, "private": private})
 
 
 def get_last_board_id():
