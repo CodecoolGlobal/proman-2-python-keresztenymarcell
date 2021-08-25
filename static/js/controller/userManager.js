@@ -102,10 +102,10 @@ export async function markPrivateBoard(){
         const boardUserId = parseInt(board.dataset.user);
         const privateStatus = parseInt(board.dataset.private);
         if (boardUserId && privateStatus === 0){
-            board.firstElementChild.firstElementChild.textContent = "public"
+            board.firstElementChild.firstElementChild.innerHTML = `<img src="/static/img/icons8-unlock-50.png" alt="unlock" id="unlock">`
         }
         else if (boardUserId !== NaN && privateStatus === 1){
-            board.firstElementChild.firstElementChild.textContent = "private"
+            board.firstElementChild.firstElementChild.innerHTML = `<img src="/static/img/lock-24.png" alt="lock" id="lock">`
         }
     }
 }

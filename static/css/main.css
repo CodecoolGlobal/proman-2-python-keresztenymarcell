@@ -296,3 +296,8 @@ input.form-control{
     font-size: 22px;
     font-weight: bold;
 }
+
+img{
+    width: 25px;
+    height: 25px;
+}
