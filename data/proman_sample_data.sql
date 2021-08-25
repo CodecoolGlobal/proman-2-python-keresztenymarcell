@@ -62,12 +62,12 @@ INSERT INTO statuses(title, board_id) VALUES ('New', 1);
 INSERT INTO statuses(title, board_id) VALUES ('In progress', 1);
 INSERT INTO statuses(title, board_id) VALUES ('Testing', 1);
 INSERT INTO statuses(title, board_id) VALUES ('Done', 1);
-INSERT INTO statuses(title, board_id) VALUES ('Delete_test', 1);
+INSERT INTO statuses(title, board_id) VALUES ('Archive', 1);
 INSERT INTO statuses(title, board_id) VALUES ('New', 2);
 INSERT INTO statuses(title, board_id) VALUES ('In progress', 2);
 INSERT INTO statuses(title, board_id) VALUES ('Testing', 2);
 INSERT INTO statuses(title, board_id) VALUES ('Done', 2);
-INSERT INTO statuses(title, board_id) VALUES ('Delete_test', 2);
+INSERT INTO statuses(title, board_id) VALUES ('Archive', 2);
 
 INSERT INTO boards(title, user_id, private_id) VALUES ('SCRUM Overlord', null, 0);
 INSERT INTO boards(title, user_id, private_id) VALUES ('Web Module', null, 0);
