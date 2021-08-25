@@ -281,9 +281,13 @@ input.form-control{
 }
 
 #footer-div{
-    background-color: lightblue;
-    clear: both;
-    position: relative;
-    height: 50px;
-    bottom: 0%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background:none;
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
 }
