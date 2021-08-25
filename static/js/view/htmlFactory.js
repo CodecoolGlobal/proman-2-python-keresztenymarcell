@@ -28,7 +28,9 @@ function boardBuilder(board) {
                     <button class="add-new-card" add-new-card-id=${board.id}>Add Card</button>
                     <button class="add-new-status" add-new-status-id=${board.id}>Add New status</button>
                     <button class="delete-board" delete-board-id=${board.id}>Delete board</button>
-                    <button class="toggle-archive-button" data-board-archive-id="${board.id}" data-toggle-state="hide">Show Archive</button>
+                    <button class="toggle-archive-button" data-board-archive-id="${board.id}" data-toggle-state="hide">
+                    Show Archive <i class="fas fa-chevron-right"></i>
+                    </button>
                     <button class="toggle-board-button" data-board-id="${board.id}" data-toggle-state="hide">
                     Show Cards <i class="fas fa-chevron-down"></i>
                     </button>

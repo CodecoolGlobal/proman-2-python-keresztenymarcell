@@ -70,9 +70,11 @@ async function showHideArchiveHandler(clickEvent) {
   for (let column of getStatusId) {
     if (button.dataset.toggleState === "hide") {
       button.dataset.toggleState = "show"
+      button.innerHTML = 'Hide Archive <i class="fas fa-chevron-left">'
       document.querySelector(`.board-column[data-column-id="${column["id"]}"]`).style.display = "inline";
     } else {
       button.dataset.toggleState = "hide"
+      button.innerHTML = 'Show Archive <i class="fas fa-chevron-right">'
       document.querySelector(`.board-column[data-column-id="${column["id"]}"]`).style.display = "none";
     }
   }
