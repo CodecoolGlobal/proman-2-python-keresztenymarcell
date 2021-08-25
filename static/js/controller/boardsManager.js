@@ -123,6 +123,7 @@ async function createNewBoard(){
     domManager.addEventListener(`.board-title[board-title-id="${board.id}"]`, "click", renameBoard);
     domManager.addEventListener(`.add-new-card[add-new-card-id="${board.id}"]`, "click", createNewCard)
     domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
+    domManager.addEventListener(`.toggle-archive-button[data-board-archive-id="${board.id}"]`, "click", showHideArchiveHandler)
     await domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
     await dataHandler.createEmptyStatuses(board.id)
     const newTableInputField = document.getElementById('new-board-title');
