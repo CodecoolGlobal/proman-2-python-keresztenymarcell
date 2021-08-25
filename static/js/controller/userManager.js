@@ -114,16 +114,23 @@ export async function markPrivateBoard(){
     }
 }
 
-function updateUserBoardStatus(e){
+async function updateUserBoardStatus(e){
     const currentIcon = e.currentTarget;
+    const currentBoard = currentIcon.parentElement.parentElement;
+    const currentBoardId = currentBoard.dataset.boardId;
     const currentIMG = currentIcon.firstElementChild;
-    const currentLock = currentIMG.dataset.lock
+    const currentLock = currentIMG.dataset.lock;
+    let currentBoardPrivate = currentBoard.dataset.private;
     if (currentLock === "unlock"){
+        currentBoardPrivate = 1;
+        await dataHandler.updateBoardPrivateStatus(currentBoardId,currentBoardPrivate)
         currentIcon.firstElementChild.remove()
         currentIcon.innerHTML = `<img src="/static/img/lock-24.png" alt="lock" data-lock="lock">`
 
     }
     else {
+        currentBoardPrivate = 0;
+        await dataHandler.updateBoardPrivateStatus(currentBoardId,currentBoardPrivate)
         currentIcon.firstElementChild.remove()
         currentIcon.innerHTML = `<img src="/static/img/icons8-unlock-50.png" alt="unlock" data-lock="unlock">`
     }

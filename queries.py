@@ -337,6 +337,17 @@ def get_userid_by_name(username):
 )
 
 
+def update_user_boards(id, is_private):
+    return data_manager.execute_query(
+        """
+        UPDATE boards 
+        SET is_private = %(is_private)s
+        WHERE id = %(id)s
+        """,
+        {"id": id, "is_private": is_private}
+    )
+
+
 def hash_password(plain_text_password):
     hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
     return hashed_bytes.decode('utf-8')

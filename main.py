@@ -113,6 +113,12 @@ def get_card_order_by_board_status_id(board_id: int, status_id: int):
     return queries.get_card_order_by_board_status_id(board_id, status_id)
 
 
+@app.route("/api/user/board/<int:board_id>/<int:is_private>")
+@json_response
+def update_user_board_private_status(board_id:int, is_private:int):
+    return queries.update_user_boards(board_id, is_private)
+
+
 @app.route("/api/boards/add-new-board/", methods=["GET", "POST"])
 @json_response
 def create_new_board():

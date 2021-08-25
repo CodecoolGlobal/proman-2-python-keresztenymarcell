@@ -97,6 +97,10 @@ export let dataHandler = {
         const response = await apiGet(`/api/card/${status_id}/${card_id}/`);
         return response;
     },
+    updateBoardPrivateStatus: async function (board_id,is_private) {
+        const response = await apiGet(`/api/user/board/${board_id}/${is_private}`);
+        return response;
+    },
     registerUser: async function (registrationData) {
         const response = await apiPost("/api/registration/register-user", registrationData);
         return response.response
