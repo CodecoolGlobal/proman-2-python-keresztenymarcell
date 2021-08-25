@@ -17,7 +17,7 @@ export let boardsManager = {
             domManager.addEventListener(`.add-new-card[add-new-card-id="${board.id}"]`, "click", createNewCard)
             domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
             domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
-        }
+            domManager.addEventListener(`.toggle-archive-button[data-board-archive-id="${board.id}"]`, "click", showHideArchiveHandler)}
     },
 };
 
@@ -70,6 +70,25 @@ async function showHideButtonHandler(clickEvent) {
     }
 }
 
+
+async function showHideArchiveHandler(clickEvent) {
+  const boardId = clickEvent.target.dataset.boardArchiveId;
+  const getStatusId = await dataHandler.getArchiveIdByBoard(boardId);
+  const button = clickEvent.target;
+  for (let column of getStatusId) {
+    if (button.dataset.toggleState === "hide") {
+      button.dataset.toggleState = "show"
+      button.innerHTML = 'Hide Archive <i class="fas fa-chevron-left">'
+      document.querySelector(`.board-column[data-column-id="${column["id"]}"]`).style.display = "inline";
+    } else {
+      button.dataset.toggleState = "hide"
+      button.innerHTML = 'Show Archive <i class="fas fa-chevron-right">'
+      document.querySelector(`.board-column[data-column-id="${column["id"]}"]`).style.display = "none";
+    }
+  }
+}
+
+
 async function renameBoard(clickEvent) {
     let boardId = clickEvent.target.attributes["board-title-id"].nodeValue
     let element = document.querySelector(`.board-title[board-title-id="${boardId}"]`)
@@ -119,6 +138,7 @@ async function createNewBoard(e) {
         domManager.addEventListener(`.board-title[board-title-id="${board.id}"]`, "click", renameBoard);
         domManager.addEventListener(`.add-new-card[add-new-card-id="${board.id}"]`, "click", createNewCard)
         domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
+        domManager.addEventListener(`.toggle-archive-button[data-board-archive-id="${board.id}"]`, "click", showHideArchiveHandler)
         await domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
         await dataHandler.createEmptyStatuses(board.id)
     } else {

@@ -56,8 +56,8 @@ export async function renameCardHandler(clickEvent){
       await dataHandler.renameCard(cardId, title)
     }
     if (title === ""){
-      element.textContent = "Unnamed"
-      await dataHandler.renameCard(cardId,title)
+      element.textContent = "Unnamed card"
+      await dataHandler.renameCard(cardId,"Unnamed card")
     }
   })
 }

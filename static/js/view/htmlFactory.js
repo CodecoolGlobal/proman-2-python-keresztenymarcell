@@ -15,7 +15,6 @@ export function htmlFactory(template) {
             return columnBuilder
         case htmlTemplates.card:
             return cardBuilder
-
         default:
             console.error("Undefined template: " + template)
             return () => { return "" }
@@ -29,7 +28,9 @@ function boardBuilder(board) {
                     <button class="add-new-card" add-new-card-id=${board.id}>Add Card</button>
                     <button class="add-new-status" add-new-status-id=${board.id}>Add New status</button>
                     <button class="delete-board" delete-board-id=${board.id}>Delete board</button>
-                    <button class="toggle-archive-button" data-board-archive-id="${board.id}">Show Archive</button>
+                    <button class="toggle-archive-button" data-board-archive-id="${board.id}" data-toggle-state="hide">
+                    Show Archive <i class="fas fa-chevron-right"></i>
+                    </button>
                     <button class="toggle-board-button" data-board-id="${board.id}" data-toggle-state="hide">
                     Show Cards <i class="fas fa-chevron-down"></i>
                     </button>
@@ -37,21 +38,29 @@ function boardBuilder(board) {
                 <div class="board-columns"></div>
             </div>`;
 }
-
+//display: none OR inline
 function columnBuilder(column) {
-    if (column.title !== 'New' && column.title !== 'In progress' && column.title !== 'Testing' && column.title !== 'Done') {
-        return `<div class="board-column" data-column-id="${column.id}" title-id="${column.title}">
-                <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
-                <button class="delete-column-button" data-delete-status-id="${column.id}" data-delete-owner-id="${column.board_id}"><img class="trashcan" src="static/img/trash.png" alt="trash_icon"></button>
-                <div class="board-column-content"></div>
-            </div>`
-    } else {
-        return `<div class="board-column" data-column-id="${column.id}" title-id="${column.title}">
-                <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
-                <div class="board-column-content"></div>
-            </div>`
+    if (column.title === 'Archive'){
+    return `<div class="board-column" style="display: none" data-column-id="${column.id}" title-id="${column.title}"> 
+            <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
+            <div class="board-column-content"></div>
+        </div>`
     }
-
+    else{
+        if (column.title !== 'New' && column.title !== 'In progress' && column.title !== 'Testing' && column.title !== 'Done') {
+            return `<div class="board-column" data-column-id="${column.id}" title-id="${column.title}">
+                    <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
+                    <button class="delete-column-button" data-delete-status-id="${column.id}" data-delete-owner-id="${column.board_id}"><img class="trashcan" src="static/img/trash.png" alt="trash_icon"></button>
+                    <div class="board-column-content"></div>
+                </div>`
+    }
+        else {
+            return `<div class="board-column" data-column-id="${column.id}" title-id="${column.title}">
+                    <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
+                    <div class="board-column-content"></div>
+                </div>`
+        }
+    }
 }
 
 
@@ -76,5 +85,3 @@ function initNewBoardDiv() {
            <button type="button" id="load-new-board-form">Create new board</button>
            <button type="button" id="load-private-board-form">Create new private board</button></div><br>`
 }
-
-

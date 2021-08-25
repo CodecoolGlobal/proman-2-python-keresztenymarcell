@@ -78,6 +78,17 @@ def get_statuses():
     )
 
 
+def get_archive_id_by_board_id(board_id):
+    return data_manager.execute_select(
+        """
+        SELECT id 
+        FROM statuses
+        WHERE board_id = %(board_id)s AND title = 'Archive'
+        """
+        , {"board_id": board_id}
+    )
+
+
 def create_new_status(title, board_id):
     return data_manager.execute_query(
         """
@@ -171,7 +182,8 @@ def add_default_statuses_to_new_board(board_id):
             ('New', %(board_id)s),
             ('In progress', %(board_id)s),
             ('Testing', %(board_id)s),
-            ('Done', %(board_id)s);
+            ('Done', %(board_id)s),
+            ('Archive', %(board_id)s);
 
         """, {"board_id": board_id}
     )
