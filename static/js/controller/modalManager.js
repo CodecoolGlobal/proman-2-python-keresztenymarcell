@@ -43,7 +43,7 @@ async function registrationHandler() {
         domManager.addChild('#modal-form', alert);
     } else {
         myModal.hide();
-        resetForm('modal-form','alert-div')
+        resetForm('modal-form','alert-div');
     }
 }
 

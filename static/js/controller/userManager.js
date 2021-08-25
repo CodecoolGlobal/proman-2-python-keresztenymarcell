@@ -1,6 +1,7 @@
 import {dataHandler} from "../data/dataHandler.js";
-import {domManager} from "../view/domManager.js";
+import {domManager, clearBoard} from "../view/domManager.js";
 import {resetForm} from "../controller/modalManager.js";
+import {boardsManager} from "./boardsManager.js";
 
 const verificationList = [];
 
@@ -41,6 +42,8 @@ async function verification(userData){
         document.querySelector('#registration').textContent = "";
         document.querySelector('#logout').textContent = "Logout";
         document.querySelector('#load-private-board-form').style.display = 'inline';
+        clearBoard();
+        await boardsManager.loadBoards();
     }
     else {
         alertMsg();

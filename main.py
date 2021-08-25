@@ -17,10 +17,11 @@ def index():
     return render_template('index.html')
 
 
-@app.route("/api/boards")
+@app.route("/api/boards/<user_id>")
 @json_response
-def get_boards():
-    return queries.get_boards()
+def get_boards(user_id):
+    print(user_id)
+    return queries.get_boards(user_id)
 
 
 @app.route("/api/boards/<int:board_id>")

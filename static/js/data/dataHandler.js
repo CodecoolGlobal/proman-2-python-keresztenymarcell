@@ -1,6 +1,7 @@
 export let dataHandler = {
-    getBoards: async function () {
-        const response = await apiGet("/api/boards");
+    getBoards: async function (userId) {
+        const response = await apiGet(`/api/boards/${userId}`);
+        console.log(response)
         return response;
     },
     getBoard: async function (boardId) {

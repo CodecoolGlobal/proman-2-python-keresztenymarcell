@@ -1,5 +1,7 @@
 import data_manager, bcrypt
 
+from psycopg2 import sql
+
 
 def get_card_status(status_id):
     status = data_manager.execute_select(
@@ -12,14 +14,15 @@ def get_card_status(status_id):
     return status
 
 
-def get_boards():
-    return data_manager.execute_select(
-        """
+def get_boards(user_id):
+    query = """
         SELECT * FROM boards
+        WHERE (private_id = 0) OR (user_id = {user_id} AND private_id = 1)
         ORDER BY id
         ;
         """
-    )
+    print(user_id)
+    return data_manager.execute_select(sql.SQL(query).format(user_id=sql.SQL(user_id)))
 
 
 def get_cards_for_board(board_id):
