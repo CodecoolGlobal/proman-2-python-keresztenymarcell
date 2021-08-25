@@ -97,12 +97,12 @@ def rename_board_by_id(id, title):
     )
 
 
-def create_board(title):
+def create_board(title, user_id, private_id):
     return data_manager.execute_query(
         """
-            INSERT INTO boards (title) VALUES (%(title)s) RETURNING (id);
-        """, {"title": title}
-    )
+            INSERT INTO boards (title, user_id, private_id) 
+            VALUES (%(title)s, %(user_id)s, %(private_id)s) RETURNING (id);
+        """, {"title": title, "user_id": user_id, "private_id": private_id})
 
 
 def get_last_board_id():
@@ -292,6 +292,15 @@ def register_user(username, password):
             INSERT INTO users (username, password)
             VALUES (%(username)s, %(password)s)"""
     return data_manager.execute_query(query, {'username': username, 'password': password})
+
+
+def get_userid_by_name(username):
+    return data_manager.execute_select(
+        """
+        SELECT id FROM users
+        WHERE username = %(username)s
+        """, {'username': username}
+)
 
 
 def hash_password(plain_text_password):

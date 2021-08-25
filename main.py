@@ -102,9 +102,11 @@ def get_card_order_by_board_status_id(board_id: int, status_id: int):
 
 @app.route("/api/boards/add-new-board/", methods=["GET", "POST"])
 @json_response
-def createboard():
+def create_new_board():
     board_title = request.json["board_title"]
-    return queries.create_board(board_title)
+    user_id = request.json["user_id"]
+    private_value = request.json["private_board"]
+    return queries.create_board(board_title, user_id, private_value)
 
 
 @app.route("/api/boards/new-board-id")
@@ -174,6 +176,12 @@ def register_user():
     queries.register_user(username, psw) # should return false if registration was successful
     return_object_reg = {'response': False}
     return return_object_reg
+
+
+@app.route("/api/me/<string:username>", methods=["GET", "POST"])
+@json_response
+def get_user_id_by_name(username):
+    return queries.get_userid_by_name(username)
 
 
 def main():

@@ -36,8 +36,11 @@ async function verification(userData){
         if (document.getElementById('alert-login')) {
             document.getElementById('alert-login').remove();
         }
+        const user = await dataHandler.getUserId(username);
+        const user_id = user[0]['id']
         myModal.hide();
         sessionStorage.setItem('user', username);
+        sessionStorage.setItem('user_id', user_id);
         document.querySelector('#logedinuser').innerHTML = 'Logged in as:' + " " + sessionStorage.getItem('user')
         document.querySelector('#login').textContent = "";
         document.querySelector('#registration').textContent = "";
@@ -60,6 +63,7 @@ async function logOut(){
 
 async function logOutHandler(){
     sessionStorage.removeItem('user');
+    sessionStorage.removeItem('user_id');
     document.querySelector('#logedinuser').innerHTML = "";
     document.querySelector('#login').textContent = "Log in";
     document.querySelector('#registration').textContent = "Register";

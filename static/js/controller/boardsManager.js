@@ -28,7 +28,16 @@ export let buttonManager = {
     domManager.addEventListener(
         "#load-new-board-form",
         "click",
-        createNewBoard
+        createNewBoard,
+        sessionStorage.removeItem('private'),
+        sessionStorage.removeItem('user_id')
+      );
+    domManager.addEventListener(
+        "#load-private-board-form",
+        "click",
+        createNewBoard,
+        sessionStorage.removeItem('private'),
+        sessionStorage.removeItem('user_id')
       );
   }
 }
@@ -89,29 +98,55 @@ async function deleteBoard(clickEvent){
     }
 }
 
-async function createNewBoard(){
-  let board = {}
-  const newTableInputField = document.getElementById('new-board-title');
-  board.title = newTableInputField.value;
-  newTableInputField.value = '';
-  if (board.title !== ""){
-    document.getElementById('alertId').style.display = "None";
-    await dataHandler.createNewBoard(board.title)
-    board.id = await dataHandler.getNewBoardId()
-    const boardBuilder = htmlFactory(htmlTemplates.board)
-    const newBoard = boardBuilder(board)
-    domManager.addChild("#root", newBoard);
-    domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler)
-    domManager.addEventListener(`.board-title[board-title-id="${board.id}"]`, "click", renameBoard);
-    domManager.addEventListener(`.add-new-card[add-new-card-id="${board.id}"]`, "click", createNewCard)
-    domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
-    await domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
-    await dataHandler.createEmptyStatuses(board.id)
+async function createNewBoard(e){
+    const click = e.currentTarget;
+    clickValidation(click)
+    let checkResult = checkPrivate();
+    sessionStorage.removeItem('private')
+    const user_id = sessionStorage.getItem('user_id');
+    let board = {}
     const newTableInputField = document.getElementById('new-board-title');
-    console.log(newTableInputField.innerText);
-  }
-  else {
-    let alert = document.getElementById('alertId')
-    alert.style.display = "inline";
-  }
+    board.title = newTableInputField.value;
+    newTableInputField.value = '';
+    if (board.title !== ""){
+        await dataHandler.createNewBoard(board.title, user_id, checkResult)
+        document.getElementById('alertId').style.display = "None";
+        board.id = await dataHandler.getNewBoardId()
+        const boardBuilder = htmlFactory(htmlTemplates.board)
+        const newBoard = boardBuilder(board)
+        domManager.addChild("#root", newBoard);
+        domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler)
+        domManager.addEventListener(`.board-title[board-title-id="${board.id}"]`, "click", renameBoard);
+        domManager.addEventListener(`.add-new-card[add-new-card-id="${board.id}"]`, "click", createNewCard)
+        domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
+        await domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
+        await dataHandler.createEmptyStatuses(board.id)
+    }
+    else {
+        let alert = document.getElementById('alertId')
+        alert.style.display = "inline";
+    }
+}
+
+
+function clickValidation(click){
+    if (click.textContent === "Create new private board"){
+        sessionStorage.setItem('private', 'true')
+    }
+    else {
+        sessionStorage.setItem('private','false')
+    }
+}
+
+function checkPrivate(){
+    let privateBoard;
+    const privateOrPublic = sessionStorage.getItem('private');
+    console.log(privateOrPublic)
+    if (privateOrPublic === 'true'){
+        privateBoard = 1
+    }
+    else{
+        privateBoard = 0
+    }
+    return privateBoard
 }
