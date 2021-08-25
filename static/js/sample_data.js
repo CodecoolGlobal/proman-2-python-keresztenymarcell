@@ -80,5 +80,5 @@ let sampleData = {
     ]
 };
 
-localStorage.setItem(keyInLocalStorage, JSON.stringify(sampleData));
+sessionStorage.setItem(keyInLocalStorage, JSON.stringify(sampleData));
 
