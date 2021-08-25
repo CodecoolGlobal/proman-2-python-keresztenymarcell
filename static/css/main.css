@@ -3,10 +3,11 @@
 }
 :root{
     --border-radius: 3px;
-    --status-1: #590000;
-    --status-2: #594300;
-    --status-3: #525900;
-    --status-4: #085900;
+    --status-1: #909AE7;
+    --status-2: #E562E3;
+    --status-3: #3CB371;
+    --status-4: #FF9079;
+    --status-5: #FBC87E;
 }
 
 body{
@@ -146,6 +147,10 @@ section.board{
 
 .board-column:nth-of-type(4) .card{
     background: var(--status-4);
+}
+
+.board-column:nth-of-type(5) .card {
+    background: var(--status-5);
 }
 
 .card-remove{
