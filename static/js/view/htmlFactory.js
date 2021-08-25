@@ -2,7 +2,8 @@ export const htmlTemplates = {
     newboard: 1,
     board: 2,
     column: 3,
-    card: 4
+    card: 4,
+    footer:5
 }
 
 export function htmlFactory(template) {
@@ -15,6 +16,8 @@ export function htmlFactory(template) {
             return columnBuilder
         case htmlTemplates.card:
             return cardBuilder
+        case htmlTemplates.footer:
+            return footerBuilder
         default:
             console.error("Undefined template: " + template)
             return () => { return "" }
@@ -84,4 +87,14 @@ function initNewBoardDiv() {
                     autocomplete="off"><br>
            <button type="button" id="load-new-board-form">Create new board</button>
            <button type="button" id="load-private-board-form">Create new private board</button></div><br>`
+}
+
+
+function footerBuilder() {
+    return `<footer class="bg-light text-center text-white">
+            <div class="text-center p-3" id="footer-div">
+                © 2021 Copyright:
+                <a class="text-white" href="https://trollo-project.herokuapp.com/">Trollo-project</a>
+            </div>
+            </footer>`
 }

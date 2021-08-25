@@ -22,7 +22,7 @@ export let boardsManager = {
 };
 
 export let buttonManager = {
-    loadBoards: async function () {
+    loadButtons: async function () {
         const buttonBuilder = htmlFactory(htmlTemplates.newboard);
         const buttoncontent = buttonBuilder();
         domManager.addChild("#root", buttoncontent);
