@@ -16,12 +16,12 @@ load_dotenv()
 def index():
     return render_template('index.html')
 
-
-@app.route("/api/boards/<user_id>")
+@app.route("/api/user/boards", defaults={'user_id': None})
+@app.route("/api/user/<user_id>/boards")
 @json_response
 def get_boards(user_id):
-    print(user_id)
-    return queries.get_boards(user_id)
+    boards = queries.get_boards(user_id)
+    return boards
 
 
 @app.route("/api/boards/<int:board_id>")

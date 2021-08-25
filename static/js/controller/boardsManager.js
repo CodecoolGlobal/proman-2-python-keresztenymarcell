@@ -6,7 +6,7 @@ import {columnManager, addStatus} from "./columnManager.js";
 
 export let boardsManager = {
     loadBoards: async function () {
-        const userId = sessionStorage.getItem('user_id');
+        const userId = sessionStorage.getItem('id');
         const boards = await dataHandler.getBoards(userId);
         for (let board of boards) {
             const boardBuilder = htmlFactory(htmlTemplates.board);
@@ -30,15 +30,15 @@ export let buttonManager = {
             "#load-new-board-form",
             "click",
             createNewBoard,
-            sessionStorage.removeItem('private'),
-            sessionStorage.removeItem('user_id')
+            // () => {sessionStorage.removeItem('private')},
+            // () => {sessionStorage.removeItem('user_id')}
         );
         domManager.addEventListener(
             "#load-private-board-form",
             "click",
             createNewBoard,
-            sessionStorage.removeItem('private'),
-            sessionStorage.removeItem('user_id')
+            // () => {sessionStorage.removeItem('private')},
+            // () => {sessionStorage.removeItem('id')}
         );
     }
 }
@@ -103,7 +103,7 @@ async function createNewBoard(e) {
     clickValidation(click)
     let checkResult = checkPrivate();
     sessionStorage.removeItem('private')
-    const user_id = sessionStorage.getItem('user_id');
+    const user_id = sessionStorage.getItem('id');
     let board = {}
     const newTableInputField = document.getElementById('new-board-title');
     board.title = newTableInputField.value;
