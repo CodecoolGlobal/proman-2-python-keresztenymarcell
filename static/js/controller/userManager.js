@@ -73,7 +73,6 @@ async function logOutHandler(){
 }
 
 
-
 function alertMsg(){
     const alert = `<div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert-login">
                                                                       <strong>Holy guacamole!</strong> Invalid username or password. Please try again.
