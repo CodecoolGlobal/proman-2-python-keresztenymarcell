@@ -1,6 +1,7 @@
 import {dataHandler} from "../data/dataHandler.js";
-import {domManager} from "../view/domManager.js";
+import {domManager, clearBoard} from "../view/domManager.js";
 import {resetForm} from "../controller/modalManager.js";
+import {boardsManager, buttonManager} from "./boardsManager.js";
 
 const verificationList = [];
 
@@ -32,15 +33,18 @@ async function verification(userData){
         const username = document.querySelector('#username').value;
         resetForm('modal-login-form','alert-login')
         const user = await dataHandler.getUserId(username);
-        const user_id = user[0]['id']
+        const user_id = user[0]['id'];
         myModal.hide();
         sessionStorage.setItem('user', username);
-        sessionStorage.setItem('user_id', user_id);
+        sessionStorage.setItem('id', user_id);
         document.querySelector('#logedinuser').innerHTML = 'Logged in as:' + " " + sessionStorage.getItem('user')
         document.querySelector('#login').textContent = "";
         document.querySelector('#registration').textContent = "";
         document.querySelector('#logout').textContent = "Logout";
+        clearBoard();
+        await buttonManager.loadBoards();
         document.querySelector('#load-private-board-form').style.display = 'inline';
+        await boardsManager.loadBoards();
     }
     else {
         alertMsg();
@@ -57,14 +61,16 @@ async function logOut(){
 
 async function logOutHandler(){
     sessionStorage.removeItem('user');
-    sessionStorage.removeItem('user_id');
+    sessionStorage.removeItem('id');
     document.querySelector('#logedinuser').innerHTML = "";
     document.querySelector('#login').textContent = "Log in";
     document.querySelector('#registration').textContent = "Register";
     document.querySelector('#logout').textContent = "";
     document.querySelector('#load-private-board-form').style.display = 'None';
+    clearBoard();
+    await buttonManager.loadBoards();
+    await boardsManager.loadBoards();
 }
-
 
 
 function alertMsg(){
