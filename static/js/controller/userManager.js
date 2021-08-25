@@ -44,6 +44,7 @@ async function verification(userData){
         changeNavbar()
         await boardRefreshByUserData()
         await markPrivateBoard()
+
     }
     else {
         alertMsg();
@@ -95,10 +96,9 @@ async function boardRefreshByUserData(){
     await boardsManager.loadBoards();
 }
 
-async function markPrivateBoard(){
+export async function markPrivateBoard(){
     const allBoards = document.querySelectorAll('.board-container');
     for (let board of allBoards) {
-        const boardId = parseInt(board.dataset.boardId);
         const boardUserId = parseInt(board.dataset.user);
         const privateStatus = parseInt(board.dataset.private);
         if (boardUserId && privateStatus === 0){

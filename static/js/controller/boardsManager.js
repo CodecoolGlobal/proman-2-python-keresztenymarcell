@@ -3,6 +3,7 @@ import {htmlFactory, htmlTemplates} from "../view/htmlFactory.js";
 import {domManager} from "../view/domManager.js";
 import {cardsManager, createNewCard} from "./cardsManager.js";
 import {columnManager, addStatus} from "./columnManager.js";
+import {markPrivateBoard} from "./userManager.js";
 
 export let boardsManager = {
     loadBoards: async function () {
@@ -141,6 +142,7 @@ async function createNewBoard(e) {
         let alert = document.getElementById('alertId')
         alert.style.display = "inline";
     }
+    await markPrivateBoard();
 }
 
 
