@@ -102,10 +102,30 @@ export async function markPrivateBoard(){
         const boardUserId = parseInt(board.dataset.user);
         const privateStatus = parseInt(board.dataset.private);
         if (boardUserId && privateStatus === 0){
-            board.firstElementChild.firstElementChild.innerHTML = `<img src="/static/img/icons8-unlock-50.png" alt="unlock" id="unlock">`
+            const privateSpan = board.firstElementChild.firstElementChild;
+            privateSpan.innerHTML = `<img src="/static/img/icons8-unlock-50.png" alt="unlock" data-lock="unlock">`
+            privateSpan.addEventListener('click',updateUserBoardStatus)
         }
         else if (boardUserId !== NaN && privateStatus === 1){
-            board.firstElementChild.firstElementChild.innerHTML = `<img src="/static/img/lock-24.png" alt="lock" id="lock">`
+            const publicSpan = board.firstElementChild.firstElementChild;
+            publicSpan.innerHTML = `<img src="/static/img/lock-24.png" alt="lock" data-lock="lock">`
+            publicSpan.addEventListener('click',updateUserBoardStatus)
         }
     }
+}
+
+function updateUserBoardStatus(e){
+    const currentIcon = e.currentTarget;
+    const currentIMG = currentIcon.firstElementChild;
+    const currentLock = currentIMG.dataset.lock
+    if (currentLock === "unlock"){
+        currentIcon.firstElementChild.remove()
+        currentIcon.innerHTML = `<img src="/static/img/lock-24.png" alt="lock" data-lock="lock">`
+
+    }
+    else {
+        currentIcon.firstElementChild.remove()
+        currentIcon.innerHTML = `<img src="/static/img/icons8-unlock-50.png" alt="unlock" data-lock="unlock">`
+    }
+
 }
