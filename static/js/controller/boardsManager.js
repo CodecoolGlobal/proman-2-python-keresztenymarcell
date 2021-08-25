@@ -16,6 +16,7 @@ export let boardsManager = {
       domManager.addEventListener(`.add-new-card[add-new-card-id="${board.id}"]`, "click", createNewCard)
       domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
       domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
+      domManager.addEventListener(`.toggle-archive-button[data-board-archive-id="${board.id}"]`, "click", showHideArchiveHandler)
     }
   },
 };
@@ -60,6 +61,23 @@ async function showHideButtonHandler(clickEvent) {
     add_new_button.style.display = "None";
   }
 }
+
+
+async function showHideArchiveHandler(clickEvent) {
+  const boardId = clickEvent.target.dataset.boardArchiveId;
+  const getStatusId = await dataHandler.getArchiveIdByBoard(boardId);
+  const button = clickEvent.target;
+  for (let column of getStatusId) {
+    if (button.dataset.toggleState === "hide") {
+      button.dataset.toggleState = "show"
+      document.querySelector(`.board-column[data-column-id="${column["id"]}"]`).style.display = "inline";
+    } else {
+      button.dataset.toggleState = "hide"
+      document.querySelector(`.board-column[data-column-id="${column["id"]}"]`).style.display = "none";
+    }
+  }
+}
+
 
 async function renameBoard(clickEvent){
   let boardId = clickEvent.target.attributes["board-title-id"].nodeValue

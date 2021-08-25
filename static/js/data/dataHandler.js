@@ -44,6 +44,10 @@ export let dataHandler = {
     getCard: async function (cardId) {
       //
   },
+    getArchiveIdByBoard: async function (boardId) {
+        const response = await apiGet(`/api/getArchiveIdByBoardId/${boardId}`)
+        return response
+  },
   renameBoard: async function(boardId, boardTitle){
     let payload = {"board_id": boardId, "board_title": boardTitle}
     await apiPost(`/api/rename-board-by-id`, payload)

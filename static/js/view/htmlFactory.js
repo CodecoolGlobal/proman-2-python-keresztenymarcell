@@ -2,8 +2,7 @@ export const htmlTemplates = {
     newboard: 1,
     board: 2,
     column: 3,
-    card: 4,
-    archive: 5
+    card: 4
 }
 
 export function htmlFactory(template) {
@@ -16,8 +15,6 @@ export function htmlFactory(template) {
             return columnBuilder
         case htmlTemplates.card:
             return cardBuilder
-        case htmlTemplates.archive:
-            return archiveBuilder
         default:
             console.error("Undefined template: " + template)
             return () => { return "" }
@@ -31,7 +28,7 @@ function boardBuilder(board) {
                     <button class="add-new-card" add-new-card-id=${board.id}>Add Card</button>
                     <button class="add-new-status" add-new-status-id=${board.id}>Add New status</button>
                     <button class="delete-board" delete-board-id=${board.id}>Delete board</button>
-                    <button class="toggle-archive-button" data-board-archive-id="${board.id}">Show Archive</button>
+                    <button class="toggle-archive-button" data-board-archive-id="${board.id}" data-toggle-state="hide">Show Archive</button>
                     <button class="toggle-board-button" data-board-id="${board.id}" data-toggle-state="hide">
                     Show Cards <i class="fas fa-chevron-down"></i>
                     </button>
@@ -39,20 +36,30 @@ function boardBuilder(board) {
                 <div class="board-columns"></div>
             </div>`;
 }
-
+//display: none OR inline
 function columnBuilder(column) {
-    if (column.title !== 'New' && column.title !== 'In progress' && column.title !== 'Testing' && column.title !== 'Done') {
-        return `<div class="board-column" data-column-id="${column.id}" title-id="${column.title}">
-                <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
-                <button class="delete-column-button" data-delete-status-id="${column.id}" data-delete-owner-id="${column.board_id}"><img class="trashcan" src="static/img/trash.png" alt="trash_icon"></button>
-                <div class="board-column-content"></div>
-            </div>`
-    } else {
-        return `<div class="board-column" data-column-id="${column.id}" title-id="${column.title}">
-                <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
-                <div class="board-column-content"></div>
-            </div>`
+    if (column.title === 'Archive'){
+    return `<div class="board-column" style="display: none" data-column-id="${column.id}" title-id="${column.title}"> 
+            <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
+            <div class="board-column-content"></div>
+        </div>`
     }
+    else{
+        if (column.title !== 'New' && column.title !== 'In progress' && column.title !== 'Testing' && column.title !== 'Done') {
+            return `<div class="board-column" data-column-id="${column.id}" title-id="${column.title}">
+                    <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
+                    <button class="delete-column-button" data-delete-status-id="${column.id}" data-delete-owner-id="${column.board_id}"><img class="trashcan" src="static/img/trash.png" alt="trash_icon"></button>
+                    <div class="board-column-content"></div>
+                </div>`
+    }
+        else {
+            return `<div class="board-column" data-column-id="${column.id}" title-id="${column.title}">
+                    <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
+                    <div class="board-column-content"></div>
+                </div>`
+        }
+    }
+
 
 }
 
@@ -77,11 +84,4 @@ function initNewBoardDiv() {
                     autocomplete="off"><br>
            <button type="button" id="load-new-board-form">Create new board</button>
            <button type="button" id="load-private-board-form">Create new private board</button></div><br>`
-}
-
-function archiveBuilder(boardId) {
-    return `<div class="archive" archive-board-id="${boardId}">
-                <span class="archive-title">Archive</span>
-                <div class="archive-content" archive-owner-id="${boardId}"></div>
-            </div>`
 }
