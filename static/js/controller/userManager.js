@@ -1,16 +1,17 @@
 import {dataHandler} from "../data/dataHandler.js";
 import {domManager} from "../view/domManager.js";
+import {resetForm} from "../controller/modalManager.js";
 
 const verificationList = [];
 
 
 export async function userManagerFunc() {
-    const button = document.querySelector('#loginModalButton')
-
-    button.addEventListener(
-        "click",
-        checkLogin
-      );
+    const loginModalButton = document.querySelector('#loginModalButton')
+    loginModalButton.addEventListener("click",checkLogin);
+    const closeModalButton = document.querySelector('#close-modal');
+    closeModalButton.addEventListener('click', () => resetForm('modal-login-form','alert-login'))
+    const closeButton = document.querySelector('#closeModalButton');
+    closeButton.addEventListener('click', () => resetForm('modal-login-form','alert-login'))
     await logOut();
   }
 
@@ -25,17 +26,11 @@ async function checkLogin(){
         await verification(userData);
     }
 
-function clearInputFields() {
-    document.getElementById('username').value = "";
-    document.getElementById('password').value = "";
-}
 
 async function verification(userData){
     if (userData) {
         const username = document.querySelector('#username').value;
-        if (document.getElementById('alert-login')) {
-            document.getElementById('alert-login').remove();
-        }
+        resetForm('modal-login-form','alert-login')
         const user = await dataHandler.getUserId(username);
         const user_id = user[0]['id']
         myModal.hide();
@@ -46,7 +41,6 @@ async function verification(userData){
         document.querySelector('#registration').textContent = "";
         document.querySelector('#logout').textContent = "Logout";
         document.querySelector('#load-private-board-form').style.display = 'inline';
-        clearInputFields();
     }
     else {
         alertMsg();
