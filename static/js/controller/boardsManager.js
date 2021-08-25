@@ -30,15 +30,11 @@ export let buttonManager = {
             "#load-new-board-form",
             "click",
             createNewBoard,
-            // () => {sessionStorage.removeItem('private')},
-            // () => {sessionStorage.removeItem('user_id')}
         );
         domManager.addEventListener(
             "#load-private-board-form",
             "click",
             createNewBoard,
-            // () => {sessionStorage.removeItem('private')},
-            // () => {sessionStorage.removeItem('id')}
         );
     }
 }
@@ -159,7 +155,6 @@ function clickValidation(click) {
 function checkPrivate() {
     let privateBoard;
     const privateOrPublic = sessionStorage.getItem('private');
-    console.log(privateOrPublic)
     if (privateOrPublic === 'true') {
         privateBoard = 1
     } else {

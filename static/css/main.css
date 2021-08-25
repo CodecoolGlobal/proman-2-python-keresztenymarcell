@@ -12,6 +12,7 @@
 
 body{
     min-width: 620px;
+    height: 100vh;
     background: #ddd url("/static/img/background.jpeg");
     background-size: 100%;
     background-repeat: no-repeat;
@@ -282,4 +283,16 @@ input.form-control{
 
 .modal-title {
     font-weight: 300;
+}
+
+#footer-div{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background:none;
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
 }
