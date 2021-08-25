@@ -247,6 +247,7 @@ button.toggle-board-button{
 input#new-board-title {
     border-radius: 16px;
     margin-bottom: 20px;
+    outline: none;
 }
 
 h1{
