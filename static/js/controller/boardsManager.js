@@ -98,8 +98,9 @@ async function deleteBoard(clickEvent){
     }
 }
 
-async function createNewBoard(){
-    clickValidation()
+async function createNewBoard(e){
+    const click = e.currentTarget;
+    clickValidation(click)
     let checkResult = checkPrivate();
     sessionStorage.removeItem('private')
     const user_id = sessionStorage.getItem('user_id');
@@ -128,8 +129,8 @@ async function createNewBoard(){
 }
 
 
-function clickValidation(){
-    if (document.querySelector('#load-private-board-form').click === true){
+function clickValidation(click){
+    if (click.textContent === "Create new private board"){
         sessionStorage.setItem('private', 'true')
     }
     else {
