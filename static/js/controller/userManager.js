@@ -41,9 +41,9 @@ async function verification(userData){
         document.querySelector('#login').textContent = "";
         document.querySelector('#registration').textContent = "";
         document.querySelector('#logout').textContent = "Logout";
-        document.querySelector('#load-private-board-form').style.display = 'inline';
         clearBoard();
         await buttonManager.loadBoards();
+        document.querySelector('#load-private-board-form').style.display = 'inline';
         await boardsManager.loadBoards();
     }
     else {
