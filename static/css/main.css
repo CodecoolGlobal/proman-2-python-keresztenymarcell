@@ -11,6 +11,7 @@
 
 body{
     min-width: 620px;
+    height: 100vh;
     background: #ddd url("/static/img/background.jpeg");
     background-size: 100%;
     background-repeat: no-repeat;
@@ -279,41 +280,10 @@ input.form-control{
     font-weight: 300;
 }
 
-
-.footer{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #263238;
-    text-align: center;
-    color: #f4f4f4;
+#footer-div{
+    background-color: lightblue;
+    clear: both;
+    position: relative;
+    height: 50px;
+    bottom: 0%;
 }
-
-.icons{
-    padding-top: 1rem;
-}
-
-.icons a{
-    text-decoration: none;
-    font-size: 2rem;
-    margin: 0.5rem;
-    color: #f4f4f4;
-}
-
-.company-name{
-    font-size: 1.6rem;
-    margin-top: 0.5rem;
-}
-
-@media (max-width: 500px){
-    html{
-        font-size: 50%;
-    }
-}
-
-@media(min-width: 501px) and (max-width: 768px){
-    html{
-    font-size: 50%;
-    }
-}    
