@@ -170,7 +170,8 @@ def add_default_statuses_to_new_board(board_id):
             ('New', %(board_id)s),
             ('In progress', %(board_id)s),
             ('Testing', %(board_id)s),
-            ('Done', %(board_id)s);
+            ('Done', %(board_id)s),
+            ('Archive', %(board_id)s);
 
         """, {"board_id": board_id}
     )
