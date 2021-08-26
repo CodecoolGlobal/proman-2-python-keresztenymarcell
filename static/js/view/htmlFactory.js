@@ -26,7 +26,7 @@ export function htmlFactory(template) {
 
 
 function boardBuilder(board) {
-    return `<div class="board-container" data-board-id="${board.id}" data-private="${board.is_private}" data-user="${board.user_id}">
+    return `<div class="board-container" data-board-id="${board.id}" data-private="${board.is_private ?? +(sessionStorage.getItem('id') !== null)}" data-user="${board.user_id ?? 'null'}">
                 <div class="board-header">
                     <span class="lock" board-title-id="${board.id}"></span>
                     <span class="board-title" contenteditable="true" board-title-id="${board.id}">${board.title}</span>

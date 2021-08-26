@@ -29,16 +29,8 @@ export let buttonManager = {
         const buttonBuilder = htmlFactory(htmlTemplates.newboard);
         const buttoncontent = buttonBuilder();
         domManager.addChild("#root", buttoncontent);
-        domManager.addEventListener(
-            "#load-new-board-form",
-            "click",
-            createNewBoard,
-        );
-        domManager.addEventListener(
-            "#load-private-board-form",
-            "click",
-            createNewBoard,
-        );
+        domManager.addEventListener("#load-new-board-form","click",createNewBoard);
+        domManager.addEventListener("#load-private-board-form","click",createNewBoard);
     }
 }
 
@@ -140,7 +132,6 @@ async function createNewBoard(e) {
         domManager.addEventListener(`.toggle-archive-button[data-board-archive-id="${board.id}"]`, "click", showHideArchiveHandler)
         await domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
         await dataHandler.createEmptyStatuses(board.id)
-
     } else {
         let alert = document.getElementById('alertId')
         alert.style.display = "inline";
