@@ -137,6 +137,7 @@ async function createNewBoard(e) {
         let alert = document.getElementById('alertId')
         alert.style.display = "inline";
     }
+    await markPrivateBoard();
 }
 
 
