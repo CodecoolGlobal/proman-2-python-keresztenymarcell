@@ -36,8 +36,7 @@ function boardBuilder(board) {
                     <button class="toggle-archive-button" data-board-archive-id="${board.id}" data-toggle-state="hide">
                     Show Archive <i class="fas fa-chevron-right"></i>
                     </button>
-                    <button class="toggle-board-button" data-board-id="${board.id}" data-toggle-state="hide">
-                    Show Cards <i class="fas fa-chevron-down"></i>
+                    <button class="toggle-board-button" data-board-id="${board.id}" data-toggle-state="hide">Show Cards<i class="fas fa-chevron-down"></i>
                     </button>
                 </div><br>
                 <div class="board-columns"></div>

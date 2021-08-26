@@ -19,7 +19,11 @@ export let boardsManager = {
             domManager.addEventListener(`.add-new-card[add-new-card-id="${board.id}"]`, "click", createNewCard)
             domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
             domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
-            domManager.addEventListener(`.toggle-archive-button[data-board-archive-id="${board.id}"]`, "click", showHideArchiveHandler)}
+            const showHideCardButton = document.querySelector(`.toggle-board-button[data-board-id="${board.id}"]`);
+            if (showHideCardButton.dataset.toggleState !== "hide") {
+                domManager.addEventListener(`.toggle-archive-button[data-board-archive-id="${board.id}"]`, "click", showHideArchiveHandler)
+            }
+        }
     },
 };
 
@@ -36,6 +40,10 @@ export let buttonManager = {
 async function openBoard(boardId, button) {
     await columnManager.loadColumns(boardId)
     await cardsManager.loadCards(boardId)
+    const showHideCardButton = document.querySelector(`.toggle-board-button[data-board-id="${boardId}"]`);
+    if (showHideCardButton.dataset.toggleState === "hide") {
+        domManager.addEventListener(`.toggle-archive-button[data-board-archive-id="${boardId}"]`, "click", showHideArchiveHandler)
+    }
     button.dataset.toggleState = "show"
     button.innerHTML = 'Hide Cards <i class="fas fa-chevron-up">'
 }
@@ -45,6 +53,8 @@ async function closeBoard(boardId, button) {
     columnContent.textContent = ""
     button.dataset.toggleState = "hide"
     button.innerHTML = 'Show Cards <i class="fas fa-chevron-down">'
+    const archiveButton = document.querySelector(`.toggle-archive-button[data-board-archive-id="${boardId}"]`);
+    archiveButton.removeEventListener( "click", showHideArchiveHandler,false);
 }
 
 async function showHideButtonHandler(clickEvent) {
@@ -128,7 +138,10 @@ async function createNewBoard(e) {
         domManager.addEventListener(`.board-title[board-title-id="${board.id}"]`, "click", renameBoard);
         domManager.addEventListener(`.add-new-card[add-new-card-id="${board.id}"]`, "click", createNewCard)
         domManager.addEventListener(`.add-new-status[add-new-status-id="${board.id}"]`, "click", addStatus);
-        domManager.addEventListener(`.toggle-archive-button[data-board-archive-id="${board.id}"]`, "click", showHideArchiveHandler)
+        const showHideCardButton = document.querySelector(`.toggle-board-button[data-board-id="${board.id}"]`);
+            if (showHideCardButton.dataset.toggleState !== "hide") {
+                domManager.addEventListener(`.toggle-archive-button[data-board-archive-id="${board.id}"]`, "click", showHideArchiveHandler)
+            }
         await domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
         await dataHandler.createEmptyStatuses(board.id)
     } else {
