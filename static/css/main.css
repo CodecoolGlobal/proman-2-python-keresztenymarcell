@@ -6,8 +6,8 @@
     --status-1: #909AE7;
     --status-2: #E562E3;
     --status-3: #3CB371;
-    --status-4: #FF9079;
-    --status-5: #FBC87E;
+    --status-4: #FBC87E;
+    --status-5: #FF9079;
 }
 
 body{
@@ -261,6 +261,45 @@ h1{
 
 #load-private-board-form{
     display: None;
+}
+
+#closeModalButton, #loginModalButton {
+    border-radius: 16px;
+}
+
+input.form-control{
+    border-radius: 16px;
+}
+
+.col-form-label, .modal-title{
+    font-weight: 100;
+    margin-top: 6px;
+    display: inline-block;
+    font-size: 20px;
+    color: darkred;
+    font-weight: 300;
+    min-width: 200px;
+}
+
+.modal-title {
+    font-weight: 300;
+}
+
+#footer-div{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background:none;
+    color: white;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+img{
+    width: 25px;
+    height: 25px;
 }
 
 #closeModalButton, #loginModalButton {

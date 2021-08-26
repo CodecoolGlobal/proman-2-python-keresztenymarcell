@@ -41,9 +41,9 @@ async function verification(userData){
         myModal.hide();
         sessionStorage.setItem('user', username);
         sessionStorage.setItem('id', user_id);
-        changeNavbar()
-        await boardRefreshByUserData()
-        await markPrivateBoard()
+        changeNavbar();
+        await boardRefreshByUserData();
+        await markPrivateBoard();
 
     }
     else {
