@@ -60,5 +60,6 @@ export async function DragAndDrop() {
             let card_id = actualCard.dataset.cardId;
             dataHandler.updateCards(status_id, card_id);
         }
+
     }
 }

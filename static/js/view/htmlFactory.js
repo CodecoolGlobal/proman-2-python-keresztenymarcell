@@ -72,8 +72,12 @@ function columnBuilder(column) {
 function cardBuilder(card) {
     return `<div class="card" data-card-id="${card.id}" data-card-order="${card.card_order}" draggable="true">
                 <span class="card-title" card-title-id="${card.id}" contenteditable="true">${card.title}</span>
-                <div class="card-archive" data-card-archive-id="${card.id}">A</div>
-                <div class="card-remove" data-card-id="${card.id}"><img src="static/img/trash.png" alt="trash_icon"></div>
+                <div class="card-archive" data-card-archive-id="${card.id}">
+                    A
+                </div>
+                <div class="card-remove" data-card-id="${card.id}">
+                    <img src="static/img/trash.png" alt="trash_icon">
+                </div>
             </div>`;
 }
 

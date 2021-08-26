@@ -15,6 +15,9 @@ export let cardsManager = {
         "click",
         cardsManager.deleteCardButtonHandler);
       domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCardHandler);
+      const archiveIcon = document.querySelector(`.card-archive[data-card-archive-id="${card.id}"]`)
+      archiveIcon.addEventListener("click", archiveHandler);
+      console.log(archiveIcon)
       DragAndDrop()
     }
   },
@@ -62,6 +65,8 @@ export async function renameCardHandler(clickEvent){
   })
 }
 
-
+export function archiveHandler(){
+  console.log("click")
+}
 
 
