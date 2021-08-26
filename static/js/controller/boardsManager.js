@@ -3,7 +3,6 @@ import {htmlFactory, htmlTemplates} from "../view/htmlFactory.js";
 import {domManager} from "../view/domManager.js";
 import {cardsManager, createNewCard} from "./cardsManager.js";
 import {columnManager, addStatus} from "./columnManager.js";
-import {markPrivateBoard} from "./userManager.js";
 import {updateUserBoardStatus} from "./userManager.js";
 
 

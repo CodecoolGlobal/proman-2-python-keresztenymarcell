@@ -13,7 +13,9 @@ export let columnManager = {
                 const content = columnBuilder(column)
                 await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns `, content)
                 await domManager.addEventListener(`.board-column-title[column-title-id="${column.id}"]`, "click", renameStatus);
-                await domManager.addEventListener(`.delete-column-button[data-delete-status-id="${column.id}"]`, "click", deleteStatus);
+                if (column.title !== 'New' && column.title !== 'In progress' && column.title !== 'Testing' && column.title !== 'Done' && column.title !== 'Archive'){
+                    await domManager.addEventListener(`.delete-column-button[data-delete-status-id="${column.id}"]`, "click", deleteStatus);
+                }
             }
         }
     }
