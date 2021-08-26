@@ -29,16 +29,8 @@ export let buttonManager = {
         const buttonBuilder = htmlFactory(htmlTemplates.newboard);
         const buttoncontent = buttonBuilder();
         domManager.addChild("#root", buttoncontent);
-        domManager.addEventListener(
-            "#load-new-board-form",
-            "click",
-            createNewBoard,
-        );
-        domManager.addEventListener(
-            "#load-private-board-form",
-            "click",
-            createNewBoard,
-        );
+        domManager.addEventListener("#load-new-board-form","click",createNewBoard);
+        domManager.addEventListener("#load-private-board-form","click",createNewBoard);
     }
 }
 
@@ -140,25 +132,12 @@ async function createNewBoard(e) {
         domManager.addEventListener(`.toggle-archive-button[data-board-archive-id="${board.id}"]`, "click", showHideArchiveHandler)
         await domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
         await dataHandler.createEmptyStatuses(board.id)
-       if (user_id){
-            if(checkResult === 0){
-                const unlockField = `<img src="/static/img/icons8-unlock-50.png" alt="unlock" data-lock="unlock" id="unlock">`;
-                const el = document.getElementById('root');
-                console.log(el)
-                domManager.addChild(`.lock[board-title-id="${board.id}]`,unlockField)
-                //domManager.addEventListener(`.lock[board-title-id="${board.id}]`,"click",updateUserBoardStatus)
-            }
-            else {
-                const lockField = `<img src="/static/img/lock-24.png" alt="lock" data-lock="lock" id="lock">`;
-                domManager.addChild(`.lock[board-title-id="${board.id}]`,lockField)
-                //domManager.addEventListener(`.lock[board-title-id="${board.id}]`,"click",updateUserBoardStatus)
 
-            }
-        }
     } else {
         let alert = document.getElementById('alertId')
         alert.style.display = "inline";
     }
+    await markPrivateBoard();
 }
 
 
