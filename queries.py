@@ -357,6 +357,15 @@ def get_archive_by_board_id(board_id):
     )
 
 
+def get_card(card_id):
+    return data_manager.execute_select(
+        """
+        SELECT * FROM cards
+        WHERE id = %(card_id)s
+        """, {'card_id': card_id}
+    )
+
+
 def hash_password(plain_text_password):
     hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
     return hashed_bytes.decode('utf-8')

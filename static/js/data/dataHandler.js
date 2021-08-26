@@ -46,12 +46,13 @@ export let dataHandler = {
         const response = await apiGet(`/api/cards/${boardId}/${statusId}`)
         return response
     },
-  getUserId: async function(username){
-      const response = await apiGet(`/api/me/${username}`)
-      return response
+    getUserId: async function(username){
+        const response = await apiGet(`/api/me/${username}`)
+        return response
   },
     getCard: async function (cardId) {
-        //
+        const response = await apiGet(`/api/card/${cardId}`)
+        return response
   },
     getArchiveIdByBoard: async function (boardId) {
         const response = await apiGet(`/api/getArchiveIdByBoardId/${boardId}`)

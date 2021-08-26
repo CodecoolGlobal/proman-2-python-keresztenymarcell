@@ -10,10 +10,7 @@ export let cardsManager = {
       const cardBuilder = htmlFactory(htmlTemplates.card);
       const content = cardBuilder(card);
       domManager.addChild(`[data-board-id="${card.board_id}"] [data-column-id="${card.status_id}"] .board-column-content`, content);
-      domManager.addEventListener(
-        `.card[data-card-id="${card.id}"] .card-remove`,
-        "click",
-        cardsManager.deleteCardButtonHandler);
+      domManager.addEventListener(`.card[data-card-id="${card.id}"] .card-remove`,"click",cardsManager.deleteCardButtonHandler);
       domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCardHandler);
       const archiveIcon = document.querySelector(`.card-archive[data-card-archive-id="${card.id}"]`)
       archiveIcon.addEventListener("click", archiveHandler);
@@ -69,16 +66,24 @@ export async function renameCardHandler(clickEvent){
 
 export async function archiveHandler(e){
   const currentCard = e.currentTarget.parentElement;
-  const currentCardId = parseInt(currentCard.dataset.cardId);
+  const currentCardId = currentCard.dataset.cardId;
   const archivestatusId = currentCard.parentElement.parentElement;
   const boardId = archivestatusId.parentElement.parentElement.dataset.boardId;
   const archiveStatus = await dataHandler.getArchiveStatusId(boardId);
   const archiveId = archiveStatus[0]['id'];
   await dataHandler.updateCards(archiveId, currentCardId)
   currentCard.remove()
+  const archivedCard = await dataHandler.getCard(currentCardId);
+  /*const archivedCardId = archivedCard[0]['id'];
+  console.log(archivedCard)*/
+
+
   const cardBuilder = htmlFactory(htmlTemplates.card);
-  const newCard = cardBuilder(currentCard);
+  const newCard = cardBuilder(archivedCard);
   await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${archiveId}"] .board-column-content`, newCard);
+  //domManager.addEventListener(`.card[data-card-id="${currentCardId}"] .card-remove`,"click",cardsManager.deleteCardButtonHandler);
+  //domManager.addEventListener(`.card-title[card-title-id="${currentCardId}"]`, "click", renameCardHandler);
+  DragAndDrop()
 }
 
 

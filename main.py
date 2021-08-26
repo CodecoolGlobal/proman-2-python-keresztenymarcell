@@ -209,6 +209,12 @@ def get_archive_status_id(board_id):
     return queries.get_archive_by_board_id(board_id)
 
 
+@app.route("/api/card/<int:card_id>")
+@json_response
+def get_card_by_id(card_id):
+    return queries.get_card(card_id)
+
+
 def main():
     app.run(debug=True)
     with app.app_context():

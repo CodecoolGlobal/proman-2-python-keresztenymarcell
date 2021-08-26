@@ -8,12 +8,14 @@ export let columnManager = {
     loadColumns: async function (boardId){
         const columns = await dataHandler.getColumns();
         for(let column of columns){
-            if (String(column.board_id) === boardId){
+            if (String(column.board_id) === boardId) {
                 const columnBuilder = htmlFactory(htmlTemplates.column);
                 const content = columnBuilder(column)
                 await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns `, content)
                 await domManager.addEventListener(`.board-column-title[column-title-id="${column.id}"]`, "click", renameStatus);
-                await domManager.addEventListener(`.delete-column-button[data-delete-status-id="${column.id}"]`, "click", deleteStatus);
+                if (column.title !== 'New' && column.title !== 'In progress' && column.title !== 'Testing' && column.title !== 'Done' && column.title !== 'Archive') {
+                    await domManager.addEventListener(`.delete-column-button[data-delete-status-id="${column.id}"]`, "click", deleteStatus);
+                }
             }
         }
     }
@@ -34,8 +36,6 @@ export async function addStatus(clickEvent){
         let column = columnBuilder(status)
         await domManager.addChild(`.board-container[data-board-id="${boardID}"] .board-columns `, column)
         await domManager.addEventListener(`.delete-column-button[data-delete-status-id="${status.id}"]`, "click", deleteStatus);
-        //const archiveIcon = document.querySelector(`.card-archive[data-card-archive-id="${card.id}"]`)
-        //archiveIcon.addEventListener("click", archiveHandler);
         await DragAndDrop()
   }
 }
