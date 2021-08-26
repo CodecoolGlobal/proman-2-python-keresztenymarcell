@@ -283,6 +283,7 @@ input.form-control{
 
 .modal-title {
     font-weight: 300;
+    justify-content: center;
 }
 
 #footer-div{
