@@ -86,7 +86,7 @@ function cardBuilder(card) {
 function initNewBoardDiv() {
     return `<br><div id="new-board-form">
     <input type="text" 
-                    placeholder="Enter new board title" 
+                    placeholder="Enter new board title here" 
                     id="new-board-title" 
                     name="new-board-title"
                     required 
