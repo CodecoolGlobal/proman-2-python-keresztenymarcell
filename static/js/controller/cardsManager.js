@@ -45,6 +45,8 @@ export async function createNewCard(clickEvent){
   await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${card.status_id}"] .board-column-content`, newCard);
   await domManager.addEventListener(`.card[data-card-id="${card.id}"] .card-remove`, "click", cardsManager.deleteCardButtonHandler);
   await domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCardHandler);
+  const archiveIcon = document.querySelector(`.card-archive[data-card-archive-id="${card.id}"]`)
+  await archiveIcon.addEventListener("click", archiveHandler);
   await DragAndDrop()
 }
 
@@ -64,12 +66,13 @@ export async function renameCardHandler(clickEvent){
   })
 }
 
+
 export async function archiveHandler(e){
   const currentCard = e.currentTarget.parentElement;
   const currentCardId = parseInt(currentCard.dataset.cardId);
   const archivestatusId = currentCard.parentElement.parentElement;
-  const aaa = archivestatusId.parentElement.parentElement.dataset.boardId;
-  const archiveStatus = await dataHandler.getArchiveStatusId(aaa);
+  const boardId = archivestatusId.parentElement.parentElement.dataset.boardId;
+  const archiveStatus = await dataHandler.getArchiveStatusId(boardId);
   const archiveId = archiveStatus[0]['id'];
   await dataHandler.updateCards(archiveId, currentCardId)
   currentCard.remove()

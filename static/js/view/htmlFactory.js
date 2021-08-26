@@ -55,7 +55,9 @@ function columnBuilder(column) {
         if (column.title !== 'New' && column.title !== 'In progress' && column.title !== 'Testing' && column.title !== 'Done') {
             return `<div class="board-column" data-column-id="${column.id}" title-id="${column.title}">
                     <span class="board-column-title" column-title-id="${column.id}" contenteditable="true">${column.title}</span>
-                    <button class="delete-column-button" data-delete-status-id="${column.id}" data-delete-owner-id="${column.board_id}"><img class="trashcan" src="static/img/trash.png" alt="trash_icon"></button>
+                    <span class="delete-column-button" data-delete-status-id="${column.id}" data-delete-owner-id="${column.board_id}">
+                        <img class="trashcan" src="static/img/trash.png" alt="trash_icon" id="delete-column">
+                    </span>
                     <div class="board-column-content"></div>
                 </div>`
     }

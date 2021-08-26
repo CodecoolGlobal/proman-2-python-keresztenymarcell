@@ -340,3 +340,8 @@ img{
     width: 25px;
     height: 25px;
 }
+
+
+#delete-column{
+    background: transparent; !important;
+}
