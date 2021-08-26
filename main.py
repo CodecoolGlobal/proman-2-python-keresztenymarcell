@@ -203,6 +203,12 @@ def get_user_id_by_name(username):
     return queries.get_userid_by_name(username)
 
 
+@app.route("/api/board/<int:board_id>/statuses", methods=["GET", "POST"])
+@json_response
+def get_archive_status_id(board_id):
+    return queries.get_archive_by_board_id(board_id)
+
+
 def main():
     app.run(debug=True)
     with app.app_context():

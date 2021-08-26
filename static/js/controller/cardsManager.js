@@ -17,7 +17,6 @@ export let cardsManager = {
       domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCardHandler);
       const archiveIcon = document.querySelector(`.card-archive[data-card-archive-id="${card.id}"]`)
       archiveIcon.addEventListener("click", archiveHandler);
-      console.log(archiveIcon)
       DragAndDrop()
     }
   },
@@ -65,8 +64,15 @@ export async function renameCardHandler(clickEvent){
   })
 }
 
-export function archiveHandler(){
-  console.log("click")
+export async function archiveHandler(e){
+  const currentCard = e.currentTarget.parentElement;
+  const currentCardId = parseInt(currentCard.dataset.cardId);
+  const archivestatusId = currentCard.parentElement.parentElement;
+  const aaa = archivestatusId.parentElement.parentElement.dataset.boardId;
+  const archiveStatus = await dataHandler.getArchiveStatusId(aaa);
+  const archiveId = archiveStatus[0]['id'];
+  await dataHandler.updateCards(archiveId, currentCardId)
+  currentCard.remove()
 }
 
 

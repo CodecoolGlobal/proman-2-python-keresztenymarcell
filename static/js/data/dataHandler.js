@@ -109,6 +109,10 @@ export let dataHandler = {
       const response = await apiPost(`/api/login`, userDataToCheck);
       return response;
     },
+    getArchiveStatusId: async function(board_id){
+      const response = await apiGet(`/api/board/${board_id}/statuses`)
+      return response
+  },
 };
 
 

@@ -348,6 +348,15 @@ def update_user_boards(id, is_private):
     )
 
 
+def get_archive_by_board_id(board_id):
+    return data_manager.execute_select(
+        """
+        SELECT id FROM statuses
+        WHERE title = 'Archive' AND board_id = %(board_id)s
+        """, {'board_id': board_id}
+    )
+
+
 def hash_password(plain_text_password):
     hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
     return hashed_bytes.decode('utf-8')
