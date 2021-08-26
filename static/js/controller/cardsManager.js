@@ -76,6 +76,9 @@ export async function archiveHandler(e){
   const archiveId = archiveStatus[0]['id'];
   await dataHandler.updateCards(archiveId, currentCardId)
   currentCard.remove()
+  const cardBuilder = htmlFactory(htmlTemplates.card);
+  const newCard = cardBuilder(currentCard);
+  await domManager.addChild(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${archiveId}"] .board-column-content`, newCard);
 }
 
 
