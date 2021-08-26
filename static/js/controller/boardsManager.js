@@ -63,7 +63,7 @@ async function showHideButtonHandler(clickEvent) {
 
 async function showHideArchiveHandler(clickEvent) {
   const boardId = clickEvent.target.dataset.boardArchiveId;
-  const getStatusId = await dataHandler.getArchiveIdByBoard(boardId);
+  const getStatusId = await dataHandler.getArchiveStatusId(boardId);
   const button = clickEvent.target;
   for (let column of getStatusId) {
     if (button.dataset.toggleState === "hide") {

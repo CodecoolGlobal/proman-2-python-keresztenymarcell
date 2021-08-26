@@ -101,12 +101,6 @@ def get_cards_for_board(board_id: int):
     return queries.get_cards_for_board(board_id)
 
 
-@app.route("/api/getArchiveIdByBoardId/<int:board_id>")
-@json_response
-def get_archive_id_by_board_id(board_id: int):
-    return queries.get_archive_id_by_board_id(board_id)
-
-
 @app.route("/api/cards/<int:board_id>/<int:status_id>")
 @json_response
 def get_card_order_by_board_status_id(board_id: int, status_id: int):
