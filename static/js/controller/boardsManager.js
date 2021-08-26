@@ -4,6 +4,8 @@ import {domManager} from "../view/domManager.js";
 import {cardsManager, createNewCard} from "./cardsManager.js";
 import {columnManager, addStatus} from "./columnManager.js";
 import {markPrivateBoard} from "./userManager.js";
+import {updateUserBoardStatus} from "./userManager.js";
+
 
 export let boardsManager = {
     loadBoards: async function () {
@@ -128,8 +130,8 @@ async function createNewBoard(e) {
         await dataHandler.createNewBoard(board.title, user_id, checkResult)
         document.getElementById('alertId').style.display = "None";
         board.id = await dataHandler.getNewBoardId()
-        const boardBuilder = htmlFactory(htmlTemplates.board)
-        const newBoard = boardBuilder(board)
+        const boardBuilder = htmlFactory(htmlTemplates.board);
+        const newBoard = boardBuilder(board);
         domManager.addChild("#root", newBoard);
         domManager.addEventListener(`.toggle-board-button[data-board-id="${board.id}"]`, "click", showHideButtonHandler)
         domManager.addEventListener(`.board-title[board-title-id="${board.id}"]`, "click", renameBoard);
@@ -138,11 +140,25 @@ async function createNewBoard(e) {
         domManager.addEventListener(`.toggle-archive-button[data-board-archive-id="${board.id}"]`, "click", showHideArchiveHandler)
         await domManager.addEventListener(`.delete-board[delete-board-id="${board.id}"]`, "click", deleteBoard);
         await dataHandler.createEmptyStatuses(board.id)
+       if (user_id){
+            if(checkResult === 0){
+                const unlockField = `<img src="/static/img/icons8-unlock-50.png" alt="unlock" data-lock="unlock" id="unlock">`;
+                const el = document.getElementById('root');
+                console.log(el)
+                domManager.addChild(`.lock[board-title-id="${board.id}]`,unlockField)
+                //domManager.addEventListener(`.lock[board-title-id="${board.id}]`,"click",updateUserBoardStatus)
+            }
+            else {
+                const lockField = `<img src="/static/img/lock-24.png" alt="lock" data-lock="lock" id="lock">`;
+                domManager.addChild(`.lock[board-title-id="${board.id}]`,lockField)
+                //domManager.addEventListener(`.lock[board-title-id="${board.id}]`,"click",updateUserBoardStatus)
+
+            }
+        }
     } else {
         let alert = document.getElementById('alertId')
         alert.style.display = "inline";
     }
-    await markPrivateBoard();
 }
 
 

@@ -28,7 +28,7 @@ export function htmlFactory(template) {
 function boardBuilder(board) {
     return `<div class="board-container" data-board-id="${board.id}" data-private="${board.is_private}" data-user="${board.user_id}">
                 <div class="board-header">
-                    <span class="lock"></span>
+                    <span class="lock" board-title-id="${board.id}"></span>
                     <span class="board-title" contenteditable="true" board-title-id="${board.id}">${board.title}</span>
                     <button class="add-new-card" add-new-card-id=${board.id}>Add Card</button>
                     <button class="add-new-status" add-new-status-id=${board.id}>Add New status</button>

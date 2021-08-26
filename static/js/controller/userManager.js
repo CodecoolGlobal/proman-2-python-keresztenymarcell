@@ -114,7 +114,7 @@ export async function markPrivateBoard(){
     }
 }
 
-async function updateUserBoardStatus(e){
+export async function updateUserBoardStatus(e){
     const currentIcon = e.currentTarget;
     const currentBoard = currentIcon.parentElement.parentElement;
     const currentBoardId = currentBoard.dataset.boardId;
