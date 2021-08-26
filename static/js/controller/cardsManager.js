@@ -76,6 +76,8 @@ export async function archiveHandler(e){
   const archiveId = archiveStatus[0]['id'];
   await dataHandler.updateCards(archiveId, currentCardId)
   currentCard.remove()
+  const actualArchiveColumn = document.querySelector(`.board-container[data-board-id="${boardId}"] .board-columns .board-column[data-column-id="${archiveId}"] .board-column-content`);
+  await actualArchiveColumn.appendChild(currentCard);
 }
 
 
