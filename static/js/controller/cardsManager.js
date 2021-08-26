@@ -16,7 +16,11 @@ export let cardsManager = {
         cardsManager.deleteCardButtonHandler);
       domManager.addEventListener(`.card-title[card-title-id="${card.id}"]`, "click", renameCardHandler);
       const archiveIcon = document.querySelector(`.card-archive[data-card-archive-id="${card.id}"]`)
-      archiveIcon.addEventListener("click", archiveHandler);
+      const cardParent = archiveIcon.parentElement.parentElement;
+      const columnTitle = cardParent.parentElement.firstElementChild;
+      if (columnTitle.textContent !== 'Archive') {
+        archiveIcon.addEventListener("click", archiveHandler);
+      }
       DragAndDrop()
     }
   },
